@@ -13,7 +13,7 @@ MainMenu::MainMenu()
 	m_menuOptionChoice = -1;
 
 	//load font resource into memory
-	TheTexture::Instance()->LoadFontFromFile("Assets\\Fonts\\Impact.ttf", 100, "MENU_FONT");
+	TheTexture::Instance()->LoadFontFromFile("Assets\\Fonts\\Quikhand.ttf", 100, "MENU_FONT");
 
 }
 //------------------------------------------------------------------------------------------------------
