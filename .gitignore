@@ -4,10 +4,7 @@ Handmade.VC.db
 Handmade.VC.VC.opendb
 
 #all photoshop assets
-Handmade/Assets/PSD/Handmade Lite Logo Original.psd
-Handmade/Assets/PSD/Handmade Lite Logo Square.psd
-Handmade/Assets/PSD/Mascot_1.psd
-Handmade/Assets/PSD/Mascot_2.psd
+Handmade/Assets/PSD
 
 #the outer Debug/Release folders
 Debug
