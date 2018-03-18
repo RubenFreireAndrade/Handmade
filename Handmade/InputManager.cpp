@@ -56,7 +56,6 @@ bool InputManager::IsMouseColliding(const AABB& bound)
 	AABB tempBound;
 
 	//set mouse cursor bounds of 1x1 based on mouse position
-	//flip Y axis as mouse coordinates run from top to bottom
 	tempBound.SetPosition((int)m_mousePosition.x, (int)(m_mousePosition.y));
 	tempBound.SetDimension(1, 1);
 
@@ -74,7 +73,6 @@ bool InputManager::IsMouseColliding(const Sphere& bound)
 	Sphere tempBound;
 
 	//set mouse cursor radius of 1 based on mouse position
-	//flip Y axis as mouse coordinates run from top to bottom
 	tempBound.SetPosition((int)m_mousePosition.x, (int)(m_mousePosition.y));
 	tempBound.SetRadius(1);
 
