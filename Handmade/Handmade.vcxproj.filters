@@ -61,14 +61,20 @@
     <Filter Include="Source Files\GameStates">
       <UniqueIdentifier>{b13b4e0d-172a-4c24-9373-75db951e531f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Networking">
-      <UniqueIdentifier>{798b7390-3f4f-452b-82a0-290064360f48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Networking">
-      <UniqueIdentifier>{7e541604-d5b0-4e18-b02e-fb6fc3298051}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Audio.h">
+      <Filter>Header Files\Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SFX.h">
+      <Filter>Header Files\Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Header Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Components\Collision</Filter>
+    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Header Files\Components\Visual</Filter>
     </ClInclude>
@@ -77,33 +83,6 @@
     </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>Header Files\Components\Visual</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Header Files\Main</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioManager.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenManager.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="SFX.h">
-      <Filter>Header Files\Components\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>Header Files\Components\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="AABB.h">
-      <Filter>Header Files\Components\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Header Files\Components\Collision</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Header Files\GameObjects</Filter>
@@ -129,17 +108,35 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files\Main</Filter>
     </ClInclude>
-    <ClInclude Include="ClientSocket.h">
-      <Filter>Header Files\Networking</Filter>
+    <ClInclude Include="Singleton.h">
+      <Filter>Header Files\Main</Filter>
     </ClInclude>
-    <ClInclude Include="ServerSocket.h">
-      <Filter>Header Files\Networking</Filter>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Socket.h">
-      <Filter>Header Files\Networking</Filter>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Source Files\Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SFX.cpp">
+      <Filter>Source Files\Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Source Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\Components\Collision</Filter>
+    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Source Files\Components\Visual</Filter>
     </ClCompile>
@@ -148,33 +145,6 @@
     </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Source Files\Components\Visual</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files\Main</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="SFX.cpp">
-      <Filter>Source Files\Components\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>Source Files\Components\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="AABB.cpp">
-      <Filter>Source Files\Components\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Source Files\Components\Collision</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Source Files\GameObjects</Filter>
@@ -200,14 +170,20 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="ClientSocket.cpp">
-      <Filter>Source Files\Networking</Filter>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="ServerSocket.cpp">
-      <Filter>Source Files\Networking</Filter>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Socket.cpp">
-      <Filter>Source Files\Networking</Filter>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

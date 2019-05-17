@@ -6,6 +6,9 @@ Handmade.VC.VC.opendb
 #all photoshop assets
 Handmade/Assets/PSD
 
+#.vs hidden folder 
+.vs
+
 #the outer Debug/Release folders
 Debug
 Release
