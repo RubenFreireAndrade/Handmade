@@ -52,7 +52,7 @@ std::string GameObject::GetTag()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns game object's position on screen
 //------------------------------------------------------------------------------------------------------
-glm::vec2 GameObject::GetPosition()
+SDL_Point GameObject::GetPosition()
 {
 
 	return m_position;
@@ -70,9 +70,10 @@ void GameObject::SetTag(std::string tag)
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns game object's position on screen
 //------------------------------------------------------------------------------------------------------
-void GameObject::SetPosition(float x, float y)
+void GameObject::SetPosition(int x, int y)
 {
 
-	m_position = glm::vec2(x, y);
+	m_position.x = x;
+	m_position.y = y;
 
 }

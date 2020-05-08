@@ -23,7 +23,8 @@ Text::Text()
 void Text::SetSize(int width, int height)
 {
 
-	m_textSize = glm::vec2(width, height);
+	m_textSize.x = width;
+	m_textSize.y = height;
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -69,8 +70,8 @@ void Text::Draw(int xPosition, int yPosition)
 	//assign dimension of rectangular block to which text will be rendered to on screen
 	dst.x = xPosition;
 	dst.y = yPosition;
-	dst.w = (int)m_textSize.x;
-	dst.h = (int)m_textSize.y;
+	dst.w = m_textSize.x;
+	dst.h = m_textSize.y;
 
 	//render the text object using all values passed and determined above
 	SDL_RenderCopy(TheScreen::Instance()->GetRenderer(), m_texture, NULL, &dst);

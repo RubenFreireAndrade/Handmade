@@ -35,7 +35,6 @@
 #define TEXT_H
 
 #include <string>
-#include <glm.hpp>
 #include <SDL.h>
 #include <SDL_ttf.h>
 
@@ -48,7 +47,7 @@ public:
 
 public:
 
-	glm::vec2 GetSize() { return m_textSize; }
+	SDL_Point GetSize() { return m_textSize; }
 
 public:
 
@@ -68,7 +67,7 @@ protected:
 private:
 
 	std::string m_text;
-	glm::vec2 m_textSize;
+	SDL_Point m_textSize;
 
 	TTF_Font* m_font;
 	SDL_Color m_color;

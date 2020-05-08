@@ -36,7 +36,7 @@
 #define GAME_OBJECT_H
 
 #include <string>
-#include <glm.hpp>
+#include <SDL.h>
 
 class GameObject 
 {
@@ -55,10 +55,10 @@ public:
 public :
 
 	std::string GetTag();
-	glm::vec2 GetPosition();
+	SDL_Point GetPosition();
 
 	void SetTag(std::string tag);
-	void SetPosition(float x, float y);
+	void SetPosition(int x, int y);
 
 public :
 
@@ -72,7 +72,7 @@ protected :
 	bool m_isVisible;
 
 	std::string m_tag;
-	glm::vec2 m_position;
+	SDL_Point m_position;
 
 };
 

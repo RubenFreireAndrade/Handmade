@@ -35,10 +35,10 @@ SDL_Renderer* ScreenManager::GetRenderer()
 //------------------------------------------------------------------------------------------------------
 //getter function that creates screen size vector and returns it
 //------------------------------------------------------------------------------------------------------
-glm::vec2 ScreenManager::GetScreenSize()
+SDL_Point ScreenManager::GetScreenSize()
 {
 
-	return glm::vec2(m_width, m_height);
+	return SDL_Point{m_width, m_height};
 
 }
 //------------------------------------------------------------------------------------------------------

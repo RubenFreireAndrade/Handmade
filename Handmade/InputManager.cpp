@@ -108,30 +108,30 @@ InputManager::ButtonState InputManager::GetRightButtonState()
 
 }
 //------------------------------------------------------------------------------------------------------
-//getter function that returns position of mouse
+//getter function that returns motion value of mouse wheel movement
 //------------------------------------------------------------------------------------------------------
-glm::vec2 InputManager::GetMousePosition()
+SDL_Point InputManager::GetMouseWheel()
 {
 
-	return m_mousePosition;
+	return m_mouseWheel;
 
 }
 //------------------------------------------------------------------------------------------------------
 //getter function that returns motion value of mouse movement
 //------------------------------------------------------------------------------------------------------
-glm::vec2 InputManager::GetMouseMotion()
+SDL_Point InputManager::GetMouseMotion()
 {
 
 	return m_mouseMotion;
 
 }
 //------------------------------------------------------------------------------------------------------
-//getter function that returns motion value of mouse wheel movement
+//getter function that returns position of mouse
 //------------------------------------------------------------------------------------------------------
-glm::vec2 InputManager::GetMouseWheel()
+SDL_Point InputManager::GetMousePosition()
 {
 
-	return m_mouseWheel;
+	return m_mousePosition;
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -278,18 +278,18 @@ void InputManager::Update()
 			//set the position and mouse motion value
 			case SDL_MOUSEMOTION :
 			{
-				m_mousePosition.x = (float)events.motion.x;
-				m_mousePosition.y = (float)events.motion.y;
-				m_mouseMotion.x = (float)events.motion.xrel;
-				m_mouseMotion.y = (float)events.motion.yrel;
+				m_mousePosition.x = events.motion.x;
+				m_mousePosition.y = events.motion.y;
+				m_mouseMotion.x = events.motion.xrel;
+				m_mouseMotion.y = events.motion.yrel;
 				break;
 			}
 
 			//the mouse wheel was moved 
 			case SDL_MOUSEWHEEL :
 			{
-				m_mouseWheel.x = (float)events.wheel.x;
-				m_mouseWheel.y = (float)events.wheel.y;
+				m_mouseWheel.x = events.wheel.x;
+				m_mouseWheel.y = events.wheel.y;
 			}
 
 			//a mouse button was clicked or released
@@ -297,8 +297,8 @@ void InputManager::Update()
 			{
 				
 				//set position of mouse
-				m_mousePosition.x = (float)events.motion.x;
-				m_mousePosition.y = (float)events.motion.y;
+				m_mousePosition.x = events.motion.x;
+				m_mousePosition.y = events.motion.y;
 				
 				//temporarily store button state for assigning below
 				ButtonState state = ((events.button.state == SDL_PRESSED) ? DOWN : UP);

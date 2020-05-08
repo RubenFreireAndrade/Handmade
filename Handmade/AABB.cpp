@@ -6,8 +6,8 @@
 void AABB::SetPosition(int x, int y)
 {
 
-	m_position.x = (float)x;
-	m_position.y = (float)y;
+	m_position.x = x;
+	m_position.y = y;
 
 	CreateBox();
 
@@ -18,8 +18,8 @@ void AABB::SetPosition(int x, int y)
 void AABB::SetDimension(int width, int height)
 {
 
-	m_dimension.x = (float)width; 
-	m_dimension.y = (float)height;
+	m_dimension.x = width; 
+	m_dimension.y = height;
 
 	CreateBox();
 

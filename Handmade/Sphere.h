@@ -22,7 +22,7 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
-#include <glm.hpp>
+#include <SDL.h>
 
 class Sphere
 {
@@ -33,7 +33,7 @@ public :
 
 public :
 
-	void SetRadius(float radius);
+	void SetRadius(int radius);
 	void SetPosition(int x, int y);
 
 public :
@@ -42,8 +42,8 @@ public :
 
 private :
 
-	float m_radius;
-	glm::vec2 m_position;
+	int m_radius;
+	SDL_Point m_position;
 
 };
 
