@@ -28,7 +28,6 @@
 #define SCREEN_MANAGER_H
 
 #include <string>
-#include <glm.hpp>
 #include <SDL.h>
 #include <SDL_syswm.h>
 #include "Singleton.h"
@@ -44,7 +43,7 @@ public :
 
 	SDL_Window* GetWindow();
 	SDL_Renderer* GetRenderer();
-	glm::vec2 GetScreenSize();
+	SDL_Point GetScreenSize();
 
 public :
 

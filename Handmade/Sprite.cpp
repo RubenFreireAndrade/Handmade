@@ -18,8 +18,8 @@ Sprite::Sprite()
 void Sprite::SetTextureCell(int column, int row)
 {
 
-	m_textureCell.x = (float)column;
-	m_textureCell.y = (float)row;
+	m_textureCell.x = column;
+	m_textureCell.y = row;
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -37,8 +37,8 @@ void Sprite::SetTexture(const std::string& mapIndex)
 void Sprite::SetSpriteDimension(int width, int height)
 {
 
-	m_spriteDimension.x = (float)width;
-	m_spriteDimension.y = (float)height;
+	m_spriteDimension.x = width;
+	m_spriteDimension.y = height;
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ void Sprite::Draw(int xPosition, int yPosition, double angle, FlipType flipType)
 {
 
 	//aquire index value of specific texture cell to "cut out" using a basic formula 
-	m_textureIndex = (int)((m_textureCell.y * m_textureDimension.x) + m_textureCell.x);
+	m_textureIndex = (m_textureCell.y * m_textureDimension.x) + m_textureCell.x;
 
 	//use internal blitting function to draw the sprite on screen
 	BlitSprite(xPosition, yPosition, angle, flipType);
@@ -79,21 +79,21 @@ void Sprite::BlitSprite(int xPosition, int yPosition, double angle, FlipType fli
 
 	//use modulo and divide with the texture index to get exact cell block XY coordinates
 	//to "cut out" and assign all of this as well as width and height to the source rect
-	src.x = (int)((m_textureIndex % (int)m_textureDimension.x) * m_textureDimension.w);
-	src.y = (int)((m_textureIndex / (int)m_textureDimension.x) * m_textureDimension.h);
+	src.x = (m_textureIndex % m_textureDimension.x) * m_textureDimension.w;
+	src.y = (m_textureIndex / m_textureDimension.x) * m_textureDimension.h;
 	src.w = m_textureDimension.w;
 	src.h = m_textureDimension.h;
 
 	//assign dimension of rectangular block to which sprite will be rendered to on screen
 	dst.x = xPosition;
 	dst.y = yPosition;
-	dst.w = (int)m_spriteDimension.x;
-	dst.h = (int)m_spriteDimension.y;
+	dst.w = m_spriteDimension.x;
+	dst.h = m_spriteDimension.y;
 
 	//if sprite needs to be rotated, use the centre of the sprite as its centre of rotation
 	SDL_Point centrePoint;
-	centrePoint.x = (int)(m_spriteDimension.x / 2);
-	centrePoint.y = (int)(m_spriteDimension.y / 2);
+	centrePoint.x = m_spriteDimension.x / 2;
+	centrePoint.y = m_spriteDimension.y / 2;
 
 	//render the sprite using all values passed and determined above
 	SDL_RenderCopyEx(TheScreen::Instance()->GetRenderer(), 

@@ -48,7 +48,6 @@
 #define SPRITE_H
 
 #include <string>
-#include <glm.hpp>
 #include <SDL.h>
 
 class Sprite
@@ -83,8 +82,8 @@ protected :
 
 	int m_textureIndex;
 
-	glm::vec2 m_textureCell;
-	glm::vec2 m_spriteDimension;
+	SDL_Point m_textureCell;
+	SDL_Point m_spriteDimension;
 
 	SDL_Texture* m_texture;
 	SDL_Rect m_textureDimension;

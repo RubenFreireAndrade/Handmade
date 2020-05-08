@@ -32,7 +32,7 @@
 #ifndef AABB_H
 #define AABB_H
 
-#include <glm.hpp>
+#include <SDL.h>
 
 class AABB
 {
@@ -52,10 +52,10 @@ private :
 
 private :
 
-	glm::vec2 m_min;   
-	glm::vec2 m_max;
-	glm::vec2 m_position;
-	glm::vec2 m_dimension;
+	SDL_Point m_min;
+	SDL_Point m_max;
+	SDL_Point m_position;
+	SDL_Point m_dimension;
 	
 };
 

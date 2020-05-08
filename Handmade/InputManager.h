@@ -88,10 +88,10 @@ public :
 	ButtonState GetMiddleButtonState();
 	ButtonState GetRightButtonState();
 
-	glm::vec2 GetMousePosition();
-	glm::vec2 GetMouseMotion();
-	glm::vec2 GetMouseWheel();	
-	
+	SDL_Point GetMouseWheel();
+	SDL_Point GetMouseMotion();
+	SDL_Point GetMousePosition();
+
 	std::string GetInput() { return m_input; }
 
 	void SetMousePosition(int x, int y);
@@ -123,9 +123,9 @@ private :
 	ButtonState m_middleButtonState;
 	ButtonState m_rightButtonState;
 
-	glm::vec2 m_mousePosition;
-	glm::vec2 m_mouseMotion;
-	glm::vec2 m_mouseWheel;
+	SDL_Point m_mouseWheel;
+	SDL_Point m_mouseMotion;
+	SDL_Point m_mousePosition;
 	
 };
 
