@@ -15,12 +15,13 @@ Game::Game()
 {
 
 	m_endGame = false;
+	m_elapsedTime = 0;
 	
 }
 //------------------------------------------------------------------------------------------------------
 //getter function that returns total time passed in milliseconds
 //------------------------------------------------------------------------------------------------------
-int Game::GetTotalTime()
+int Game::GetTotalTime() const
 {
 
 	return SDL_GetTicks();
@@ -29,7 +30,7 @@ int Game::GetTotalTime()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns time elapsed in milliseconds
 //------------------------------------------------------------------------------------------------------
-int Game::GetElapsedTime()
+int Game::GetElapsedTime() const
 {
 
 	return m_elapsedTime;
@@ -38,7 +39,7 @@ int Game::GetElapsedTime()
 //------------------------------------------------------------------------------------------------------
 //function that initializes all sub-systems of the game
 //------------------------------------------------------------------------------------------------------
-bool Game::Initialize(std::string name, int screenWidth, int screenHeight, bool fullscreen)
+bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight, bool fullscreen)
 {
 
 	//initialise game screen with passed values and return false if error occured

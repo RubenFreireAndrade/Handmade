@@ -121,10 +121,10 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 
 	//if a font file needs to be removed, free it from memory based on if a 
 	//single item needs to be removed or if the entire map needs to be cleared
-	if (dataType == FONT_DATA)
+	if (dataType == DataType::FONT_DATA)
 	{
 
-		if (removeType == CUSTOM_DATA)
+		if (removeType == RemoveType::CUSTOM_DATA)
 		{
 			auto it = m_fontMap.find(mapIndex);
 
@@ -140,7 +140,7 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 			}
 		}
 
-		else if (removeType == ALL_DATA)
+		else if (removeType == RemoveType::ALL_DATA)
 		{
 
 			for (auto it = m_fontMap.begin(); it != m_fontMap.end(); it++)
@@ -156,10 +156,10 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 
 	//otherwise if a texture file needs to be removed, free it from memory based on
 	//if a single item needs to be removed or if the entire map needs to be cleared
-	else if (dataType == TEXTURE_DATA)
+	else if (dataType == DataType::TEXTURE_DATA)
 	{
 
-		if (removeType == CUSTOM_DATA)
+		if (removeType == RemoveType::CUSTOM_DATA)
 		{
 			auto it = m_textureMap.find(mapIndex);
 
@@ -175,7 +175,7 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 			}
 		}
 
-		else if (removeType == ALL_DATA)
+		else if (removeType == RemoveType::ALL_DATA)
 		{
 
 			for (auto it = m_textureMap.begin(); it != m_textureMap.end(); it++)

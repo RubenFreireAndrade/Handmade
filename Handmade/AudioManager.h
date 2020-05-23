@@ -52,20 +52,20 @@ class AudioManager
 
 public:
 
-	enum RemoveType { CUSTOM_AUDIO, ALL_AUDIO };
-	enum AudioType  { SFX_AUDIO, MUSIC_AUDIO, VOICE_AUDIO };
+	enum class RemoveType { CUSTOM_AUDIO, ALL_AUDIO };
+	enum class AudioType  { SFX_AUDIO, MUSIC_AUDIO, VOICE_AUDIO };
 	
 public:
 
 	friend class Singleton<AudioManager>;
 
-public :
+public:
 
 	Mix_Chunk* GetSFXData(const std::string& mapIndex);
 	Mix_Music* GetMusicData(const std::string& mapIndex);
 	Mix_Music* GetVoiceData(const std::string& mapIndex);
 
-public :
+public:
 
 	bool Initialize();
 	bool LoadFromFile(const std::string& filename, AudioType audioType, const std::string& mapIndex);
@@ -82,7 +82,7 @@ private:
 	AudioManager(const AudioManager&);
 	AudioManager& operator=(const AudioManager&);
 
-private :
+private:
 
 	std::map<std::string, Mix_Chunk*> m_sfxDataMap;
 	std::map<std::string, Mix_Music*> m_musicDataMap;

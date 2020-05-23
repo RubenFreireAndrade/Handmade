@@ -53,7 +53,7 @@ void ScreenManager::SetClearColor(Uint8 r, Uint8 g, Uint8 b)
 //------------------------------------------------------------------------------------------------------
 //function that initializes the screen including the SDL subsystems   
 //------------------------------------------------------------------------------------------------------
-bool ScreenManager::Initialize(const char* windowTitle, int width, int height, bool fullscreen)
+bool ScreenManager::Initialize(const std::string& windowTitle, int width, int height, bool fullscreen)
 {
 
 	//initialize SDL subsystem by enabling the entire SDL package
@@ -68,11 +68,13 @@ bool ScreenManager::Initialize(const char* windowTitle, int width, int height, b
 	Uint32 screenFlag = (fullscreen) ? SDL_WINDOW_FULLSCREEN : 0;
 
 	//create a game window using caption, width, height and screen mode flag
-	m_window = SDL_CreateWindow(windowTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+	m_window = SDL_CreateWindow(windowTitle.c_str(), 
+		                        SDL_WINDOWPOS_CENTERED, 
+		                        SDL_WINDOWPOS_CENTERED,
 		                        width, height, screenFlag);
 
 	//if game window could not be created, display error message and return false
-	if (m_window == 0)
+	if (!m_window)
 	{
 		std::cout << "Game window could not be created." << std::endl;
 		return false;
@@ -85,7 +87,7 @@ bool ScreenManager::Initialize(const char* windowTitle, int width, int height, b
 		                                          SDL_RENDERER_PRESENTVSYNC);
 	
 	//if SDL renderer could not be created, display error message and return false
-	if (m_renderer == 0)
+	if (!m_renderer)
 	{
 		std::cout << "Renderer could not be created." << std::endl;
 		return false;

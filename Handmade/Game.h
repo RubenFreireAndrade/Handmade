@@ -46,14 +46,14 @@ public:
 
 	friend class Singleton<Game>;
 
-public :
+public:
 
-	int GetTotalTime();
-	int GetElapsedTime();
+	int GetTotalTime() const;
+	int GetElapsedTime() const;
 	
 public:
 
-	bool Initialize(std::string name, int screenWidth,
+	bool Initialize(const std::string& name, int screenWidth,
 		            int screenHeight, bool fullscreen = false);
 
 	void AddState(GameState* state);
@@ -68,7 +68,7 @@ private:
 	Game(const Game&);
 	Game& operator=(const Game&);
 	
-private :
+private:
 	
 	void RemoveState();
 

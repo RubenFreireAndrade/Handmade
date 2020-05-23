@@ -19,7 +19,7 @@ MainMenu::MainMenu()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns main menu choice made
 //------------------------------------------------------------------------------------------------------
-int MainMenu::GetMenuOption()
+int MainMenu::GetMenuOption() const
 {
 
 	return m_menuOptionChoice;
@@ -28,7 +28,7 @@ int MainMenu::GetMenuOption()
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns properties of menu text objects
 //------------------------------------------------------------------------------------------------------
-void MainMenu::SetMenuText(std::string text)
+void MainMenu::SetMenuText(const std::string& text)
 {
 
 	Text menuText;
@@ -114,12 +114,13 @@ bool MainMenu::Draw()
 
 	//calculate a centre position for all menu items based on amount of menu items and their height
 	//this will keep all menu items centered around the same spot no matter how many items there are
-	int yPos = (int)(620.0f - (float(m_menuText.size()) / 2.0f * 60.0f));
+	int yPos = static_cast<int>(620.0f - (float(m_menuText.size()) / 2.0f * 60.0f));
 
 	//loop through all menu items and render them based on a centre position
 	for (size_t i = 0; i < m_menuText.size(); i++)
 	{
-		m_menuText[i].Draw((int)(512 - m_menuText[i].GetSize().x / 2), (int)(yPos + i * 60));
+		m_menuText[i].Draw(static_cast<int>(512 - m_menuText[i].GetSize().x / 2),  //x
+			               static_cast<int>(yPos + i * 60));                       //y
 	}
 
 	return true;
@@ -142,6 +143,7 @@ MainMenu::~MainMenu()
 {
 
 	TheTexture::Instance()->
-	UnloadFromMemory(TextureManager::FONT_DATA, TextureManager::CUSTOM_DATA, "MENU_FONT");
+	UnloadFromMemory(TextureManager::DataType::FONT_DATA, 
+		             TextureManager::RemoveType::CUSTOM_DATA, "MENU_FONT");
 
 }

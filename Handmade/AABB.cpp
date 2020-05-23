@@ -6,8 +6,10 @@
 void AABB::SetPosition(int x, int y)
 {
 
-	m_position.x = x;
-	m_position.y = y;
+	m_min = { 0, 0 };
+	m_max = { 0, 0 };
+	m_position = { x, y };
+	m_dimension = { 0, 0 };
 
 	CreateBox();
 
@@ -27,7 +29,7 @@ void AABB::SetDimension(int width, int height)
 //------------------------------------------------------------------------------------------------------
 //function that checks if AABB collides with another AABB object
 //------------------------------------------------------------------------------------------------------
-bool AABB::IsColliding(const AABB& secondBox)
+bool AABB::IsColliding(const AABB& secondBox) const
 {
 
 	return ((m_max.x > secondBox.m_min.x && secondBox.m_max.x > m_min.x) &&

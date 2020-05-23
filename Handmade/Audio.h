@@ -40,28 +40,28 @@
 class Audio
 {
 
-public :
+public:
 
-	enum AudioType { MUSIC_AUDIO, VOICE_AUDIO };
-	enum LoopType  { PLAY_ONCE = 1, PLAY_ENDLESS = -1 };
+	enum class AudioType { MUSIC_AUDIO, VOICE_AUDIO };
+	enum class LoopType  { PLAY_ONCE = 1, PLAY_ENDLESS = -1 };
 
-public :
+public:
 
 	Audio();
 
-public :
+public:
 
 	void SetVolume(int volume);
 	void SetAudio(const std::string& mapIndex, AudioType audioType);
 
-public :
+public:
 
-	bool Play(LoopType loopType = PLAY_ONCE);
+	bool Play(LoopType loopType = LoopType::PLAY_ONCE);
 	void Pause();
 	void Resume();
 	void Stop();    			
 
-private :
+private:
 	
 	Mix_Music* m_audio;
 					

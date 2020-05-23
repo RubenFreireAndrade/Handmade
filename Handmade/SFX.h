@@ -40,20 +40,20 @@
 class SFX
 {
 
-public :
+public:
 
 	SFX();
 
-public :
+public:
 
 	void SetVolume(int volume);
 	void SetSFX(const std::string& mapIndex);
 
-public :
+public:
 
 	bool Play(int loop = 0);			
 	
-private :
+private:
 	
 	Mix_Chunk* m_sfx;
 					

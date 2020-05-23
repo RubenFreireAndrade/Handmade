@@ -44,7 +44,7 @@ class MenuState : public GameState
 
 public:
 
-	enum MenuOption { PLAY, QUIT };
+	enum class MenuOption { PLAY, QUIT };
 
 public:
 

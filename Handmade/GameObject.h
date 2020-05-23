@@ -40,7 +40,7 @@
 class GameObject 
 {
 
-public :
+public:
 
 	GameObject();
 	virtual ~GameObject() = 0 {}
@@ -51,20 +51,20 @@ public:
 	bool& IsActive();
 	bool& IsVisible();
 
-public :
+public:
 
-	std::string GetTag();
+	const std::string& GetTag() const;
 	SDL_Point GetPosition();
 
-	void SetTag(std::string tag);
+	void SetTag(const std::string& tag);
 	void SetPosition(int x, int y);
 
-public :
+public:
 
 	virtual void Update() = 0;
 	virtual bool Draw() = 0;
 
-protected :
+protected:
 
 	bool m_isAlive;
 	bool m_isActive;

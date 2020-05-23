@@ -10,6 +10,9 @@ Sprite::Sprite()
 
 	m_textureIndex = 0;
 	m_texture = nullptr;
+	m_textureCell = { 0, 0 };
+	m_spriteDimension = { 0, 0 };
+	m_textureDimension = { 0, 0, 0, 0 };
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -97,6 +100,6 @@ void Sprite::BlitSprite(int xPosition, int yPosition, double angle, FlipType fli
 
 	//render the sprite using all values passed and determined above
 	SDL_RenderCopyEx(TheScreen::Instance()->GetRenderer(), 
-		             m_texture, &src, &dst, angle, &centrePoint, (SDL_RendererFlip)flipType);
+		             m_texture, &src, &dst, angle, &centrePoint, static_cast<SDL_RendererFlip>(flipType));
 
 }

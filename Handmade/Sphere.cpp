@@ -32,7 +32,7 @@ void Sphere::SetPosition(int x, int y)
 //------------------------------------------------------------------------------------------------------
 //function that checks if sphere collides with another sphere object
 //------------------------------------------------------------------------------------------------------
-bool Sphere::IsColliding(const Sphere& secondSphere)
+bool Sphere::IsColliding(const Sphere& secondSphere) const
 {
 
 	//first calculate the middle point of the sphere bound
@@ -47,8 +47,8 @@ bool Sphere::IsColliding(const Sphere& secondSphere)
 							  centrePoint_1.y - centrePoint_2.y };
 
 	//calculate the distance between both spheres by using the Pythagoras theorem
-	int distance = (int)(sqrt((double)distanceVector.x * (double)distanceVector.x +
-		                      (double)distanceVector.y * (double)distanceVector.y));
+	int distance = static_cast<int>(sqrt(static_cast<double>(distanceVector.x) * static_cast<double>(distanceVector.x) +
+		                                 static_cast<double>(distanceVector.y) * static_cast<double>(distanceVector.y)));
 
 	//return collision flag based on distance and radii formula  
 	return (distance <= (m_radius + secondSphere.m_radius));

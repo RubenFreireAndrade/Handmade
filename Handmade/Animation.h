@@ -17,14 +17,14 @@ public:
 
 public:
 
-	bool IsAnimationDead();
+	bool IsAnimationDead() const;
 	bool& IsAnimationLooping();
 	void SetAnimationVelocity(float velocity);
 	
 public:
 
 	virtual void Draw(int xPosition = 0, int yPosition = 0, 
-		              double angle = 0.0, FlipType flipType = NO_FLIP);
+		              double angle = 0.0, FlipType flipType = FlipType::NO_FLIP);
 
 protected:
 

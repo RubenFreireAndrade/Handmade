@@ -45,10 +45,10 @@ class TextureManager
 
 public:
 
-	enum DataType   { FONT_DATA, TEXTURE_DATA };
-	enum RemoveType { CUSTOM_DATA, ALL_DATA };
+	enum class DataType   { FONT_DATA, TEXTURE_DATA };
+	enum class RemoveType { CUSTOM_DATA, ALL_DATA };
 
-public :
+public:
 
 	friend class Singleton<TextureManager>;
 
@@ -69,13 +69,13 @@ public:
 
 	void Output();
 
-private :
+private:
 
 	TextureManager()  {}
 	TextureManager(const TextureManager&);
 	TextureManager& operator=(const TextureManager&);
 
-private :
+private:
 
 	std::map<std::string, TTF_Font*> m_fontMap;
 	std::map<std::string, SDL_Texture*> m_textureMap;

@@ -39,20 +39,20 @@
 class AABB
 {
 
-public :
+public:
 
 	void SetPosition(int x, int y);
 	void SetDimension(int width, int height);
 
-public :
+public:
 
-	bool IsColliding(const AABB& secondBox);
+	bool IsColliding(const AABB& secondBox) const;
 
-private :
+private:
 
 	void CreateBox();
 
-private :
+private:
 
 	SDL_Point m_min;
 	SDL_Point m_max;

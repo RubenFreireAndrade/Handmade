@@ -8,15 +8,18 @@
 Text::Text()
 {
 
-	m_text = "";
 	m_font = nullptr;
 	m_texture = nullptr;
-
-	m_color.r = 255;
-	m_color.g = 255;
-	m_color.b = 255;
+	m_textSize = { 0, 0 };
+	m_color = { 255, 255, 255 };
 
 }
+
+SDL_Point Text::GetSize() const
+{
+	return m_textSize;
+}
+
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns size of text object
 //------------------------------------------------------------------------------------------------------
@@ -74,7 +77,7 @@ void Text::Draw(int xPosition, int yPosition)
 	dst.h = m_textSize.y;
 
 	//render the text object using all values passed and determined above
-	SDL_RenderCopy(TheScreen::Instance()->GetRenderer(), m_texture, NULL, &dst);
+	SDL_RenderCopy(TheScreen::Instance()->GetRenderer(), m_texture, nullptr, &dst);
 
 }
 //------------------------------------------------------------------------------------------------------

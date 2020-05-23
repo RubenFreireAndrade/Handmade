@@ -39,20 +39,20 @@
 class Sphere
 {
 
-public :
+public:
 
 	Sphere();
 
-public :
+public:
 
 	void SetRadius(int radius);
 	void SetPosition(int x, int y);
 
-public :
+public:
 
-	bool IsColliding(const Sphere& secondSphere);
+	bool IsColliding(const Sphere& secondSphere) const;
 
-private :
+private:
 
 	int m_radius;
 	SDL_Point m_position;

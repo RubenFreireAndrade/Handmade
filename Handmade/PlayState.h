@@ -54,7 +54,7 @@ public:
 	virtual bool Draw();
 	virtual void OnExit();
 
-private :
+private:
 
 	Background* m_image;
 	std::vector<GameObject*> m_gameObjects;

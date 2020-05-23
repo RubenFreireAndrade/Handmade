@@ -40,32 +40,34 @@
 class Sprite
 {
 
-public :
+public:
 
-	enum FlipType { NO_FLIP, HORIZONTAL, VERTICAL };
+	enum class FlipType { NO_FLIP = SDL_FLIP_NONE, 
+		                  HORIZONTAL = SDL_FLIP_HORIZONTAL, 
+		                  VERTICAL = SDL_FLIP_VERTICAL };
 
-public :
+public:
 
 	Sprite();           
 	virtual ~Sprite() {}
 
-public :
+public:
 
 	void SetTextureCell(int column, int row);
 	void SetTexture(const std::string& mapIndex);
 	void SetSpriteDimension(int width, int height);
 	void SetTextureDimension(int column, int row, int width, int height);
 	
-public :
+public:
 
 	virtual void Draw(int xPosition = 0, int yPosition = 0, 
-		              double angle = 0.0, FlipType flipType = NO_FLIP);
+		              double angle = 0.0, FlipType flipType = FlipType::NO_FLIP);
 
-protected :
+protected:
 
 	void BlitSprite(int xPosition, int yPosition, double angle, FlipType flipType);
 
-protected :
+protected:
 
 	int m_textureIndex;
 

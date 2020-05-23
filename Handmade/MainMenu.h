@@ -49,8 +49,8 @@ public:
 
 public:
 
-	int GetMenuOption();
-	void SetMenuText(std::string text);
+	int GetMenuOption() const;
+	void SetMenuText(const std::string& text);
 
 public:
 

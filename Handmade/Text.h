@@ -47,7 +47,7 @@ public:
 
 public:
 
-	SDL_Point GetSize() { return m_textSize; }
+	SDL_Point GetSize() const;
 
 public:
 

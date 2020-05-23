@@ -43,7 +43,7 @@ class Background : public GameObject
 
 public:
 
-	Background(std::string imageFilename, std::string audioFilename);
+	Background(const std::string& imageFilename, const std::string& audioFilename);
 	virtual ~Background();
 
 public:
@@ -51,7 +51,7 @@ public:
 	virtual void Update() {}
 	virtual bool Draw();
 
-public :
+public:
 
 	void PlayMusic();
 	void StopMusic();

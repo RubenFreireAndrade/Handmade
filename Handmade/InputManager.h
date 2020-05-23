@@ -43,52 +43,53 @@
 class InputManager
 {
 
-public :
+public:
 
-	enum ButtonState { UP, DOWN };
-	enum CursorState { ON = 1, OFF = 0, SHOW = 1, HIDE = 0 };
-	enum CursorType  { ARROW, IBEAM, WAIT, CROSSHAIR, WAIT_ARROW, NO = 10, HAND = 11 };
+	enum class ButtonState { UP, DOWN };
+	enum class CursorState { ON = 1, OFF = 0, SHOW = 1, HIDE = 0 };
+	enum class CursorType  { ARROW, IBEAM, WAIT, CROSSHAIR, WAIT_ARROW, NO = 10, HAND = 11 };
 
-public :
+public:
 
 	friend class Singleton<InputManager>;
 
-public :
+public:
 
-	bool IsXClicked();
-	bool IsKeyPressed();
-	const Uint8* GetKeyStates();
-	bool IsMouseColliding(const AABB& bound);
-	bool IsMouseColliding(const Sphere& bound);
+	bool IsXClicked() const;
+	bool IsKeyPressed() const;
+	const Uint8* GetKeyStates() const;
+	bool IsMouseColliding(const AABB& bound) const;
+	bool IsMouseColliding(const Sphere& bound) const;
 
-public :
+public:
 
-	ButtonState GetLeftButtonState();
-	ButtonState GetMiddleButtonState();
-	ButtonState GetRightButtonState();
+	ButtonState GetLeftButtonState() const;
+	ButtonState GetMiddleButtonState() const;
+	ButtonState GetRightButtonState() const;
 
-	SDL_Point GetMouseWheel();
-	SDL_Point GetMouseMotion();
-	SDL_Point GetMousePosition();
+	SDL_Point GetMouseWheel() const;
+	SDL_Point GetMouseMotion() const;
+	SDL_Point GetMousePosition() const;
 
-	std::string GetInput() { return m_input; }
+	const std::string& GetInput() const;
 
 	void SetMousePosition(int x, int y);
-	void SetMouseCursorType(CursorType cursorType = ARROW);
-	void SetMouseCursorState(CursorState cursorEnabled = ON, CursorState cursorVisible = SHOW);
+	void SetMouseCursorType(CursorType cursorType = CursorType::ARROW);
+	void SetMouseCursorState(CursorState cursorEnabled = CursorState::ON, 
+		                     CursorState cursorVisible = CursorState::SHOW);
 
-public :
+public:
 
 	void Update();
 	void FlushInput() { m_input.clear(); }
 
-private :
+private:
 
 	InputManager();
 	InputManager(const InputManager&);
 	InputManager& operator=(const InputManager&);
 
-private :
+private:
 
 	bool m_isXClicked;
 	bool m_isKeyPressed;
