@@ -1,6 +1,6 @@
 #include <iostream>
 #include <time.h>
-#include "InputManager.h"
+#include "Input.h"
 #include "Game.h"
 #include "MenuState.h"
 #include "PlayState.h"
@@ -51,7 +51,7 @@ bool MenuState::Update()
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		TheGame::Instance()->ChangeState(new PlayState(this));
+		Game::Instance()->ChangeState(new PlayState(this));
 	}
 
 	//if player chose to exit the game then quit altogether

@@ -1,10 +1,20 @@
-#include "InputManager.h"
-#include "ScreenManager.h"
+#include "Input.h"
+#include "Screen.h"
 
+//------------------------------------------------------------------------------------------------------
+//static function that will create an instance of this Input object and return its address
+//------------------------------------------------------------------------------------------------------
+Input* Input::Instance()
+{
+
+	static Input* inputObject = new Input();
+	return inputObject;
+
+}
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values 
 //------------------------------------------------------------------------------------------------------
-InputManager::InputManager()
+Input::Input()
 {
 
 	m_cursor = nullptr;
@@ -24,7 +34,7 @@ InputManager::InputManager()
 //------------------------------------------------------------------------------------------------------
 //predicate function that returns flag stating if X has been clicked
 //------------------------------------------------------------------------------------------------------
-bool InputManager::IsXClicked() const
+bool Input::IsXClicked() const
 {
 
 	return m_isXClicked;
@@ -33,7 +43,7 @@ bool InputManager::IsXClicked() const
 //------------------------------------------------------------------------------------------------------
 //predicate function that returns flag stating if a key has been pressed
 //------------------------------------------------------------------------------------------------------
-bool InputManager::IsKeyPressed() const
+bool Input::IsKeyPressed() const
 {
 
 	return m_isKeyPressed;
@@ -42,7 +52,7 @@ bool InputManager::IsKeyPressed() const
 //------------------------------------------------------------------------------------------------------
 //getter function that returns pointer to array of key states
 //------------------------------------------------------------------------------------------------------
-const Uint8* InputManager::GetKeyStates() const
+const Uint8* Input::GetKeyStates() const
 {
 
 	return m_keyStates;
@@ -51,7 +61,7 @@ const Uint8* InputManager::GetKeyStates() const
 //------------------------------------------------------------------------------------------------------
 //predicate function that checks if mouse cursor collides with passed box bound
 //------------------------------------------------------------------------------------------------------
-bool InputManager::IsMouseColliding(const AABB& bound) const
+bool Input::IsMouseColliding(const AABB& bound) const
 {
 
 	//create a temporary bounding box to represent mouse cursor
@@ -69,7 +79,7 @@ bool InputManager::IsMouseColliding(const AABB& bound) const
 //------------------------------------------------------------------------------------------------------
 //predicate function that checks if mouse cursor collides with passed sphere bound
 //------------------------------------------------------------------------------------------------------
-bool InputManager::IsMouseColliding(const Sphere& bound) const
+bool Input::IsMouseColliding(const Sphere& bound) const
 {
 
 	//create a temporary sphere bound to represent mouse cursor
@@ -87,7 +97,7 @@ bool InputManager::IsMouseColliding(const Sphere& bound) const
 //------------------------------------------------------------------------------------------------------
 //getter function that returns state of left mouse button
 //------------------------------------------------------------------------------------------------------
-InputManager::ButtonState InputManager::GetLeftButtonState() const
+Input::ButtonState Input::GetLeftButtonState() const
 {
 
 	return m_leftButtonState;
@@ -96,7 +106,7 @@ InputManager::ButtonState InputManager::GetLeftButtonState() const
 //------------------------------------------------------------------------------------------------------
 //getter function that returns state of middle mouse button
 //------------------------------------------------------------------------------------------------------
-InputManager::ButtonState InputManager::GetMiddleButtonState() const
+Input::ButtonState Input::GetMiddleButtonState() const
 {
 
 	return m_middleButtonState;
@@ -105,7 +115,7 @@ InputManager::ButtonState InputManager::GetMiddleButtonState() const
 //------------------------------------------------------------------------------------------------------
 //getter function that returns state of right mouse button
 //------------------------------------------------------------------------------------------------------
-InputManager::ButtonState InputManager::GetRightButtonState() const
+Input::ButtonState Input::GetRightButtonState() const
 {
 
 	return m_rightButtonState;
@@ -114,7 +124,7 @@ InputManager::ButtonState InputManager::GetRightButtonState() const
 //------------------------------------------------------------------------------------------------------
 //getter function that returns motion value of mouse wheel movement
 //------------------------------------------------------------------------------------------------------
-SDL_Point InputManager::GetMouseWheel() const
+SDL_Point Input::GetMouseWheel() const
 {
 
 	return m_mouseWheel;
@@ -123,7 +133,7 @@ SDL_Point InputManager::GetMouseWheel() const
 //------------------------------------------------------------------------------------------------------
 //getter function that returns motion value of mouse movement
 //------------------------------------------------------------------------------------------------------
-SDL_Point InputManager::GetMouseMotion() const
+SDL_Point Input::GetMouseMotion() const
 {
 
 	return m_mouseMotion;
@@ -132,14 +142,14 @@ SDL_Point InputManager::GetMouseMotion() const
 //------------------------------------------------------------------------------------------------------
 //getter function that returns position of mouse
 //------------------------------------------------------------------------------------------------------
-SDL_Point InputManager::GetMousePosition() const
+SDL_Point Input::GetMousePosition() const
 {
 
 	return m_mousePosition;
 
 }
 
-const std::string& InputManager::GetInput() const
+const std::string& Input::GetInput() const
 {
 	return m_input;
 }
@@ -147,16 +157,16 @@ const std::string& InputManager::GetInput() const
 //------------------------------------------------------------------------------------------------------
 //setter function that places mouse cursor at passed position
 //------------------------------------------------------------------------------------------------------
-void InputManager::SetMousePosition(int x, int y)
+void Input::SetMousePosition(int x, int y)
 {
 
-	SDL_WarpMouseInWindow(TheScreen::Instance()->GetWindow(), x, y);
+	SDL_WarpMouseInWindow(Screen::Instance()->GetWindow(), x, y);
 
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that creates a system mouse cursor 
 //------------------------------------------------------------------------------------------------------
-void InputManager::SetMouseCursorType(CursorType cursorType)
+void Input::SetMouseCursorType(CursorType cursorType)
 {
 
 	//first destroy old cursor object from memory
@@ -172,7 +182,7 @@ void InputManager::SetMouseCursorType(CursorType cursorType)
 //------------------------------------------------------------------------------------------------------
 //setter function that enables, disables, shows or hides the mouse cursor
 //------------------------------------------------------------------------------------------------------
-void InputManager::SetMouseCursorState(CursorState cursorEnabled, CursorState cursorVisible)
+void Input::SetMouseCursorState(CursorState cursorEnabled, CursorState cursorVisible)
 {
 
 	//if mouse cursor is enabled then check if it's visible  
@@ -205,7 +215,7 @@ void InputManager::SetMouseCursorState(CursorState cursorEnabled, CursorState cu
 //------------------------------------------------------------------------------------------------------
 //function that processes all keyboard and mouse events
 //------------------------------------------------------------------------------------------------------
-void InputManager::Update()
+void Input::Update()
 {
 
 	//variable to store SDL event data

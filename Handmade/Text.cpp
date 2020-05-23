@@ -1,4 +1,4 @@
-#include "ScreenManager.h"
+#include "Screen.h"
 #include "Text.h"
 #include "TextureManager.h"
 
@@ -59,7 +59,7 @@ void Text::SetColor(Uint8 r, Uint8 g, Uint8 b)
 void Text::SetFont(const std::string& mapIndex)
 {
 
-	m_font = TheTexture::Instance()->GetFont(mapIndex);
+	m_font = TextureManager::Instance()->GetFont(mapIndex);
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ void Text::Draw(int xPosition, int yPosition)
 	dst.h = m_textSize.y;
 
 	//render the text object using all values passed and determined above
-	SDL_RenderCopy(TheScreen::Instance()->GetRenderer(), m_texture, nullptr, &dst);
+	SDL_RenderCopy(Screen::Instance()->GetRenderer(), m_texture, nullptr, &dst);
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ void Text::CreateText()
 	//free the old texture first before creating a new
 	//texture object from surface object loaded above
 	SDL_DestroyTexture(m_texture);
-	m_texture = SDL_CreateTextureFromSurface(TheScreen::Instance()->GetRenderer(), textSurface);
+	m_texture = SDL_CreateTextureFromSurface(Screen::Instance()->GetRenderer(), textSurface);
 
 	//remove temporary SDL surface object as we don't need it anymore
 	SDL_FreeSurface(textSurface);

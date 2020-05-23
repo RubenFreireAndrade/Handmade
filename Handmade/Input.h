@@ -1,5 +1,5 @@
-#ifndef INPUT_MANAGER_H
-#define INPUT_MANAGER_H
+#ifndef INPUT_H
+#define INPUT_H
 
 /*==============================================================================================#
 |                                                                                               |
@@ -31,16 +31,15 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'InputManager' source files last updated in May 2020   							            |
+| 'Input' source files last updated in May 2020   							                    |
 #==============================================================================================*/
 
 #include <string>
 #include <SDL.h>
 #include "AABB.h"
-#include "Singleton.h"
 #include "Sphere.h"
 
-class InputManager
+class Input
 {
 
 public:
@@ -51,7 +50,7 @@ public:
 
 public:
 
-	friend class Singleton<InputManager>;
+	static Input* Instance();
 
 public:
 
@@ -85,9 +84,9 @@ public:
 
 private:
 
-	InputManager();
-	InputManager(const InputManager&);
-	InputManager& operator=(const InputManager&);
+	Input();
+	Input(const Input&);
+	Input& operator=(Input&);
 
 private:
 
@@ -108,7 +107,5 @@ private:
 	SDL_Point m_mousePosition;
 	
 };
-
-typedef Singleton<InputManager> TheInput;
 
 #endif

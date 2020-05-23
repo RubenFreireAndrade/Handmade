@@ -1,5 +1,5 @@
 #include "Sprite.h"
-#include "ScreenManager.h"
+#include "Screen.h"
 #include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ void Sprite::SetTextureCell(int column, int row)
 void Sprite::SetTexture(const std::string& mapIndex)
 {
 
-	m_texture = TheTexture::Instance()->GetTexture(mapIndex);
+	m_texture = TextureManager::Instance()->GetTexture(mapIndex);
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ void Sprite::BlitSprite(int xPosition, int yPosition, double angle, FlipType fli
 	centrePoint.y = m_spriteDimension.y / 2;
 
 	//render the sprite using all values passed and determined above
-	SDL_RenderCopyEx(TheScreen::Instance()->GetRenderer(), 
+	SDL_RenderCopyEx(Screen::Instance()->GetRenderer(), 
 		             m_texture, &src, &dst, angle, &centrePoint, static_cast<SDL_RendererFlip>(flipType));
 
 }

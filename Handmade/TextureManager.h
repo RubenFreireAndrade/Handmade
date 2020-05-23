@@ -38,7 +38,6 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "Singleton.h"
 
 class TextureManager
 {
@@ -50,7 +49,7 @@ public:
 
 public:
 
-	friend class Singleton<TextureManager>;
+	static TextureManager* Instance();
 
 public:
 
@@ -81,7 +80,5 @@ private:
 	std::map<std::string, SDL_Texture*> m_textureMap;
 	
 };
-
-typedef Singleton<TextureManager> TheTexture;
 
 #endif

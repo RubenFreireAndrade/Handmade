@@ -1,6 +1,6 @@
 #include "AudioManager.h"
 #include "Background.h"
-#include "ScreenManager.h"
+#include "Screen.h"
 #include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -12,12 +12,12 @@ Background::Background(const std::string& imageFilename, const std::string& audi
 	m_isPlaying = false;
 
 	//load image and audio resources into memory
-	TheTexture::Instance()->LoadTextureFromFile(imageFilename, imageFilename);
-	TheAudio::Instance()->
+	TextureManager::Instance()->LoadTextureFromFile(imageFilename, imageFilename);
+	AudioManager::Instance()->
 	LoadFromFile(audioFilename, AudioManager::AudioType::MUSIC_AUDIO, audioFilename);
 
 	//get resolution so that we can adjust the background image accordingly
-	SDL_Point resolution = TheScreen::Instance()->GetResolution();
+	SDL_Point resolution = Screen::Instance()->GetResolution();
 
 	//link image resource with sprite component
 	m_image.SetTexture(imageFilename);
@@ -71,11 +71,11 @@ void Background::StopMusic()
 Background::~Background()
 {
 
-	TheAudio::Instance()->
+	AudioManager::Instance()->
 	UnloadFromMemory(AudioManager::AudioType::MUSIC_AUDIO, 
 		             AudioManager::RemoveType::CUSTOM_AUDIO, m_audioName);
 	
-	TheTexture::Instance()->
+	TextureManager::Instance()->
 	UnloadFromMemory(TextureManager::DataType::TEXTURE_DATA, 
 		             TextureManager::RemoveType::CUSTOM_DATA, m_imageName);
 

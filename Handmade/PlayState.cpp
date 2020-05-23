@@ -2,7 +2,7 @@
 #include <time.h>
 #include "EndState.h"
 #include "Game.h"
-#include "InputManager.h"
+#include "Input.h"
 #include "MenuState.h"
 #include "PlayState.h"
 
@@ -36,14 +36,14 @@ bool PlayState::Update()
 	m_image->PlayMusic();
 
 	//read keyboard state
-	const Uint8* keys = TheInput::Instance()->GetKeyStates();
+	const Uint8* keys = Input::Instance()->GetKeyStates();
 
 	//the M key moves to the main menu
 	if (keys[SDL_SCANCODE_M])
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		TheGame::Instance()->ChangeState(new MenuState(this));
+		Game::Instance()->ChangeState(new MenuState(this));
 	}
 
 	//the Q key moves to the ending state
@@ -52,7 +52,7 @@ bool PlayState::Update()
 		
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		TheGame::Instance()->ChangeState(new EndState(this));
+		Game::Instance()->ChangeState(new EndState(this));
 
 	}
 

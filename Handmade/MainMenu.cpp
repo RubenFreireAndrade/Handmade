@@ -1,6 +1,6 @@
-#include "InputManager.h"
+#include "Input.h"
 #include "MainMenu.h"
-#include "ScreenManager.h"
+#include "Screen.h"
 #include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ MainMenu::MainMenu()
 	m_menuOptionChoice = -1;
 
 	//load font resource into memory
-	TheTexture::Instance()->LoadFontFromFile("Assets/Fonts/Quikhand.ttf", 100, "MENU_FONT");
+	TextureManager::Instance()->LoadFontFromFile("Assets/Fonts/Quikhand.ttf", 100, "MENU_FONT");
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ void MainMenu::SetMenuText(const std::string& text)
 void MainMenu::Update()
 {
 
-	const Uint8* keys = TheInput::Instance()->GetKeyStates();
+	const Uint8* keys = Input::Instance()->GetKeyStates();
 
 	//flag to monitor if key is pressed so that when pressing UP/DOWN
 	//key the selected menu option doesn't move at lightning speed
@@ -95,7 +95,7 @@ void MainMenu::Update()
 
 	//update state of key based on if it's pressed or not which will make sure the next time
 	//the frame is called the above code will either move the menu option or keep it still
-	isKeyPressed = TheInput::Instance()->IsKeyPressed();
+	isKeyPressed = Input::Instance()->IsKeyPressed();
 
 	//loop through all menu items and set their initial color to orange
 	for (size_t i = 0; i < m_menuText.size(); i++)
@@ -114,7 +114,7 @@ bool MainMenu::Draw()
 {
 
 	//first get resolution so that we can set the menu position accordingly
-	SDL_Point resolution = TheScreen::Instance()->GetResolution();
+	SDL_Point resolution = Screen::Instance()->GetResolution();
 
 	//this will position the text in the bottom half of the screen, centered in X
 	//X - divide screen width in half and subtract half the width of each text
@@ -148,7 +148,7 @@ void MainMenu::Reset()
 MainMenu::~MainMenu()
 {
 
-	TheTexture::Instance()->
+	TextureManager::Instance()->
 	UnloadFromMemory(TextureManager::DataType::FONT_DATA, 
 		             TextureManager::RemoveType::CUSTOM_DATA, "MENU_FONT");
 

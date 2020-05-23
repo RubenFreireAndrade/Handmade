@@ -45,7 +45,6 @@
 #include <map>
 #include <string>
 #include <SDL_mixer.h>
-#include "Singleton.h"
 
 class AudioManager
 {
@@ -57,7 +56,7 @@ public:
 	
 public:
 
-	friend class Singleton<AudioManager>;
+	static AudioManager* Instance();
 
 public:
 
@@ -89,7 +88,5 @@ private:
 	std::map<std::string, Mix_Music*> m_voiceDataMap;
 
 };
-
-typedef Singleton<AudioManager> TheAudio;
 
 #endif

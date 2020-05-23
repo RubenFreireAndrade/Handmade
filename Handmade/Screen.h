@@ -1,5 +1,5 @@
-#ifndef SCREEN_MANAGER_H
-#define SCREEN_MANAGER_H
+#ifndef SCREEN_H
+#define SCREEN_H
 
 /*==============================================================================================#
 |                                                                                               |
@@ -31,20 +31,19 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'ScreenManager' source files last updated in May 2020   							            |
+| 'Screen' source files last updated in May 2020   							                    |
 #==============================================================================================*/
 
 #include <string>
 #include <SDL.h>
 #include <SDL_syswm.h>
-#include "Singleton.h"
 
-class ScreenManager
+class Screen
 {
 
 public:
 
-	friend class Singleton<ScreenManager>;
+	static Screen* Instance();
 
 public:
 
@@ -68,9 +67,9 @@ public:
 
 private:
 
-	ScreenManager();
-	ScreenManager(const ScreenManager&);
-	ScreenManager& operator=(const ScreenManager&);
+	Screen();
+	Screen(const Screen&);
+	Screen& operator=(const Screen&);
 
 private:
 
@@ -81,7 +80,5 @@ private:
 	SDL_Renderer* m_renderer;
 	
 };
-
-typedef Singleton<ScreenManager> TheScreen;
 
 #endif

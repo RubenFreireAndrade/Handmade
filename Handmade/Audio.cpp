@@ -26,8 +26,8 @@ void Audio::SetVolume(int volume)
 void Audio::SetAudio(const std::string& mapIndex, AudioType audioType)
 {
 
-	audioType == AudioType::MUSIC_AUDIO ? m_audio = TheAudio::Instance()->GetMusicData(mapIndex)
-							            : m_audio = TheAudio::Instance()->GetVoiceData(mapIndex);
+	audioType == AudioType::MUSIC_AUDIO ? m_audio = AudioManager::Instance()->GetMusicData(mapIndex)
+							            : m_audio = AudioManager::Instance()->GetVoiceData(mapIndex);
 
 }
 //------------------------------------------------------------------------------------------------------

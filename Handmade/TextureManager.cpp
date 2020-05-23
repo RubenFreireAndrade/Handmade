@@ -1,8 +1,15 @@
 #include <iostream>
 #include <SDL_image.h>
-#include "ScreenManager.h"
+#include "Screen.h"
 #include "TextureManager.h"
 
+TextureManager* TextureManager::Instance()
+{
+
+	static TextureManager* textureObject = new TextureManager();
+	return textureObject;
+
+}
 //------------------------------------------------------------------------------------------------------
 //getter function that returns font pointer based on font map index passed 
 //------------------------------------------------------------------------------------------------------
@@ -95,7 +102,7 @@ bool TextureManager::LoadTextureFromFile(const std::string& filename, const std:
 	{
 
 		//create a texture out of the previously loaded image
-		texture = SDL_CreateTextureFromSurface(TheScreen::Instance()->GetRenderer(), textureData);
+		texture = SDL_CreateTextureFromSurface(Screen::Instance()->GetRenderer(), textureData);
 
 		//free SDL image as its no longer needed
 		SDL_FreeSurface(textureData);

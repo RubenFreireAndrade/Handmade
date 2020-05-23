@@ -1,6 +1,13 @@
 #include <iostream>
 #include "AudioManager.h"
 
+AudioManager* AudioManager::Instance()
+{
+
+	static AudioManager* audioObject = new AudioManager();
+	return audioObject;
+
+}
 //------------------------------------------------------------------------------------------------------
 //getter function that returns pointer to sound effect data based on index value passed
 //------------------------------------------------------------------------------------------------------

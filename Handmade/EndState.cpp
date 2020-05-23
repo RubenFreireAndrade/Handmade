@@ -2,7 +2,7 @@
 #include <iostream>
 #include "EndState.h"
 #include "Game.h"
-#include "InputManager.h"
+#include "Input.h"
 #include "PlayState.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ bool EndState::Update()
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		TheGame::Instance()->ChangeState(new PlayState(this));
+		Game::Instance()->ChangeState(new PlayState(this));
 	}
 
 	//if player chose to exit the game then quit altogether

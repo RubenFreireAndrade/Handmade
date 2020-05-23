@@ -37,14 +37,13 @@
 #include <deque>
 #include <string>
 #include "GameState.h"
-#include "Singleton.h"
 
 class Game
 {
 
 public:
 
-	friend class Singleton<Game>;
+	static Game* Instance();
 
 public:
 
@@ -79,7 +78,5 @@ private:
 	std::deque<GameState*> m_gameStates;
 
 };
-
-typedef Singleton<Game> TheGame;
 
 #endif
