@@ -1,5 +1,6 @@
 #include "InputManager.h"
 #include "MainMenu.h"
+#include "ScreenManager.h"
 #include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -13,7 +14,7 @@ MainMenu::MainMenu()
 	m_menuOptionChoice = -1;
 
 	//load font resource into memory
-	TheTexture::Instance()->LoadFontFromFile("Assets\\Fonts\\Quikhand.ttf", 100, "MENU_FONT");
+	TheTexture::Instance()->LoadFontFromFile("Assets/Fonts/Quikhand.ttf", 100, "MENU_FONT");
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ void MainMenu::SetMenuText(const std::string& text)
 	
 	menuText.SetFont("MENU_FONT");
 	menuText.SetColor(255, 174, 0);
-	menuText.SetSize(text.size() * 20, 60);
+	menuText.SetSize(text.size() * MENU_TEXT_CHAR_W, MENU_TEXT_CHAR_H);
 	menuText.SetText(text);
 	m_menuText.push_back(menuText);
 
@@ -112,15 +113,20 @@ void MainMenu::Update()
 bool MainMenu::Draw()
 {
 
-	//calculate a centre position for all menu items based on amount of menu items and their height
-	//this will keep all menu items centered around the same spot no matter how many items there are
-	int yPos = static_cast<int>(620.0f - (float(m_menuText.size()) / 2.0f * 60.0f));
+	//first get resolution so that we can set the menu position accordingly
+	SDL_Point resolution = TheScreen::Instance()->GetResolution();
+
+	//this will position the text in the bottom half of the screen, centered in X
+	//X - divide screen width in half and subtract half the width of each text
+	//Y - divide screen height in quarters and subtract half of the menu's text heights
+	int posY = static_cast<int>((resolution.y - resolution.y / 4) - 
+		                        (m_menuText.size() / 2 * MENU_TEXT_CHAR_H));
 
 	//loop through all menu items and render them based on a centre position
 	for (size_t i = 0; i < m_menuText.size(); i++)
 	{
-		m_menuText[i].Draw(static_cast<int>(512 - m_menuText[i].GetSize().x / 2),  //x
-			               static_cast<int>(yPos + i * 60));                       //y
+		m_menuText[i].Draw(static_cast<int>((resolution.x / 2) - m_menuText[i].GetSize().x / 2),  //x
+			               static_cast<int>(posY + i * MENU_TEXT_CHAR_H));                        //y
 	}
 
 	return true;

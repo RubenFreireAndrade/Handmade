@@ -25,7 +25,7 @@ bool EndState::OnEnter()
 	m_menu->SetMenuText("PLAY AGAIN");
 	m_menu->SetMenuText("QUIT GAME");
 
-	m_image = new Background("Assets/Textures/End.png", "Assets/Audio/End.ogg");
+	m_image = new Background("Assets/Textures/End_1280x720.png", "Assets/Audio/End.ogg");
 
 	return true;
 

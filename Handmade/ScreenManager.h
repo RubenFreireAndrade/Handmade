@@ -50,7 +50,7 @@ public:
 
 	SDL_Window* GetWindow();
 	SDL_Renderer* GetRenderer();
-	SDL_Point GetScreenSize();
+	SDL_Point GetResolution();
 
 public:
 

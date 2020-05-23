@@ -46,7 +46,7 @@ int main(int argc, char* args[])
 {
 
 	//initialize the game
-	if (!(TheGame::Instance()->Initialize("<insert game name here>", 1024, 768)))
+	if (!(TheGame::Instance()->Initialize("<insert game name here>", 1280, 720)))
 	{
 		return 0;
 	}

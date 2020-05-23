@@ -39,6 +39,9 @@
 #include "GameObject.h"
 #include "Text.h"
 
+const int MENU_TEXT_CHAR_W = 20;
+const int MENU_TEXT_CHAR_H = 60;
+
 class MainMenu : public GameObject
 {
 

@@ -1,5 +1,6 @@
 #include "AudioManager.h"
 #include "Background.h"
+#include "ScreenManager.h"
 #include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -15,10 +16,13 @@ Background::Background(const std::string& imageFilename, const std::string& audi
 	TheAudio::Instance()->
 	LoadFromFile(audioFilename, AudioManager::AudioType::MUSIC_AUDIO, audioFilename);
 
+	//get resolution so that we can adjust the background image accordingly
+	SDL_Point resolution = TheScreen::Instance()->GetResolution();
+
 	//link image resource with sprite component
 	m_image.SetTexture(imageFilename);
-	m_image.SetSpriteDimension(1024, 768);
-	m_image.SetTextureDimension(1, 1, 1024, 768);
+	m_image.SetSpriteDimension(resolution.x, resolution.y);
+	m_image.SetTextureDimension(1, 1, resolution.x, resolution.y);
 
 	//link audio resource with music component
 	m_music.SetAudio(audioFilename, Audio::AudioType::MUSIC_AUDIO);

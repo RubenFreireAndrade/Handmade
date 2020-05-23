@@ -25,7 +25,7 @@ bool MenuState::OnEnter()
 	m_menu->SetMenuText("PLAY GAME");
 	m_menu->SetMenuText("QUIT GAME");
 
-	m_image = new Background("Assets/Textures/Menu.png", "Assets/Audio/Menu.ogg");
+	m_image = new Background("Assets/Textures/Menu_1280x720.png", "Assets/Audio/Menu.ogg");
 	
 	//seed the random number generator
 	srand(static_cast<unsigned int>(time(0)));
