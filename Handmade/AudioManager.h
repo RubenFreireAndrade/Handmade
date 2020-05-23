@@ -35,6 +35,8 @@
 - An Output() routine is there for debug purposes only and will print to the console how many audio
   objects are currently stored in each of the three supported maps.
 
+  //to be removed!
+
 */
 
 #ifndef AUDIO_MANAGER_H

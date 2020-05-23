@@ -1,39 +1,38 @@
-/*
-
-  All code has been written by Karsten Vermeulen and may be used freely by anyone. It is by no
-  means perfect and there is certainly room for improvement in some parts. As a whole, the code
-  has been created as part of an engine for the purposes of educating other fellow programmers,
-  and anyone else wishing to learn C++ and OOP. Feel free to use, copy, break, update and do as
-  you wish with this code - it is there for all!
-
-  UPDATED : July 2017
-
-  -----------------------------------------------------------------------------------------------
-
-- This class encapsulates a game object that will exist in the game world and represent any type
-  of object like a player, enemy, weapon, inventory item, etc. It is designed around the same
-  principle as Unity's game objects and will be instantiated in the client code at runtime from
-  within the game specific code. It consists of three main flags, m_isAlive, m_isActive and
-  m_isVisible, to signify if the object is exisiting in memory, being used in the game world and
-  hidden or not from the game world, respectively. Each game object also has a string tag to
-  identify it amongst other objects, and a priority value for 2D game worlds without a Z-axis,
-  so that game objects may be drawn in a specific order to give the illusion of depth. All game 
-  objects need to be instantiated as sub-classes of this abstract base class.
-
-- The getters and setters are split into normal ones and combo variants. The combo variants,
-  IsAlive(), IsActive() and IsVisible() return references to the respective variables because these
-  flag variables may be used frequently and getting and setting them individually may become
-  inconvenient.
-
-- Each game object has a Update() and Draw() function which will be overriden in the sub-class,
-  where the actual main functionality of that object will exist. Generally the Update() routine
-  is there for the updating of all position, rotation and scale values, alongside others. The Draw()
-  function is intended to render all internal components and other objects.
-
-*/
-
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
+
+/*==============================================================================================#
+|                                                                                               |
+| Handmade Lite is an educational game engine, written by Karsten Vermeulen for the purposes of |
+| educating other fellow programmers, programming students and anyone else wishing to learn     |
+| about game development, C++ and OOP. The engine, class design and overall structure is by no  |
+| means perfect and there is certainly room for improvement. Feel free to use, copy, break,     |
+| update and do as you wish with this code - it is there, free, for all!                        |
+|																							    |
+| Designed to teach. Made from scratch. Built by hand.							                |
+|																							    |
+#===============================================================================================#
+|	                                                                                            |
+| Please note, that this project is not open source and therefore has no license affiliated     |
+| with it. However, feel free to use the engine to build your own game or learn from the code.  |
+| Handmade Lite is an educational tool, designed to be used as such. Please be respectful and   |
+| do not distribute the engine or its code as your own work. You may alter or tweak the engine  |
+| code as a learning experience and you may also 'borrow' some code and functionality and use   |
+| it to create your own game engine or game.                                                    |
+|	                                                                                            |
+#===============================================================================================#
+|                                                                                               |
+| If you like Handmade Lite and wish to show your support, if you have any questions about      |
+| the project, or if you just want to reach out, please do get in touch:                        |
+|																						        |
+| Facebook: https://www.facebook.com/KarstensCorner								                |
+| Twitter: https://twitter.com/KarstensCorner													|
+| LinkedIn: https://www.linkedin.com/in/karstenvermeulen                                        |
+| GitHub: https://github.com/djkarstenv									                        |
+|                                                                                               |
+#===============================================================================================#
+| 'GameObject' source files last updated in May 2020   	    			                        |
+#==============================================================================================*/
 
 #include <string>
 #include <SDL.h>

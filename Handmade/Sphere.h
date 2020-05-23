@@ -1,26 +1,38 @@
-/*
-
-  All code has been written by Karsten Vermeulen and may be used freely by anyone. It is by no
-  means perfect and there is certainly room for improvement in some parts. As a whole, the code
-  has been created as part of an engine for the purposes of educating other fellow programmers,
-  and anyone else wishing to learn C++ and OOP. Feel free to use, copy, break, update and do as
-  you wish with this code - it is there for all!
-
-  UPDATED : February 2017
-
-  -----------------------------------------------------------------------------------------------
-
-- This class encapsulates a sphere colliding volume that determines collisions that may occur 
-  between two spheres. It will make use of the position and radius of either sphere and use a 
-  particular formula in the IsColliding() routine to check if the two spheres collide. Because the
-  objects in SDL all have a position at the top left corner of the sprite or image, the sphere's
-  collision volume needs to perform an extra calculation to use the centre position of each sphere
-  instead. This is all handled within the IsColliding() routine.
-
-*/
-
 #ifndef SPHERE_H
 #define SPHERE_H
+
+/*==============================================================================================#
+|                                                                                               |
+| Handmade Lite is an educational game engine, written by Karsten Vermeulen for the purposes of |
+| educating other fellow programmers, programming students and anyone else wishing to learn     |
+| about game development, C++ and OOP. The engine, class design and overall structure is by no  |
+| means perfect and there is certainly room for improvement. Feel free to use, copy, break,     |
+| update and do as you wish with this code - it is there, free, for all!                        |
+|																							    |
+| Designed to teach. Made from scratch. Built by hand.							                |
+|																							    |
+#===============================================================================================#
+|	                                                                                            |
+| Please note, that this project is not open source and therefore has no license affiliated     |
+| with it. However, feel free to use the engine to build your own game or learn from the code.  |
+| Handmade Lite is an educational tool, designed to be used as such. Please be respectful and   |
+| do not distribute the engine or its code as your own work. You may alter or tweak the engine  |
+| code as a learning experience and you may also 'borrow' some code and functionality and use   |
+| it to create your own game engine or game.                                                    |
+|	                                                                                            |
+#===============================================================================================#
+|                                                                                               |
+| If you like Handmade Lite and wish to show your support, if you have any questions about      |
+| the project, or if you just want to reach out, please do get in touch:                        |
+|																						        |
+| Facebook: https://www.facebook.com/KarstensCorner								                |
+| Twitter: https://twitter.com/KarstensCorner													|
+| LinkedIn: https://www.linkedin.com/in/karstenvermeulen                                        |
+| GitHub: https://github.com/djkarstenv									                        |
+|                                                                                               |
+#===============================================================================================#
+| 'Sphere' source files last updated in May 2020   							                    |
+#==============================================================================================*/
 
 #include <SDL.h>
 

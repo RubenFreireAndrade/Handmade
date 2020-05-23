@@ -1,38 +1,38 @@
-/*
-
-  All code has been written by Karsten Vermeulen and may be used freely by anyone. It is by no
-  means perfect and there is certainly room for improvement in some parts. As a whole, the code
-  has been created as part of an engine for the purposes of educating other fellow programmers,
-  and anyone else wishing to learn C++ and OOP. Feel free to use, copy, break, update and do as
-  you wish with this code - it is there for all!
-
-  UPDATED : June 2017
-
-  -----------------------------------------------------------------------------------------------
-
-- This class encapsulates text objects that are able to store and display regular text strings on
-  screen using a TTF font pointer that references a particular font style and size. It uses the
-  font style, a particular text color and a string of text to create a texture that will be drawn
-  on screen, almost like a sprite. However this class does not derive from the Sprite class, unlike
-  the OpenGL version of Handmade, as it shares very little functionality with the Sprite class.
-
-- There are a few setter functions to set the various properties of the text object. The SetFont()
-  routine is used to assign a TTF font object to the text object. This pointer is requested from the
-  Texture Manager. Whenever the color and text are set, via SetColor() and SetText(), the internal
-  CreateText() function is called each time, so that the text object can be re-created before it's
-  drawn in the Draw() routine. There is no need to re-create the text each frame, as this becomes
-  expensive considering the work needed to create the text object.
-
-- The CreateText() function will create a text object and store it as a regular SDL surface before
-  it's converted into a SDL texture. This texture is then used to render on screen, just like a
-  sprite renders its images on screen. Because there is a lot of loading and unloading SDL objects
-  in this routine, it becomes expensive to call it each frame, so its only called when needed, ie
-  when the color or text string of the text object changes.
-
-*/
-
 #ifndef TEXT_H
 #define TEXT_H
+
+/*==============================================================================================#
+|                                                                                               |
+| Handmade Lite is an educational game engine, written by Karsten Vermeulen for the purposes of |
+| educating other fellow programmers, programming students and anyone else wishing to learn     |
+| about game development, C++ and OOP. The engine, class design and overall structure is by no  |
+| means perfect and there is certainly room for improvement. Feel free to use, copy, break,     |
+| update and do as you wish with this code - it is there, free, for all!                        |
+|																							    |
+| Designed to teach. Made from scratch. Built by hand.							                |
+|																							    |
+#===============================================================================================#
+|	                                                                                            |
+| Please note, that this project is not open source and therefore has no license affiliated     |
+| with it. However, feel free to use the engine to build your own game or learn from the code.  |
+| Handmade Lite is an educational tool, designed to be used as such. Please be respectful and   |
+| do not distribute the engine or its code as your own work. You may alter or tweak the engine  |
+| code as a learning experience and you may also 'borrow' some code and functionality and use   |
+| it to create your own game engine or game.                                                    |
+|	                                                                                            |
+#===============================================================================================#
+|                                                                                               |
+| If you like Handmade Lite and wish to show your support, if you have any questions about      |
+| the project, or if you just want to reach out, please do get in touch:                        |
+|																						        |
+| Facebook: https://www.facebook.com/KarstensCorner								                |
+| Twitter: https://twitter.com/KarstensCorner													|
+| LinkedIn: https://www.linkedin.com/in/karstenvermeulen                                        |
+| GitHub: https://github.com/djkarstenv									                        |
+|                                                                                               |
+#===============================================================================================#
+| 'Text' source files last updated in May 2020   							                    |
+#==============================================================================================*/
 
 #include <string>
 #include <SDL.h>

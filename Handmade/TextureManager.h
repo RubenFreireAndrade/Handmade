@@ -1,41 +1,38 @@
-/*
-
-  All code has been written by Karsten Vermeulen and may be used freely by anyone. It is by no
-  means perfect and there is certainly room for improvement in some parts. As a whole, the code
-  has been created as part of an engine for the purposes of educating other fellow programmers,
-  and anyone else wishing to learn C++ and OOP. Feel free to use, copy, break, update and do as
-  you wish with this code - it is there for all!
-
-  UPDATED : February 2017
-
-  -----------------------------------------------------------------------------------------------
-
-- This class encapsulates a texture manager which will load images from disk and store them as 
-  SDL textures in a map, with a string reference to that texture. The images are loaded using 
-  SDL's image loading function and generated through SDL's texture creation routine to produce 
-  a texture object out of the SDL_Surface object that was originally loaded. SDL textures make use
-  of the GPU and so are preferred. Currently the images supported are BMP, PNG, JPG, GIF, TGA. <TBA>.
-  To access a particular image inside the map the string reference is needed to sift through the 
-  map and find the texture. Textures can also be unloaded from memory individually or in bulk.
-  Furthermore, this class also loads font files and stores them in a similar manner in a separate 
-  font map. Fonts and textures are stored together because they are somewhat linked in the original
-  Handmade engine, and this prevents us from creating a separate Font Manager class. This class is
-  a Singleton.
-
-- Two enum types have been created to be used when removing texture images from the map. Either
-  one single specific texture can be removed, or the entire map of textures can be cleared.
-
-- To use this class, an object in the client code will need to link to a specific texture or font 
-  pointer from within the Texture Manager. The GetFont() and GetTexture() functions are used to 
-  request the font and texture pointers respectively and link the data with the external object. 
-
-- An Output() routine is there for debug purposes only and will print to the console how many font
-  and texture objects are currently stored in the map.
-
-*/
-
 #ifndef TEXTURE_MANAGER_H
 #define TEXTURE_MANAGER_H
+
+/*==============================================================================================#
+|                                                                                               |
+| Handmade Lite is an educational game engine, written by Karsten Vermeulen for the purposes of |
+| educating other fellow programmers, programming students and anyone else wishing to learn     |
+| about game development, C++ and OOP. The engine, class design and overall structure is by no  |
+| means perfect and there is certainly room for improvement. Feel free to use, copy, break,     |
+| update and do as you wish with this code - it is there, free, for all!                        |
+|																							    |
+| Designed to teach. Made from scratch. Built by hand.							                |
+|																							    |
+#===============================================================================================#
+|	                                                                                            |
+| Please note, that this project is not open source and therefore has no license affiliated     |
+| with it. However, feel free to use the engine to build your own game or learn from the code.  |
+| Handmade Lite is an educational tool, designed to be used as such. Please be respectful and   |
+| do not distribute the engine or its code as your own work. You may alter or tweak the engine  |
+| code as a learning experience and you may also 'borrow' some code and functionality and use   |
+| it to create your own game engine or game.                                                    |
+|	                                                                                            |
+#===============================================================================================#
+|                                                                                               |
+| If you like Handmade Lite and wish to show your support, if you have any questions about      |
+| the project, or if you just want to reach out, please do get in touch:                        |
+|																						        |
+| Facebook: https://www.facebook.com/KarstensCorner								                |
+| Twitter: https://twitter.com/KarstensCorner													|
+| LinkedIn: https://www.linkedin.com/in/karstenvermeulen                                        |
+| GitHub: https://github.com/djkarstenv									                        |
+|                                                                                               |
+#===============================================================================================#
+| 'TextureManager' source files last updated in May 2020   							            |
+#==============================================================================================*/
 
 #include <map>
 #include <string>

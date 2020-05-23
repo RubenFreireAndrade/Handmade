@@ -18,6 +18,8 @@
 - The constructor, copy constructor and assignment operator all need to be private so that this
   class cannot be individually instantiated.
 
+  //to be removed!
+
 */
 
 #ifndef SINGLETON_H

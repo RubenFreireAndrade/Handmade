@@ -22,15 +22,6 @@
     <Filter Include="Header Files\Managers">
       <UniqueIdentifier>{f0d43da4-3c10-4b0d-9ec4-1481302c07f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components\Audio">
-      <UniqueIdentifier>{396013c2-095e-44a9-b3e7-73586546202d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Components\Collision">
-      <UniqueIdentifier>{791b9fa1-4df8-46c2-92cb-07c272d79629}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Components\Visual">
-      <UniqueIdentifier>{ff8fe4d9-d308-4184-bc9e-6311cf02449f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{06c93391-09c5-4f77-bcf2-aaf939c01ee0}</UniqueIdentifier>
     </Filter>
@@ -39,15 +30,6 @@
     </Filter>
     <Filter Include="Source Files\Managers">
       <UniqueIdentifier>{2e826b70-23c4-4de0-be3a-90618f193e31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\Audio">
-      <UniqueIdentifier>{b81f9d0c-a5dd-4b2f-8068-8fc54c6318f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\Collision">
-      <UniqueIdentifier>{e21bdc27-7b51-403d-9650-ac17241683e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\Visual">
-      <UniqueIdentifier>{952c6fe5-7ab9-449b-a46a-397cb483c6b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\GameObjects">
       <UniqueIdentifier>{f41559d8-5e43-4369-a37a-dddf7405a94f}</UniqueIdentifier>
@@ -63,27 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h">
-      <Filter>Header Files\Components\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="SFX.h">
-      <Filter>Header Files\Components\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="AABB.h">
-      <Filter>Header Files\Components\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Header Files\Components\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Header Files\Components\Visual</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Components\Visual</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Header Files\Components\Visual</Filter>
-    </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
@@ -123,29 +84,29 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SFX.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Audio.cpp">
-      <Filter>Source Files\Components\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="SFX.cpp">
-      <Filter>Source Files\Components\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="AABB.cpp">
-      <Filter>Source Files\Components\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Source Files\Components\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Source Files\Components\Visual</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Components\Visual</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Source Files\Components\Visual</Filter>
-    </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
@@ -184,6 +145,27 @@
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SFX.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

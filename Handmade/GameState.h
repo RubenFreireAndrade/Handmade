@@ -1,34 +1,38 @@
-/*
-
-  All code has been written by Karsten Vermeulen and may be used freely by anyone. It is by no
-  means perfect and there is certainly room for improvement in some parts. As a whole, the code
-  has been created as part of an engine for the purposes of educating other fellow programmers,
-  and anyone else wishing to learn C++ and OOP. Feel free to use, copy, break, update and do as
-  you wish with this code - it is there for all!
-
-  UPDATED : July 2017
-
-  -----------------------------------------------------------------------------------------------
-
-- This class encapsulates a game state that will exist within the game. A game state can be
-  anything like a play state, pause state, menu state, etc and will contain all the game
-  specific code specific to that state. Every game state needs to be instantiated as a
-  sub-class of this abstract base class.
-
-- The main flag variable m_isActive will keep track if the game state is currently active or not.
-  As long as its active, its overriden Update() and Draw() routines will constantly be called until
-  the state is set as not active, at which point the state will close down.
-
-- The OnEnter() routine is called when the state is activated and this function will load all
-  resources from file, instantiate the game objects for that state and do all start up tasks for the
-  active state. The opposing OnExit() function will do the opposite when the state is deactivated,
-  ie - call all shutdown tasks, remove all game objects from memory and free all resources from
-  memory for the given state.
-
-*/
-
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
+
+/*==============================================================================================#
+|                                                                                               |
+| Handmade Lite is an educational game engine, written by Karsten Vermeulen for the purposes of |
+| educating other fellow programmers, programming students and anyone else wishing to learn     |
+| about game development, C++ and OOP. The engine, class design and overall structure is by no  |
+| means perfect and there is certainly room for improvement. Feel free to use, copy, break,     |
+| update and do as you wish with this code - it is there, free, for all!                        |
+|																							    |
+| Designed to teach. Made from scratch. Built by hand.							                |
+|																							    |
+#===============================================================================================#
+|	                                                                                            |
+| Please note, that this project is not open source and therefore has no license affiliated     |
+| with it. However, feel free to use the engine to build your own game or learn from the code.  |
+| Handmade Lite is an educational tool, designed to be used as such. Please be respectful and   |
+| do not distribute the engine or its code as your own work. You may alter or tweak the engine  |
+| code as a learning experience and you may also 'borrow' some code and functionality and use   |
+| it to create your own game engine or game.                                                    |
+|	                                                                                            |
+#===============================================================================================#
+|                                                                                               |
+| If you like Handmade Lite and wish to show your support, if you have any questions about      |
+| the project, or if you just want to reach out, please do get in touch:                        |
+|																						        |
+| Facebook: https://www.facebook.com/KarstensCorner								                |
+| Twitter: https://twitter.com/KarstensCorner													|
+| LinkedIn: https://www.linkedin.com/in/karstenvermeulen                                        |
+| GitHub: https://github.com/djkarstenv									                        |
+|                                                                                               |
+#===============================================================================================#
+| 'GameState' source files last updated in May 2020   							                |
+#==============================================================================================*/
 
 class GameState
 {
