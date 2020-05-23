@@ -26,8 +26,8 @@ void Audio::SetVolume(int volume)
 void Audio::SetAudio(const std::string& mapIndex, AudioType audioType)
 {
 
-	audioType == MUSIC_AUDIO ? m_audio = TheAudio::Instance()->GetMusicData(mapIndex)
-							 : m_audio = TheAudio::Instance()->GetVoiceData(mapIndex);
+	audioType == AudioType::MUSIC_AUDIO ? m_audio = AudioManager::Instance()->GetMusicData(mapIndex)
+							            : m_audio = AudioManager::Instance()->GetVoiceData(mapIndex);
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ bool Audio::Play(LoopType loopType)
 	{
 
 		//if playing music fails, display error message and return false
-		if(Mix_PlayMusic(m_audio, loopType) == -1)
+		if(Mix_PlayMusic(m_audio, static_cast<int>(loopType)) == -1)
 		{
 			std::cout << "Music could not be played." << std::endl;
 			return false;

@@ -26,7 +26,7 @@ void SFX::SetVolume(int volume)
 void SFX::SetSFX(const std::string& mapIndex)
 {
 
-	m_sfx = TheAudio::Instance()->GetSFXData(mapIndex);
+	m_sfx = AudioManager::Instance()->GetSFXData(mapIndex);
 
 }
 //------------------------------------------------------------------------------------------------------

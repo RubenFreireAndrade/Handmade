@@ -1,5 +1,5 @@
-#ifndef GAME_STATE_H
-#define GAME_STATE_H
+#ifndef SCREEN_H
+#define SCREEN_H
 
 /*==============================================================================================#
 |                                                                                               |
@@ -31,35 +31,54 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'GameState' source files last updated in May 2020   							                |
+| 'Screen' source files last updated in May 2020   							                    |
 #==============================================================================================*/
 
-class GameState
+#include <string>
+#include <SDL.h>
+#include <SDL_syswm.h>
+
+class Screen
 {
 
 public:
+
+	static Screen* Instance();
+
+public:
+
+	SDL_Window* GetWindow();
+	SDL_Renderer* GetRenderer();
+	SDL_Point GetResolution();
+
+public:
+
+	void SetClearColor(Uint8 r, Uint8 g, Uint8 b);
 	
-	GameState(GameState* state);
-	virtual ~GameState() = 0 {}
-
 public:
 
-	bool& IsAlive();
-	bool& IsActive();
+	bool Initialize(const std::string& windowTitle, int width = 1024, 
+		            int height = 768, bool fullscreen = false);
+	
+	void Update();
+	void Draw();
 
-public:
+	void ShutDown();
 
-	virtual bool OnEnter() = 0;
-	virtual bool Update() = 0;
-	virtual bool Draw() = 0;
-	virtual void OnExit() = 0;
+private:
 
-protected:
+	Screen();
+	Screen(const Screen&);
+	Screen& operator=(const Screen&);
 
-	bool m_isAlive;
-	bool m_isActive;
-	GameState* m_previousState;
+private:
 
+	int m_width;
+	int m_height;
+
+	SDL_Window* m_window;
+	SDL_Renderer* m_renderer;
+	
 };
 
 #endif

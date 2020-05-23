@@ -1,5 +1,6 @@
-#include "InputManager.h"
+#include "Input.h"
 #include "MainMenu.h"
+#include "Screen.h"
 #include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -13,13 +14,13 @@ MainMenu::MainMenu()
 	m_menuOptionChoice = -1;
 
 	//load font resource into memory
-	TheTexture::Instance()->LoadFontFromFile("Assets\\Fonts\\Quikhand.ttf", 100, "MENU_FONT");
+	TextureManager::Instance()->LoadFontFromFile("Assets/Fonts/Quikhand.ttf", 100, "MENU_FONT");
 
 }
 //------------------------------------------------------------------------------------------------------
 //getter function that returns main menu choice made
 //------------------------------------------------------------------------------------------------------
-int MainMenu::GetMenuOption()
+int MainMenu::GetMenuOption() const
 {
 
 	return m_menuOptionChoice;
@@ -28,14 +29,14 @@ int MainMenu::GetMenuOption()
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns properties of menu text objects
 //------------------------------------------------------------------------------------------------------
-void MainMenu::SetMenuText(std::string text)
+void MainMenu::SetMenuText(const std::string& text)
 {
 
 	Text menuText;
 	
 	menuText.SetFont("MENU_FONT");
 	menuText.SetColor(255, 174, 0);
-	menuText.SetSize(text.size() * 20, 60);
+	menuText.SetSize(text.size() * MENU_TEXT_CHAR_W, MENU_TEXT_CHAR_H);
 	menuText.SetText(text);
 	m_menuText.push_back(menuText);
 
@@ -46,7 +47,7 @@ void MainMenu::SetMenuText(std::string text)
 void MainMenu::Update()
 {
 
-	const Uint8* keys = TheInput::Instance()->GetKeyStates();
+	const Uint8* keys = Input::Instance()->GetKeyStates();
 
 	//flag to monitor if key is pressed so that when pressing UP/DOWN
 	//key the selected menu option doesn't move at lightning speed
@@ -94,7 +95,7 @@ void MainMenu::Update()
 
 	//update state of key based on if it's pressed or not which will make sure the next time
 	//the frame is called the above code will either move the menu option or keep it still
-	isKeyPressed = TheInput::Instance()->IsKeyPressed();
+	isKeyPressed = Input::Instance()->IsKeyPressed();
 
 	//loop through all menu items and set their initial color to orange
 	for (size_t i = 0; i < m_menuText.size(); i++)
@@ -112,14 +113,20 @@ void MainMenu::Update()
 bool MainMenu::Draw()
 {
 
-	//calculate a centre position for all menu items based on amount of menu items and their height
-	//this will keep all menu items centered around the same spot no matter how many items there are
-	int yPos = (int)(620.0f - (float(m_menuText.size()) / 2.0f * 60.0f));
+	//first get resolution so that we can set the menu position accordingly
+	SDL_Point resolution = Screen::Instance()->GetResolution();
+
+	//this will position the text in the bottom half of the screen, centered in X
+	//X - divide screen width in half and subtract half the width of each text
+	//Y - divide screen height in quarters and subtract half of the menu's text heights
+	int posY = static_cast<int>((resolution.y - resolution.y / 4) - 
+		                        (m_menuText.size() / 2 * MENU_TEXT_CHAR_H));
 
 	//loop through all menu items and render them based on a centre position
 	for (size_t i = 0; i < m_menuText.size(); i++)
 	{
-		m_menuText[i].Draw((int)(512 - m_menuText[i].GetSize().x / 2), (int)(yPos + i * 60));
+		m_menuText[i].Draw(static_cast<int>((resolution.x / 2) - m_menuText[i].GetSize().x / 2),  //x
+			               static_cast<int>(posY + i * MENU_TEXT_CHAR_H));                        //y
 	}
 
 	return true;
@@ -141,7 +148,8 @@ void MainMenu::Reset()
 MainMenu::~MainMenu()
 {
 
-	TheTexture::Instance()->
-	UnloadFromMemory(TextureManager::FONT_DATA, TextureManager::CUSTOM_DATA, "MENU_FONT");
+	TextureManager::Instance()->
+	UnloadFromMemory(TextureManager::DataType::FONT_DATA, 
+		             TextureManager::RemoveType::CUSTOM_DATA, "MENU_FONT");
 
 }

@@ -1,5 +1,5 @@
-#ifndef GAME_STATE_H
-#define GAME_STATE_H
+#ifndef INPUT_H
+#define INPUT_H
 
 /*==============================================================================================#
 |                                                                                               |
@@ -31,35 +31,81 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'GameState' source files last updated in May 2020   							                |
+| 'Input' source files last updated in May 2020   							                    |
 #==============================================================================================*/
 
-class GameState
+#include <string>
+#include <SDL.h>
+#include "AABB.h"
+#include "Sphere.h"
+
+class Input
 {
 
 public:
+
+	enum class ButtonState { UP, DOWN };
+	enum class CursorState { ON = 1, OFF = 0, SHOW = 1, HIDE = 0 };
+	enum class CursorType  { ARROW, IBEAM, WAIT, CROSSHAIR, WAIT_ARROW, NO = 10, HAND = 11 };
+
+public:
+
+	static Input* Instance();
+
+public:
+
+	bool IsXClicked() const;
+	bool IsKeyPressed() const;
+	const Uint8* GetKeyStates() const;
+	bool IsMouseColliding(const AABB& bound) const;
+	bool IsMouseColliding(const Sphere& bound) const;
+
+public:
+
+	ButtonState GetLeftButtonState() const;
+	ButtonState GetMiddleButtonState() const;
+	ButtonState GetRightButtonState() const;
+
+	SDL_Point GetMouseWheel() const;
+	SDL_Point GetMouseMotion() const;
+	SDL_Point GetMousePosition() const;
+
+	const std::string& GetInput() const;
+
+	void SetMousePosition(int x, int y);
+	void SetMouseCursorType(CursorType cursorType = CursorType::ARROW);
+	void SetMouseCursorState(CursorState cursorEnabled = CursorState::ON, 
+		                     CursorState cursorVisible = CursorState::SHOW);
+
+public:
+
+	void Update();
+	void FlushInput() { m_input.clear(); }
+
+private:
+
+	Input();
+	Input(const Input&);
+	Input& operator=(Input&);
+
+private:
+
+	bool m_isXClicked;
+	bool m_isKeyPressed;
+	std::string m_input;
+
+	const Uint8* m_keyStates;
 	
-	GameState(GameState* state);
-	virtual ~GameState() = 0 {}
+	SDL_Cursor* m_cursor;
 
-public:
+	ButtonState m_leftButtonState;
+	ButtonState m_middleButtonState;
+	ButtonState m_rightButtonState;
 
-	bool& IsAlive();
-	bool& IsActive();
-
-public:
-
-	virtual bool OnEnter() = 0;
-	virtual bool Update() = 0;
-	virtual bool Draw() = 0;
-	virtual void OnExit() = 0;
-
-protected:
-
-	bool m_isAlive;
-	bool m_isActive;
-	GameState* m_previousState;
-
+	SDL_Point m_mouseWheel;
+	SDL_Point m_mouseMotion;
+	SDL_Point m_mousePosition;
+	
 };
 
 #endif

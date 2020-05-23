@@ -1,6 +1,6 @@
 #include <iostream>
 #include <time.h>
-#include "InputManager.h"
+#include "Input.h"
 #include "Game.h"
 #include "MenuState.h"
 #include "PlayState.h"
@@ -25,10 +25,10 @@ bool MenuState::OnEnter()
 	m_menu->SetMenuText("PLAY GAME");
 	m_menu->SetMenuText("QUIT GAME");
 
-	m_image = new Background("Assets\\Textures\\Menu.png", "Assets\\Audio\\Menu.ogg");
+	m_image = new Background("Assets/Textures/Menu_1280x720.png", "Assets/Audio/Menu.ogg");
 	
 	//seed the random number generator
-	srand((unsigned int)time(0));
+	srand(static_cast<unsigned int>(time(0)));
 
 	return true;
 
@@ -47,15 +47,15 @@ bool MenuState::Update()
 	m_menu->Update();
 
 	//if player chose to play game, go into main playing state 
-	if (m_menu->GetMenuOption() == PLAY)
+	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::PLAY))
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		TheGame::Instance()->ChangeState(new PlayState(this));
+		Game::Instance()->ChangeState(new PlayState(this));
 	}
 
 	//if player chose to exit the game then quit altogether
-	if (m_menu->GetMenuOption() == QUIT)
+	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::QUIT))
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;

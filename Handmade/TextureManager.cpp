@@ -1,8 +1,15 @@
 #include <iostream>
 #include <SDL_image.h>
-#include "ScreenManager.h"
+#include "Screen.h"
 #include "TextureManager.h"
 
+TextureManager* TextureManager::Instance()
+{
+
+	static TextureManager* textureObject = new TextureManager();
+	return textureObject;
+
+}
 //------------------------------------------------------------------------------------------------------
 //getter function that returns font pointer based on font map index passed 
 //------------------------------------------------------------------------------------------------------
@@ -95,7 +102,7 @@ bool TextureManager::LoadTextureFromFile(const std::string& filename, const std:
 	{
 
 		//create a texture out of the previously loaded image
-		texture = SDL_CreateTextureFromSurface(TheScreen::Instance()->GetRenderer(), textureData);
+		texture = SDL_CreateTextureFromSurface(Screen::Instance()->GetRenderer(), textureData);
 
 		//free SDL image as its no longer needed
 		SDL_FreeSurface(textureData);
@@ -121,10 +128,10 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 
 	//if a font file needs to be removed, free it from memory based on if a 
 	//single item needs to be removed or if the entire map needs to be cleared
-	if (dataType == FONT_DATA)
+	if (dataType == DataType::FONT_DATA)
 	{
 
-		if (removeType == CUSTOM_DATA)
+		if (removeType == RemoveType::CUSTOM_DATA)
 		{
 			auto it = m_fontMap.find(mapIndex);
 
@@ -140,7 +147,7 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 			}
 		}
 
-		else if (removeType == ALL_DATA)
+		else if (removeType == RemoveType::ALL_DATA)
 		{
 
 			for (auto it = m_fontMap.begin(); it != m_fontMap.end(); it++)
@@ -156,10 +163,10 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 
 	//otherwise if a texture file needs to be removed, free it from memory based on
 	//if a single item needs to be removed or if the entire map needs to be cleared
-	else if (dataType == TEXTURE_DATA)
+	else if (dataType == DataType::TEXTURE_DATA)
 	{
 
-		if (removeType == CUSTOM_DATA)
+		if (removeType == RemoveType::CUSTOM_DATA)
 		{
 			auto it = m_textureMap.find(mapIndex);
 
@@ -175,7 +182,7 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 			}
 		}
 
-		else if (removeType == ALL_DATA)
+		else if (removeType == RemoveType::ALL_DATA)
 		{
 
 			for (auto it = m_textureMap.begin(); it != m_textureMap.end(); it++)

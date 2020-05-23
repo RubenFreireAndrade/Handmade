@@ -6,19 +6,17 @@
 Animation::Animation()
 {
 
-	//set other default values
+	m_timeElapsed = 0.0;
+	m_animationVelocity = 0.0f;
 	m_isAnimationDead = false;
 	m_isAnimationLoopFinal = false;
 	m_isAnimationLooping = true;
 	
-	m_timeElapsed = 0.0;
-	m_animationVelocity = 0.0f;
-
 }
 //------------------------------------------------------------------------------------------------------
 //predicate function that returns flag variable stating if animation is dead 
 //------------------------------------------------------------------------------------------------------
-bool Animation::IsAnimationDead()
+bool Animation::IsAnimationDead() const
 {
 
 	return m_isAnimationDead;
@@ -53,8 +51,8 @@ void Animation::Draw(int xPosition, int yPosition, double angle, FlipType flipTy
 	m_timeElapsed += 0.01f;
 
 	//aquire index value of specific texture cell to "cut out" using a formula
-	m_textureIndex = (int)(m_timeElapsed * m_animationVelocity) %
-		             (int)(m_textureDimension.x * m_textureDimension.y);
+	m_textureIndex = static_cast<int>(m_timeElapsed * m_animationVelocity) %
+		             static_cast<int>(m_textureDimension.x * m_textureDimension.y);
 
 	//if animation is set to cycle endlessly then set the kill and final flags
 	//to false so that no other final checks are made and that the animation loops

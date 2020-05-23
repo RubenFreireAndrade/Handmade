@@ -1,56 +1,58 @@
-/*
-
-  All code has been written by Karsten Vermeulen and may be used freely by anyone. It is by no
-  means perfect and there is certainly room for improvement in some parts. As a whole, the code
-  has been created as part of an engine for the purposes of educating other fellow programmers,
-  and anyone else wishing to learn C++ and OOP. Feel free to use, copy, break, update and do as
-  you wish with this code - it is there for all!
-
-  UPDATED : February 2017
-
-  -----------------------------------------------------------------------------------------------
-
-- This class encapsulates an axis-aligned bounding box that determines collisions that may occur
-  with other bounding boxes. It will calculate the min and max values of the bounding box which
-  are then used to calculate for collision, using a particular formula. For the min and max values
-  to be correctly calculated, the position and dimension of the box need to be set and for that 
-  there is a SetPosition() and SetDimension() routine, respectively. Each one will internally call
-  the CreateBox() function that will calculate the min and max values. This is so that each time
-  the position or dimension change, the bounding box volume is correctly updated. The IsColliding()
-  function does all of the work and uses the min and max X and Y values within a formula to 
-  calculate for collision. Note that the min and max calculations are flipped on the y axis compared
-  to the original OpenGL Handmade Game Engine, because the y axis is flipped in SDL.
-
-- There is a need for a seprate private CreateBox() routine so that the min and max values can be 
-  determined. If the min and max values are calculated only in the IsColliding() routine, then the
-  second box's min and max values will never be known, as you would have to call both IsColliding()
-  functions at once - which is very impractical. The Sphere class on the other hand only needs the
-  position and radius so no seprate CreateSphere() routine is needed. 
-
-*/
-
 #ifndef AABB_H
 #define AABB_H
+
+/*==============================================================================================#
+|                                                                                               |
+| Handmade Lite is an educational game engine, written by Karsten Vermeulen for the purposes of |
+| educating other fellow programmers, programming students and anyone else wishing to learn     |
+| about game development, C++ and OOP. The engine, class design and overall structure is by no  |
+| means perfect and there is certainly room for improvement. Feel free to use, copy, break,     |
+| update and do as you wish with this code - it is there, free, for all!                        | 
+|																							    |
+| Designed to teach. Made from scratch. Built by hand.							                |
+|																							    |
+#===============================================================================================#
+|	                                                                                            |
+| Please note, that this project is not open source and therefore has no license affiliated     |
+| with it. However, feel free to use the engine to build your own game or learn from the code.  |
+| Handmade Lite is an educational tool, designed to be used as such. Please be respectful and   |
+| do not distribute the engine or its code as your own work. You may alter or tweak the engine  | 
+| code as a learning experience and you may also 'borrow' some code and functionality and use   | 
+| it to create your own game engine or game.                                                    |
+|	                                                                                            |
+#===============================================================================================#
+|                                                                                               | 
+| If you like Handmade Lite and wish to show your support, if you have any questions about      |
+| the project, or if you just want to reach out, please do get in touch:                        |
+|																						        |
+| Facebook: https://www.facebook.com/KarstensCorner								                |
+| Twitter: https://twitter.com/KarstensCorner													|
+| LinkedIn: https://www.linkedin.com/in/karstenvermeulen                                        |
+| GitHub: https://github.com/djkarstenv									                        |
+|                                                                                               |
+#===============================================================================================#
+| 'AABB' source files last updated in May 2020   							                    |
+#==============================================================================================*/
 
 #include <SDL.h>
 
 class AABB
 {
 
-public :
+public:
 
 	void SetPosition(int x, int y);
 	void SetDimension(int width, int height);
 
-public :
+public:
 
-	bool IsColliding(const AABB& secondBox);
+	bool IsColliding(const AABB& secondBox) const;
 
-private :
+private:
 
 	void CreateBox();
 
-private :
+private:
 
 	SDL_Point m_min;
 	SDL_Point m_max;

@@ -1,6 +1,13 @@
 #include <iostream>
 #include "AudioManager.h"
 
+AudioManager* AudioManager::Instance()
+{
+
+	static AudioManager* audioObject = new AudioManager();
+	return audioObject;
+
+}
 //------------------------------------------------------------------------------------------------------
 //getter function that returns pointer to sound effect data based on index value passed
 //------------------------------------------------------------------------------------------------------
@@ -56,7 +63,7 @@ bool AudioManager::LoadFromFile(const std::string& filename, AudioType audioType
 
 	//if a sfx file needs to be loaded, load it into memory and check
 	//if it was loaded properly before adding it to the sfx data map 
-	if (audioType == SFX_AUDIO)
+	if (audioType == AudioType::SFX_AUDIO)
 	{
 		
 		Mix_Chunk* sfx = Mix_LoadWAV(filename.c_str());
@@ -74,7 +81,7 @@ bool AudioManager::LoadFromFile(const std::string& filename, AudioType audioType
 
 	//otherwise if a music or voice file needs to be loaded, load it into memory and
 	//check if it was loaded properly before adding it to the music/voice data map 
-	else if (audioType == MUSIC_AUDIO || audioType == VOICE_AUDIO)
+	else if (audioType == AudioType::MUSIC_AUDIO || audioType == AudioType::VOICE_AUDIO)
 	{
 
 		Mix_Music* audio = Mix_LoadMUS(filename.c_str());
@@ -86,8 +93,8 @@ bool AudioManager::LoadFromFile(const std::string& filename, AudioType audioType
 			return false;
 		}
 
-		audioType == MUSIC_AUDIO ? m_musicDataMap[mapIndex] = audio
-							     : m_voiceDataMap[mapIndex] = audio;
+		audioType == AudioType::MUSIC_AUDIO ? m_musicDataMap[mapIndex] = audio
+							                : m_voiceDataMap[mapIndex] = audio;
 
 	}
 
@@ -107,10 +114,10 @@ void AudioManager::UnloadFromMemory(AudioType audioType,
 
 	//if a sfx file needs to be removed, free it from memory based on if a 
 	//single item needs to be removed or if the entire map needs to be cleared
-	if (audioType == SFX_AUDIO)
+	if (audioType == AudioType::SFX_AUDIO)
 	{
 
-		if (removeType == CUSTOM_AUDIO)
+		if (removeType == RemoveType::CUSTOM_AUDIO)
 		{
 			auto it = m_sfxDataMap.find(mapIndex);
 			
@@ -126,7 +133,7 @@ void AudioManager::UnloadFromMemory(AudioType audioType,
 			}
 		}
 
-		else if (removeType == ALL_AUDIO)
+		else if (removeType == RemoveType::ALL_AUDIO)
 		{
 			
 			for (auto it = m_sfxDataMap.begin(); it != m_sfxDataMap.end(); it++)
@@ -143,15 +150,15 @@ void AudioManager::UnloadFromMemory(AudioType audioType,
 	//otherwise if a music or voice file needs to be removed, free it from memory based
 	//on if a single item needs to be removed or if the entire map needs to be cleared
 	//we use a temporary map pointer so that we don't rewrite code for two different maps
-	else if (audioType == MUSIC_AUDIO || audioType == VOICE_AUDIO)
+	else if (audioType == AudioType::MUSIC_AUDIO || audioType == AudioType::VOICE_AUDIO)
 	{
 
 		std::map<std::string, Mix_Music*>* tempMap = nullptr;
 
-		audioType == MUSIC_AUDIO ? tempMap = &m_musicDataMap
-							     : tempMap = &m_voiceDataMap;
+		audioType == AudioType::MUSIC_AUDIO ? tempMap = &m_musicDataMap
+							                : tempMap = &m_voiceDataMap;
 
-		if (removeType == CUSTOM_AUDIO)
+		if (removeType == RemoveType::CUSTOM_AUDIO)
 		{
 			auto it = tempMap->find(mapIndex);
 
@@ -167,7 +174,7 @@ void AudioManager::UnloadFromMemory(AudioType audioType,
 			}
 		}
 
-		else if (removeType == ALL_AUDIO)
+		else if (removeType == RemoveType::ALL_AUDIO)
 		{
 
 			for (auto it = tempMap->begin(); it != tempMap->end(); it++)

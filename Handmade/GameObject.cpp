@@ -9,8 +9,7 @@ GameObject::GameObject()
 	m_isAlive = true;
 	m_isActive = true;
 	m_isVisible = true;
-
-	m_tag = "";
+	m_position = { 0, 0 };
 	
 }
 //------------------------------------------------------------------------------------------------------
@@ -43,7 +42,7 @@ bool& GameObject::IsVisible()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns game object's tag variable
 //------------------------------------------------------------------------------------------------------
-std::string GameObject::GetTag()
+const std::string& GameObject::GetTag() const
 {
 
 	return m_tag;
@@ -61,7 +60,7 @@ SDL_Point GameObject::GetPosition()
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns game object's tag variable
 //------------------------------------------------------------------------------------------------------
-void GameObject::SetTag(std::string tag)
+void GameObject::SetTag(const std::string& tag)
 {
 
 	m_tag = tag;

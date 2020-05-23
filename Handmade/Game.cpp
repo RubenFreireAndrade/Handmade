@@ -3,11 +3,18 @@
 #include <vector>
 #include "AudioManager.h"
 #include "Game.h"
-#include "InputManager.h"
+#include "Input.h"
 #include "MenuState.h"
-#include "ScreenManager.h"
+#include "Screen.h"
 #include "TextureManager.h"
 
+Game* Game::Instance()
+{
+
+	static Game* game = new Game();
+	return game;
+
+}
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values
 //------------------------------------------------------------------------------------------------------
@@ -15,12 +22,13 @@ Game::Game()
 {
 
 	m_endGame = false;
+	m_elapsedTime = 0;
 	
 }
 //------------------------------------------------------------------------------------------------------
 //getter function that returns total time passed in milliseconds
 //------------------------------------------------------------------------------------------------------
-int Game::GetTotalTime()
+int Game::GetTotalTime() const
 {
 
 	return SDL_GetTicks();
@@ -29,7 +37,7 @@ int Game::GetTotalTime()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns time elapsed in milliseconds
 //------------------------------------------------------------------------------------------------------
-int Game::GetElapsedTime()
+int Game::GetElapsedTime() const
 {
 
 	return m_elapsedTime;
@@ -38,26 +46,26 @@ int Game::GetElapsedTime()
 //------------------------------------------------------------------------------------------------------
 //function that initializes all sub-systems of the game
 //------------------------------------------------------------------------------------------------------
-bool Game::Initialize(std::string name, int screenWidth, int screenHeight, bool fullscreen)
+bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight, bool fullscreen)
 {
 
 	//initialise game screen with passed values and return false if error occured
-	if (!TheScreen::Instance()->Initialize(name.c_str(), screenWidth, screenHeight, fullscreen))
+	if (!Screen::Instance()->Initialize(name.c_str(), screenWidth, screenHeight, fullscreen))
 	{
 		return false;
 	}
 
 	//set the background rendering color
-	TheScreen::Instance()->SetClearColor(100, 149, 237);
+	Screen::Instance()->SetClearColor(100, 149, 237);
 
 	//initialize audio sub-system and return false if error occured
-	if (!(TheAudio::Instance()->Initialize()))
+	if (!(AudioManager::Instance()->Initialize()))
 	{
 		return false;
 	}
 
 	//initialize font sub-system and return false if error occured
-	if (!TheTexture::Instance()->Initialize())
+	if (!TextureManager::Instance()->Initialize())
 	{
 		return false;
 	}
@@ -109,10 +117,10 @@ bool Game::Run()
 			int startTime = SDL_GetTicks();
 
 			//update screen by clearing SDL frame buffer
-			TheScreen::Instance()->Update();
+			Screen::Instance()->Update();
 
 			//update input handling by listening for input events
-			TheInput::Instance()->Update();
+			Input::Instance()->Update();
 
 			//update the currently active state
 			state->Update();
@@ -121,7 +129,7 @@ bool Game::Run()
 			state->Draw();
 			
 			//swap the frame buffer
-			TheScreen::Instance()->Draw();
+			Screen::Instance()->Draw();
 
 			//calculate time value passed for one frame call
 			//if vsync is on this value should be around 16ms
@@ -151,11 +159,11 @@ void Game::ShutDown()
 {
 
 	//close down font and audio sub-systems
-	TheTexture::Instance()->ShutDown();
-	TheAudio::Instance()->ShutDown();
+	TextureManager::Instance()->ShutDown();
+	AudioManager::Instance()->ShutDown();
 
 	//close down game screen 
-	TheScreen::Instance()->ShutDown();
+	Screen::Instance()->ShutDown();
 
 }
 //------------------------------------------------------------------------------------------------------

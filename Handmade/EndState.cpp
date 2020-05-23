@@ -2,7 +2,7 @@
 #include <iostream>
 #include "EndState.h"
 #include "Game.h"
-#include "InputManager.h"
+#include "Input.h"
 #include "PlayState.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -11,6 +11,7 @@
 EndState::EndState(GameState* state) : GameState(state)
 {
 
+	m_menu = nullptr;
 	m_image = nullptr;
 
 }
@@ -24,7 +25,7 @@ bool EndState::OnEnter()
 	m_menu->SetMenuText("PLAY AGAIN");
 	m_menu->SetMenuText("QUIT GAME");
 
-	m_image = new Background("Assets\\Textures\\End.png", "Assets\\Audio\\End.ogg");
+	m_image = new Background("Assets/Textures/End_1280x720.png", "Assets/Audio/End.ogg");
 
 	return true;
 
@@ -43,15 +44,15 @@ bool EndState::Update()
 	m_menu->Update();
 
 	//if player wants to play again then return to the main playing state
-	if (m_menu->GetMenuOption() == PLAY)
+	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::PLAY))
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		TheGame::Instance()->ChangeState(new PlayState(this));
+		Game::Instance()->ChangeState(new PlayState(this));
 	}
 
 	//if player chose to exit the game then quit altogether
-	if (m_menu->GetMenuOption() == QUIT)
+	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::QUIT))
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;

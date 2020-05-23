@@ -1,28 +1,40 @@
-#include "InputManager.h"
-#include "ScreenManager.h"
+#include "Input.h"
+#include "Screen.h"
 
+//------------------------------------------------------------------------------------------------------
+//static function that will create an instance of this Input object and return its address
+//------------------------------------------------------------------------------------------------------
+Input* Input::Instance()
+{
+
+	static Input* inputObject = new Input();
+	return inputObject;
+
+}
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values 
 //------------------------------------------------------------------------------------------------------
-InputManager::InputManager()
+Input::Input()
 {
 
+	m_cursor = nullptr;
+	m_keyStates = nullptr;
 	m_isXClicked = false;
 	m_isKeyPressed = false;
 
-	m_keyStates = 0;
+	m_mouseWheel = { 0, 0 };
+	m_mouseMotion = { 0, 0 };
+	m_mousePosition = { 0, 0 };
 
-	m_cursor = nullptr;
-
-	m_leftButtonState = UP;
-	m_middleButtonState = UP;
-	m_rightButtonState = UP;
+	m_leftButtonState = ButtonState::UP;
+	m_middleButtonState = ButtonState::UP;
+	m_rightButtonState = ButtonState::UP;
 	
 }
 //------------------------------------------------------------------------------------------------------
 //predicate function that returns flag stating if X has been clicked
 //------------------------------------------------------------------------------------------------------
-bool InputManager::IsXClicked()
+bool Input::IsXClicked() const
 {
 
 	return m_isXClicked;
@@ -31,7 +43,7 @@ bool InputManager::IsXClicked()
 //------------------------------------------------------------------------------------------------------
 //predicate function that returns flag stating if a key has been pressed
 //------------------------------------------------------------------------------------------------------
-bool InputManager::IsKeyPressed()
+bool Input::IsKeyPressed() const
 {
 
 	return m_isKeyPressed;
@@ -40,7 +52,7 @@ bool InputManager::IsKeyPressed()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns pointer to array of key states
 //------------------------------------------------------------------------------------------------------
-const Uint8* InputManager::GetKeyStates()
+const Uint8* Input::GetKeyStates() const
 {
 
 	return m_keyStates;
@@ -49,14 +61,15 @@ const Uint8* InputManager::GetKeyStates()
 //------------------------------------------------------------------------------------------------------
 //predicate function that checks if mouse cursor collides with passed box bound
 //------------------------------------------------------------------------------------------------------
-bool InputManager::IsMouseColliding(const AABB& bound)
+bool Input::IsMouseColliding(const AABB& bound) const
 {
 
 	//create a temporary bounding box to represent mouse cursor
 	AABB tempBound;
 
 	//set mouse cursor bounds of 1x1 based on mouse position
-	tempBound.SetPosition((int)m_mousePosition.x, (int)(m_mousePosition.y));
+	tempBound.SetPosition(static_cast<int>(m_mousePosition.x), 
+		                  static_cast<int>(m_mousePosition.y));
 	tempBound.SetDimension(1, 1);
 
 	//return flag based on if mouse collides with bound
@@ -66,14 +79,15 @@ bool InputManager::IsMouseColliding(const AABB& bound)
 //------------------------------------------------------------------------------------------------------
 //predicate function that checks if mouse cursor collides with passed sphere bound
 //------------------------------------------------------------------------------------------------------
-bool InputManager::IsMouseColliding(const Sphere& bound)
+bool Input::IsMouseColliding(const Sphere& bound) const
 {
 
 	//create a temporary sphere bound to represent mouse cursor
 	Sphere tempBound;
 
 	//set mouse cursor radius of 1 based on mouse position
-	tempBound.SetPosition((int)m_mousePosition.x, (int)(m_mousePosition.y));
+	tempBound.SetPosition(static_cast<int>(m_mousePosition.x), 
+		                  static_cast<int>(m_mousePosition.y));
 	tempBound.SetRadius(1);
 
 	//return flag based on if mouse collides with bound
@@ -83,7 +97,7 @@ bool InputManager::IsMouseColliding(const Sphere& bound)
 //------------------------------------------------------------------------------------------------------
 //getter function that returns state of left mouse button
 //------------------------------------------------------------------------------------------------------
-InputManager::ButtonState InputManager::GetLeftButtonState()
+Input::ButtonState Input::GetLeftButtonState() const
 {
 
 	return m_leftButtonState;
@@ -92,7 +106,7 @@ InputManager::ButtonState InputManager::GetLeftButtonState()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns state of middle mouse button
 //------------------------------------------------------------------------------------------------------
-InputManager::ButtonState InputManager::GetMiddleButtonState()
+Input::ButtonState Input::GetMiddleButtonState() const
 {
 
 	return m_middleButtonState;
@@ -101,7 +115,7 @@ InputManager::ButtonState InputManager::GetMiddleButtonState()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns state of right mouse button
 //------------------------------------------------------------------------------------------------------
-InputManager::ButtonState InputManager::GetRightButtonState()
+Input::ButtonState Input::GetRightButtonState() const
 {
 
 	return m_rightButtonState;
@@ -110,7 +124,7 @@ InputManager::ButtonState InputManager::GetRightButtonState()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns motion value of mouse wheel movement
 //------------------------------------------------------------------------------------------------------
-SDL_Point InputManager::GetMouseWheel()
+SDL_Point Input::GetMouseWheel() const
 {
 
 	return m_mouseWheel;
@@ -119,7 +133,7 @@ SDL_Point InputManager::GetMouseWheel()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns motion value of mouse movement
 //------------------------------------------------------------------------------------------------------
-SDL_Point InputManager::GetMouseMotion()
+SDL_Point Input::GetMouseMotion() const
 {
 
 	return m_mouseMotion;
@@ -128,32 +142,38 @@ SDL_Point InputManager::GetMouseMotion()
 //------------------------------------------------------------------------------------------------------
 //getter function that returns position of mouse
 //------------------------------------------------------------------------------------------------------
-SDL_Point InputManager::GetMousePosition()
+SDL_Point Input::GetMousePosition() const
 {
 
 	return m_mousePosition;
 
 }
+
+const std::string& Input::GetInput() const
+{
+	return m_input;
+}
+
 //------------------------------------------------------------------------------------------------------
 //setter function that places mouse cursor at passed position
 //------------------------------------------------------------------------------------------------------
-void InputManager::SetMousePosition(int x, int y)
+void Input::SetMousePosition(int x, int y)
 {
 
-	SDL_WarpMouseInWindow(TheScreen::Instance()->GetWindow(), x, y);
+	SDL_WarpMouseInWindow(Screen::Instance()->GetWindow(), x, y);
 
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that creates a system mouse cursor 
 //------------------------------------------------------------------------------------------------------
-void InputManager::SetMouseCursorType(CursorType cursorType)
+void Input::SetMouseCursorType(CursorType cursorType)
 {
 
 	//first destroy old cursor object from memory
 	SDL_FreeCursor(m_cursor);
 
 	//based on type of cursor value passed, create mouse cursor using SDL ID flag value 
-	m_cursor = SDL_CreateSystemCursor(SDL_SystemCursor(cursorType));
+	m_cursor = SDL_CreateSystemCursor(static_cast<SDL_SystemCursor>(cursorType));
 	
 	//use cursor pointer to assign cursor to SDL
 	SDL_SetCursor(m_cursor);
@@ -162,16 +182,16 @@ void InputManager::SetMouseCursorType(CursorType cursorType)
 //------------------------------------------------------------------------------------------------------
 //setter function that enables, disables, shows or hides the mouse cursor
 //------------------------------------------------------------------------------------------------------
-void InputManager::SetMouseCursorState(CursorState cursorEnabled, CursorState cursorVisible)
+void Input::SetMouseCursorState(CursorState cursorEnabled, CursorState cursorVisible)
 {
 
 	//if mouse cursor is enabled then check if it's visible  
 	//and display the cursor accordingly, and keep the mouse 
 	//cursor within the window border as long as it's enabled
-	if (cursorEnabled)
+	if (static_cast<bool>(cursorEnabled))
 	{
 		
-		if (cursorVisible)
+		if (static_cast<bool>(cursorVisible))
 		{
 			SDL_ShowCursor(1);
 			SDL_SetRelativeMouseMode(SDL_FALSE);
@@ -195,7 +215,7 @@ void InputManager::SetMouseCursorState(CursorState cursorEnabled, CursorState cu
 //------------------------------------------------------------------------------------------------------
 //function that processes all keyboard and mouse events
 //------------------------------------------------------------------------------------------------------
-void InputManager::Update()
+void Input::Update()
 {
 
 	//variable to store SDL event data
@@ -226,7 +246,7 @@ void InputManager::Update()
 	m_mouseWheel.y = 0;
 
 	//store state of keyboard in array
-	m_keyStates = SDL_GetKeyboardState(0);
+	m_keyStates = SDL_GetKeyboardState(nullptr);
 
 	//check for events on SDL event queue
 	//keep this loop running until all events have been processed
@@ -238,14 +258,14 @@ void InputManager::Update()
 		{
 		
 			//top right X on game window has been clicked
-			case SDL_QUIT :
+			case SDL_QUIT:
 			{
 				m_isXClicked = true;
 				break;
 			}
 		
 			//a key is pressed 
-			case SDL_KEYUP : 
+			case SDL_KEYUP: 
 			{
 				m_isKeyPressed = false;
 				break;
@@ -276,7 +296,7 @@ void InputManager::Update()
 
 			//the mouse was moved 
 			//set the position and mouse motion value
-			case SDL_MOUSEMOTION :
+			case SDL_MOUSEMOTION:
 			{
 				m_mousePosition.x = events.motion.x;
 				m_mousePosition.y = events.motion.y;
@@ -286,14 +306,15 @@ void InputManager::Update()
 			}
 
 			//the mouse wheel was moved 
-			case SDL_MOUSEWHEEL :
+			case SDL_MOUSEWHEEL:
 			{
 				m_mouseWheel.x = events.wheel.x;
 				m_mouseWheel.y = events.wheel.y;
 			}
 
 			//a mouse button was clicked or released
-			case SDL_MOUSEBUTTONUP : case SDL_MOUSEBUTTONDOWN :
+			case SDL_MOUSEBUTTONUP: 
+			case SDL_MOUSEBUTTONDOWN:
 			{
 				
 				//set position of mouse
@@ -301,26 +322,26 @@ void InputManager::Update()
 				m_mousePosition.y = events.motion.y;
 				
 				//temporarily store button state for assigning below
-				ButtonState state = ((events.button.state == SDL_PRESSED) ? DOWN : UP);
+				ButtonState state = ((events.button.state == SDL_PRESSED) ? ButtonState::DOWN : ButtonState::UP);
 
 				//based on which of the three mouse buttons was pressed 
 				//or released, assign flag to button's state variable
 				switch(events.button.button)
 				{
 				
-					case SDL_BUTTON_LEFT :
+					case SDL_BUTTON_LEFT:
 					{
 						m_leftButtonState = state;
 						break;
 					}
 				
-					case SDL_BUTTON_MIDDLE :
+					case SDL_BUTTON_MIDDLE:
 					{
 						m_middleButtonState = state;
 						break;
 					}
 
-					case SDL_BUTTON_RIGHT :
+					case SDL_BUTTON_RIGHT:
 					{
 						m_rightButtonState = state;
 						break;
