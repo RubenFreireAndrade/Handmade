@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AudioManager.h"
+#include "Debug.h"
 
 AudioManager* AudioManager::Instance()
 {
@@ -44,7 +45,8 @@ bool AudioManager::Initialize()
 	//if audio sub-system initialization failed, display error message and return false
 	if (Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024) == -1)
 	{
-		std::cout << "Audio sub-system did not initialize properly." << std::endl;
+		Debug::Log("Audio sub-system did not initialize properly.", Debug::ErrorCode::FAILURE);
+		Debug::Log("===============================================================");
 		return false;
 	}
 
@@ -59,7 +61,7 @@ bool AudioManager::LoadFromFile(const std::string& filename, AudioType audioType
 {
 
 	//display text to state that file is being opened and read
-	std::cout << "Opening and reading audio file : " << "\"" << filename << "\"" << std::endl;
+	Debug::Log("Opening and reading audio file: '" + filename + "'");
 
 	//if a sfx file needs to be loaded, load it into memory and check
 	//if it was loaded properly before adding it to the sfx data map 
@@ -70,8 +72,8 @@ bool AudioManager::LoadFromFile(const std::string& filename, AudioType audioType
 
 		if (!sfx)
 		{
-			std::cout << "File could not be loaded." << std::endl;
-			std::cout << "---------------------------------------------------------------" << std::endl;
+			Debug::Log("File could not be loaded.", Debug::ErrorCode::FAILURE);
+			Debug::Log("===============================================================");
 			return false;
 		}
 
@@ -88,8 +90,8 @@ bool AudioManager::LoadFromFile(const std::string& filename, AudioType audioType
 
 		if (!audio)
 		{
-			std::cout << "File could not be loaded." << std::endl;
-			std::cout << "---------------------------------------------------------------" << std::endl;
+			Debug::Log("File could not be loaded.", Debug::ErrorCode::FAILURE);
+			Debug::Log("===============================================================");
 			return false;
 		}
 
@@ -99,8 +101,8 @@ bool AudioManager::LoadFromFile(const std::string& filename, AudioType audioType
 	}
 
 	//display text to state that file has been opened and read
-	std::cout << "File opened and read successfully." << std::endl;
-	std::cout << "---------------------------------------------------------------" << std::endl;
+	Debug::Log("File opened and read successfully.", Debug::ErrorCode::SUCCESS);
+	Debug::Log("===============================================================");
 
 	return true;
 
@@ -123,7 +125,8 @@ void AudioManager::UnloadFromMemory(AudioType audioType,
 			
 			if (it == m_sfxDataMap.end())
 			{
-				std::cout << "Audio data not found." << std::endl;
+				Debug::Log("Audio data not found. Please enter a valid ID.", Debug::ErrorCode::WARNING);
+				Debug::Log("===============================================================");
 			}
 
 			else
@@ -164,7 +167,8 @@ void AudioManager::UnloadFromMemory(AudioType audioType,
 
 			if (it == tempMap->end())
 			{
-				std::cout << "Audio data not found." << std::endl;
+				Debug::Log("Audio data not found. Please enter a valid ID.", Debug::ErrorCode::WARNING);
+				Debug::Log("===============================================================");
 			}
 
 			else
@@ -204,13 +208,13 @@ void AudioManager::ShutDown()
 void AudioManager::Output()
 {
 
-	system("cls");
+	/*system("cls");
 	std::cout << "------------------------------------" << std::endl;
 	std::cout << "Total size of all audio maps : " << std::endl;
 	std::cout << "------------------------------------" << std::endl;
 	std::cout << "Size of SFX Data Map   : " << m_sfxDataMap.size() << std::endl;
 	std::cout << "Size of Music Data Map : " << m_musicDataMap.size() << std::endl;
 	std::cout << "Size of Voice Data Map : " << m_voiceDataMap.size() << std::endl;
-	std::cout << "------------------------------------" << std::endl;
+	std::cout << "------------------------------------" << std::endl;*/
 
 }

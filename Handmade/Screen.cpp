@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Debug.h"
 #include "Screen.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -70,7 +71,9 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 	//if SDL initialization fails, display error message and return false
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 	{
-		std::cout << "SDL did not initialize properly." << std::endl;
+		Debug::Log("SDL did not initialize properly.", Debug::ErrorCode::FAILURE);
+		Debug::Log("===============================================================");
+		Debug::PauseLog();
 		return false;
 	}
 
@@ -86,7 +89,9 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 	//if game window could not be created, display error message and return false
 	if (!m_window)
 	{
-		std::cout << "Game window could not be created." << std::endl;
+		Debug::Log("Game window could not be created.", Debug::ErrorCode::FAILURE);
+		Debug::Log("===============================================================");
+		Debug::PauseLog();
 		return false;
 	}
 
@@ -99,7 +104,9 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 	//if SDL renderer could not be created, display error message and return false
 	if (!m_renderer)
 	{
-		std::cout << "Renderer could not be created." << std::endl;
+		Debug::Log("Renderer could not be created.", Debug::ErrorCode::FAILURE);
+		Debug::Log("===============================================================");
+		Debug::PauseLog();
 		return false;
 	}
 

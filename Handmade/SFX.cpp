@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AudioManager.h"
+#include "Debug.h"
 #include "SFX.h"
 
 //------------------------------------------------------------------------------------------------------
@@ -38,7 +39,8 @@ bool SFX::Play(int loop)
 	//if playing sound effect fails, display error message and return false
 	if (Mix_PlayChannel(-1, m_sfx, loop) == -1)
 	{
-		std::cout << "Sound effect could not be played." << std::endl;
+		Debug::Log("Sound effect could not be played.", Debug::ErrorCode::FAILURE);
+		Debug::Log("===============================================================");
 		return false;
 	}
 

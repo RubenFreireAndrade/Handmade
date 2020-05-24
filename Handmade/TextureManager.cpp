@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL_image.h>
+#include "Debug.h"
 #include "Screen.h"
 #include "TextureManager.h"
 
@@ -37,7 +38,8 @@ bool TextureManager::Initialize()
 	//if font sub-system initialization failed, display error message and return false
 	if (TTF_Init() == -1)
 	{
-		std::cout << "Font sub-system did not initialize properly." << std::endl;
+		Debug::Log("Font sub-system did not initialize properly.", Debug::ErrorCode::FAILURE);
+		Debug::Log("===============================================================");
 		return false;
 	}
 
@@ -52,7 +54,7 @@ bool TextureManager::LoadFontFromFile(const std::string& filename, int fontSize,
 {
 
 	//display text to state that file is being opened and read
-	std::cout << "Opening and reading font file : " << "\"" << filename << "\"" << std::endl;
+	Debug::Log("Opening and reading font file: '" + filename + "'");
 
 	//load font from file using SDL font load function
 	TTF_Font* font = TTF_OpenFont(filename.c_str(), fontSize);
@@ -60,8 +62,8 @@ bool TextureManager::LoadFontFromFile(const std::string& filename, int fontSize,
 	//if font loading failed, display error message and return false
 	if (!font)
 	{
-		std::cout << "File could not be loaded." << std::endl;
-		std::cout << "---------------------------------------------------------------" << std::endl;
+		Debug::Log("File could not be loaded.", Debug::ErrorCode::FAILURE);
+		Debug::Log("===============================================================");
 		return false;
 	}
 
@@ -69,8 +71,8 @@ bool TextureManager::LoadFontFromFile(const std::string& filename, int fontSize,
 	m_fontMap[mapIndex] = font;
 
 	//display text to state that file has been opened and read
-	std::cout << "File opened and read successfully." << std::endl;
-	std::cout << "---------------------------------------------------------------" << std::endl;
+	Debug::Log("File opened and read successfully.", Debug::ErrorCode::SUCCESS);
+	Debug::Log("===============================================================");
 
 	return true;
 
@@ -85,7 +87,7 @@ bool TextureManager::LoadTextureFromFile(const std::string& filename, const std:
 	SDL_Surface* textureData = nullptr;
 
 	//display text to state that file is being opened and read
-	std::cout << "Opening and reading texture file : " << "\"" << filename << "\"" << std::endl;
+	Debug::Log("Opening and reading image file: '" + filename + "'");
 
 	//load texture from file using SDL image load function
 	textureData = IMG_Load(filename.c_str());
@@ -93,8 +95,8 @@ bool TextureManager::LoadTextureFromFile(const std::string& filename, const std:
 	//if texture loading failed, display error message 
 	if (!textureData)
 	{
-		std::cout << "File could not be loaded." << std::endl;
-		std::cout << "---------------------------------------------------------------" << std::endl;
+		Debug::Log("File could not be loaded.", Debug::ErrorCode::FAILURE);
+		Debug::Log("===============================================================");
 		return false;
 	}
 
@@ -113,8 +115,8 @@ bool TextureManager::LoadTextureFromFile(const std::string& filename, const std:
 	}
 
 	//display text to state that file has been opened and read
-	std::cout << "File opened and read successfully." << std::endl;
-	std::cout << "---------------------------------------------------------------" << std::endl;
+	Debug::Log("File opened and read successfully.", Debug::ErrorCode::SUCCESS);
+	Debug::Log("===============================================================");
 
 	return true;
 
@@ -137,7 +139,8 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 
 			if (it == m_fontMap.end())
 			{
-				std::cout << "Font data not found." << std::endl;
+				Debug::Log("Font data not found. Please enter a valid ID.", Debug::ErrorCode::WARNING);
+				Debug::Log("===============================================================");
 			}
 
 			else
@@ -172,7 +175,8 @@ void TextureManager::UnloadFromMemory(DataType dataType,
 
 			if (it == m_textureMap.end())
 			{
-				std::cout << "Texture data not found." << std::endl;
+				Debug::Log("Image data not found. Please enter a valid ID.", Debug::ErrorCode::WARNING);
+				Debug::Log("===============================================================");
 			}
 
 			else
@@ -212,12 +216,12 @@ void TextureManager::ShutDown()
 void TextureManager::Output()
 {
 
-	system("cls");
+	/*system("cls");
 	std::cout << "------------------------------------" << std::endl;
 	std::cout << "Total size of texture and font maps : " << std::endl;
 	std::cout << "------------------------------------" << std::endl;
 	std::cout << "Size of Font Map    : " << m_fontMap.size() << std::endl;
 	std::cout << "Size of Texture Map : " << m_textureMap.size() << std::endl;
-	std::cout << "------------------------------------" << std::endl;
+	std::cout << "------------------------------------" << std::endl;*/
 
 }
