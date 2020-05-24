@@ -139,6 +139,7 @@
     <ClInclude Include="Audio.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="EndState.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -160,6 +161,7 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EndState.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
