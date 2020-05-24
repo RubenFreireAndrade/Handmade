@@ -45,23 +45,26 @@
 int main(int argc, char* args[])
 {
 
+	//create a game!
+	Game* game = new Game;
+
 	//initialize the game
-	if (!(Game::Instance()->Initialize("<insert game name here>", 1280, 720)))
+	if (!(game->Initialize("<insert game name here>", 1280, 720)))
 	{
 		return 0;
 	}
 
 	//create the first state to be used in the game
-	Game::Instance()->AddState(new MenuState(nullptr));
+	game->AddState(new MenuState(game, nullptr));
 
 	//run the game
-	if (!Game::Instance()->Run())
+	if (!game->Run())
 	{
 		return 0;
 	}
 
 	//close down the game
-	Game::Instance()->ShutDown();
+	game->ShutDown();
 
 	//end application
 	return 0;

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values
 //------------------------------------------------------------------------------------------------------
-EndState::EndState(GameState* state) : GameState(state)
+EndState::EndState(Game* gameHandle, GameState* previousState) : GameState(gameHandle, previousState)
 {
 
 	m_menu = nullptr;
@@ -33,7 +33,7 @@ bool EndState::OnEnter()
 //------------------------------------------------------------------------------------------------------
 //function that waits for a Q key to be pressed before ending all game states (the end!)
 //------------------------------------------------------------------------------------------------------
-bool EndState::Update()
+bool EndState::Update(int deltaTime)
 {
 
 	//play the background music associated with the image
@@ -41,14 +41,14 @@ bool EndState::Update()
 	m_image->PlayMusic();
 
 	//update the main menu to determine which menu choice was made
-	m_menu->Update();
+	m_menu->Update(deltaTime);
 
 	//if player wants to play again then return to the main playing state
 	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::PLAY))
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		Game::Instance()->ChangeState(new PlayState(this));
+		m_gameHandle->ChangeState(new PlayState(m_gameHandle, this));
 	}
 
 	//if player chose to exit the game then quit altogether

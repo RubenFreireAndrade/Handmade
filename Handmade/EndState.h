@@ -48,13 +48,13 @@ public:
 
 public:
 
-	EndState(GameState* state);
+	EndState(Game* gameHandle, GameState* previousState);
 	virtual ~EndState() {}
 
 public:
 
 	virtual bool OnEnter();
-	virtual bool Update();
+	virtual bool Update(int deltaTime);
 	virtual bool Draw();
 	virtual void OnExit();
 
