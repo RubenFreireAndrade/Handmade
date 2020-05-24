@@ -44,13 +44,13 @@ class PlayState : public GameState
 
 public:
 
-	PlayState(GameState* state);
+	PlayState(Game* gameHandle, GameState* previousState);
 	virtual ~PlayState() {}
 
 public:
 
 	virtual bool OnEnter();
-	virtual bool Update();
+	virtual bool Update(int deltaTime);
 	virtual bool Draw();
 	virtual void OnExit();
 

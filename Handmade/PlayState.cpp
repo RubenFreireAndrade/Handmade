@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all defaults
 //------------------------------------------------------------------------------------------------------
-PlayState::PlayState(GameState* state) : GameState(state)
+PlayState::PlayState(Game* gameHandle, GameState* previousState) : GameState(gameHandle, previousState)
 {
 
 	m_image = nullptr;
@@ -28,7 +28,7 @@ bool PlayState::OnEnter()
 //------------------------------------------------------------------------------------------------------
 //function that reads key presses, mouse clicks and updates all game objects in scene
 //------------------------------------------------------------------------------------------------------
-bool PlayState::Update()
+bool PlayState::Update(int deltaTime)
 {
 
 	//play the background music associated with the image
@@ -43,17 +43,15 @@ bool PlayState::Update()
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		Game::Instance()->ChangeState(new MenuState(this));
+		m_gameHandle->ChangeState(new MenuState(m_gameHandle, this));
 	}
 
 	//the Q key moves to the ending state
 	if (keys[SDL_SCANCODE_Q])
 	{
-		
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		Game::Instance()->ChangeState(new EndState(this));
-
+		m_gameHandle->ChangeState(new EndState(m_gameHandle, this));
 	}
 
 	//loop through all game objects in vector and update them only if they are active
@@ -61,7 +59,7 @@ bool PlayState::Update()
 	{
 		if ((*it)->IsActive())
 		{
-			(*it)->Update();
+			(*it)->Update(deltaTime);
 		}
 	}
 

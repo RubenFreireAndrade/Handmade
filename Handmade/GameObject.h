@@ -61,7 +61,7 @@ public:
 
 public:
 
-	virtual void Update() = 0;
+	virtual void Update(int deltaTime) = 0;
 	virtual bool Draw() = 0;
 
 protected:

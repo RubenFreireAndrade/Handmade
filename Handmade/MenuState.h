@@ -48,13 +48,13 @@ public:
 
 public:
 
-	MenuState(GameState* state);
+	MenuState(Game* gameHandle, GameState* previousState);
 	virtual ~MenuState() {}
 
 public:
 
 	virtual bool OnEnter();
-	virtual bool Update();
+	virtual bool Update(int deltaTime);
 	virtual bool Draw();
 	virtual void OnExit();
 

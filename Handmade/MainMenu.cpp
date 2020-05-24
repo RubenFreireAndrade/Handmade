@@ -44,7 +44,7 @@ void MainMenu::SetMenuText(const std::string& text)
 //------------------------------------------------------------------------------------------------------
 //function that updates the main menu text on screen
 //------------------------------------------------------------------------------------------------------
-void MainMenu::Update()
+void MainMenu::Update(int deltaTime)
 {
 
 	const Uint8* keys = Input::Instance()->GetKeyStates();

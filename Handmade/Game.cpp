@@ -8,40 +8,15 @@
 #include "Screen.h"
 #include "TextureManager.h"
 
-Game* Game::Instance()
-{
-
-	static Game* game = new Game();
-	return game;
-
-}
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values
 //------------------------------------------------------------------------------------------------------
 Game::Game()
 {
 
+	m_deltaTime = 0;
 	m_endGame = false;
-	m_elapsedTime = 0;
 	
-}
-//------------------------------------------------------------------------------------------------------
-//getter function that returns total time passed in milliseconds
-//------------------------------------------------------------------------------------------------------
-int Game::GetTotalTime() const
-{
-
-	return SDL_GetTicks();
-
-}
-//------------------------------------------------------------------------------------------------------
-//getter function that returns time elapsed in milliseconds
-//------------------------------------------------------------------------------------------------------
-int Game::GetElapsedTime() const
-{
-
-	return m_elapsedTime;
-
 }
 //------------------------------------------------------------------------------------------------------
 //function that initializes all sub-systems of the game
@@ -61,13 +36,15 @@ bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight
 	//initialize audio sub-system and return false if error occured
 	if (!(AudioManager::Instance()->Initialize()))
 	{
-		return false;
+		//not serious - game does not need to end
+		//add your own outcome/messages here...
 	}
 
 	//initialize font sub-system and return false if error occured
 	if (!TextureManager::Instance()->Initialize())
 	{
-		return false;
+		//not serious - game does not need to end
+		//add your own outcome/messages here...
 	}
 
 	return true;
@@ -123,7 +100,7 @@ bool Game::Run()
 			Input::Instance()->Update();
 
 			//update the currently active state
-			state->Update();
+			state->Update(m_deltaTime);
 
 			//render the currently active state
 			state->Draw();
@@ -133,7 +110,7 @@ bool Game::Run()
 
 			//calculate time value passed for one frame call
 			//if vsync is on this value should be around 16ms
-			m_elapsedTime = SDL_GetTicks() - startTime;
+			m_deltaTime = SDL_GetTicks() - startTime;
 			
 		}
 

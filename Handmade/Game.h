@@ -43,13 +43,8 @@ class Game
 
 public:
 
-	static Game* Instance();
+	Game();
 
-public:
-
-	int GetTotalTime() const;
-	int GetElapsedTime() const;
-	
 public:
 
 	bool Initialize(const std::string& name, int screenWidth,
@@ -62,19 +57,13 @@ public:
 	void ShutDown();
 
 private:
-
-	Game();
-	Game(const Game&);
-	Game& operator=(const Game&);
-	
-private:
 	
 	void RemoveState();
 
 private:
 
 	bool m_endGame;
-	int m_elapsedTime;
+	int m_deltaTime;
 	std::deque<GameState*> m_gameStates;
 
 };

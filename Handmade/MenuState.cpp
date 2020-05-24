@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values
 //------------------------------------------------------------------------------------------------------
-MenuState::MenuState(GameState* state) : GameState(state)
+MenuState::MenuState(Game* gameHandle, GameState* previousState) : GameState(gameHandle, previousState)
 {
 
 	m_menu = nullptr;
@@ -36,7 +36,7 @@ bool MenuState::OnEnter()
 //------------------------------------------------------------------------------------------------------
 //function that waits for a key to be pressed before transitioning to a different state
 //------------------------------------------------------------------------------------------------------
-bool MenuState::Update()
+bool MenuState::Update(int deltaTime)
 {
 
 	//play the background music associated with the image
@@ -44,14 +44,14 @@ bool MenuState::Update()
 	m_image->PlayMusic();
 
 	//update the main menu to determine which menu choice was made
-	m_menu->Update();
+	m_menu->Update(deltaTime);
 
 	//if player chose to play game, go into main playing state 
 	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::PLAY))
 	{
 		m_image->StopMusic();
 		m_isActive = m_isAlive = false;
-		Game::Instance()->ChangeState(new PlayState(this));
+		m_gameHandle->ChangeState(new PlayState(m_gameHandle, this));
 	}
 
 	//if player chose to exit the game then quit altogether
