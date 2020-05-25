@@ -1,3 +1,6 @@
+#ifndef DEBUG_H
+#define DEBUG_H
+
 /*==============================================================================================#
 |                                                                                               |
 | Handmade Lite is an educational game engine, written by Karsten Vermeulen for the purposes of |
@@ -28,43 +31,33 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'Main' source file last updated in May 2020   							                    |
+| 'Debug' source files last updated in May 2020   							                    |
 #==============================================================================================*/
 
-//include SDL main header file to prevent 
-//main lib conflicts in Release mode
-#include <SDL.h> 
-#include "Game.h"
-#include "MenuState.h"
+#include <string>
+#include <Windows.h>
+#include <SDL.h>
 
-//------------------------------------------------------------------------------------------------------
-//main function that processes everything  
-//------------------------------------------------------------------------------------------------------
-int main(int argc, char* args[])
+class Debug
 {
 
-	//create a game!
-	Game* game = new Game;
+public:
 
-	//initialize the game
-	if (!(game->Initialize("<insert game name here>", 1280, 720)))
-	{
-		return 0;
-	}
+	enum class ErrorCode { FAILURE = 4, WARNING = 6, SUCCESS = 10, DEFAULT = 15 };
 
-	//create the first state to be used in the game
-	game->AddState(new MenuState(game, nullptr));
+public:
 
-	//run the game
-	if (!game->Run())
-	{
-		return 0;
-	}
+	static void PauseLog();
+	static void ClearLog();
+	static void Log(float value, const std::string& label = "");
+	static void Log(int x, int y, const std::string& label = "");
+	static void Log(const SDL_Point& point, const std::string& label = "");
+	static void Log(const std::string& message, ErrorCode errorCode = ErrorCode::DEFAULT);
 
-	//close down the game
-	game->ShutDown();
+private:
 
-	//end application
-	return 0;
+	static HANDLE s_consoleHandle;
 
-}
+};
+
+#endif

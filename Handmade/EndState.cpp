@@ -1,5 +1,3 @@
-#include <fstream>
-#include <iostream>
 #include "EndState.h"
 #include "Game.h"
 #include "Input.h"

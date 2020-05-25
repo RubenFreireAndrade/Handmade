@@ -1,6 +1,6 @@
-#include <iostream>
 #include "Audio.h"
 #include "AudioManager.h"
+#include "Debug.h"
 
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values
@@ -43,7 +43,8 @@ bool Audio::Play(LoopType loopType)
 		//if playing music fails, display error message and return false
 		if(Mix_PlayMusic(m_audio, static_cast<int>(loopType)) == -1)
 		{
-			std::cout << "Music could not be played." << std::endl;
+			Debug::Log("Music could not be played.", Debug::ErrorCode::FAILURE);
+			Debug::Log("===============================================================");
 			return false;
 		}
 
