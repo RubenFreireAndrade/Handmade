@@ -34,8 +34,6 @@
 //include SDL main header file to prevent 
 //main lib conflicts in Release mode
 #include <SDL.h> 
-#include <iostream>
-#include <string>
 #include "Game.h"
 #include "MenuState.h"
 

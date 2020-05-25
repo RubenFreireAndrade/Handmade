@@ -1,4 +1,3 @@
-#include <iostream>
 #include <SDL_image.h>
 #include "Debug.h"
 #include "Screen.h"
