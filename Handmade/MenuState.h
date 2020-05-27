@@ -48,7 +48,7 @@ public:
 
 public:
 
-	MenuState(Game* gameHandle, GameState* previousState);
+	MenuState(Game* gameHandle);
 	virtual ~MenuState() {}
 
 public:

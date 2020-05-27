@@ -84,7 +84,7 @@ bool Game::Run()
 
 		//update and render all objects while the current state is active
 		//each state will flag itself as inactive after which the loop breaks
-		while (state->IsActive())
+		while (state)
 		{
 
 			//save time value to mark the start of the frame
@@ -113,10 +113,10 @@ bool Game::Run()
 
 		//if game state is also flagged as dead  
 		//then completely remove all of its objects
-		if (!state->IsAlive())
+		/*if (!state->IsAlive())
 		{
 			RemoveState();
-		}
+		}*/
 
 		//the main game loop will run as long there are game states available
 		m_endGame = m_gameStates.empty();

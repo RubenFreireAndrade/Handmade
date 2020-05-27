@@ -53,7 +53,7 @@ int main(int argc, char* args[])
 	}
 
 	//create the first state to be used in the game
-	game->AddState(new MenuState(game, nullptr));
+	game->AddState(new MenuState(game));
 
 	//run the game
 	if (!game->Run())

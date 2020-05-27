@@ -41,13 +41,8 @@ class GameState
 
 public:
 	
-	GameState(Game* gameHandle, GameState* previousState);
+	GameState(Game* gameHandle);
 	virtual ~GameState() = 0 {}
-
-public:
-
-	bool& IsAlive();
-	bool& IsActive();
 
 public:
 
@@ -58,11 +53,7 @@ public:
 
 protected:
 
-	bool m_isAlive;
-	bool m_isActive;
-
 	Game* m_gameHandle;
-	GameState* m_previousState;
 
 };
 
