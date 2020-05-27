@@ -31,7 +31,7 @@ bool EndState::OnEnter()
 //------------------------------------------------------------------------------------------------------
 //function that waits for a Q key to be pressed before ending all game states (the end!)
 //------------------------------------------------------------------------------------------------------
-bool EndState::Update(int deltaTime)
+GameState* EndState::Update(int deltaTime)
 {
 
 	//play the background music associated with the image
@@ -45,6 +45,7 @@ bool EndState::Update(int deltaTime)
 	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::PLAY))
 	{
 		m_image->StopMusic();
+		return new PlayState;
 		//m_isActive = m_isAlive = false;
 		//m_gameHandle->ChangeState(new PlayState(m_gameHandle));
 	}
@@ -53,10 +54,11 @@ bool EndState::Update(int deltaTime)
 	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::QUIT))
 	{
 		m_image->StopMusic();
+		return nullptr;
 		//m_isActive = m_isAlive = false;
 	}
 
-	return true;
+	return this;
 
 }
 //------------------------------------------------------------------------------------------------------

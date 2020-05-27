@@ -26,7 +26,7 @@ bool PlayState::OnEnter()
 //------------------------------------------------------------------------------------------------------
 //function that reads key presses, mouse clicks and updates all game objects in scene
 //------------------------------------------------------------------------------------------------------
-bool PlayState::Update(int deltaTime)
+GameState* PlayState::Update(int deltaTime)
 {
 
 	//play the background music associated with the image
@@ -40,6 +40,7 @@ bool PlayState::Update(int deltaTime)
 	if (keys[SDL_SCANCODE_M])
 	{
 		m_image->StopMusic();
+		return new MenuState;
 		//m_isActive = m_isAlive = false;
 		//m_gameHandle->ChangeState(new MenuState(m_gameHandle));
 	}
@@ -48,6 +49,7 @@ bool PlayState::Update(int deltaTime)
 	if (keys[SDL_SCANCODE_Q])
 	{
 		m_image->StopMusic();
+		return new EndState;
 		//m_isActive = m_isAlive = false;
 		//m_gameHandle->ChangeState(new EndState(m_gameHandle));
 	}
@@ -61,7 +63,7 @@ bool PlayState::Update(int deltaTime)
 		}
 	}
 
-	return true;
+	return this;
 
 }
 //------------------------------------------------------------------------------------------------------

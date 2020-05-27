@@ -49,16 +49,8 @@ public:
 
 	bool Initialize(const std::string& name, int screenWidth,
 		            int screenHeight, bool fullscreen = false);
-
-	void AddState(GameState* state);
-	void ChangeState(GameState* state);
-
 	bool Run();
 	void ShutDown();
-
-private:
-	
-	void RemoveState();
 
 private:
 

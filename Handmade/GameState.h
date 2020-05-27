@@ -45,7 +45,7 @@ public:
 public:
 
 	virtual bool OnEnter() = 0;
-	virtual bool Update(int deltaTime) = 0;
+	virtual GameState* Update(int deltaTime) = 0;
 	virtual bool Draw() = 0;
 	virtual void OnExit() = 0;
 

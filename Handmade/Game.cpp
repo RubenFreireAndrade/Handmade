@@ -49,26 +49,6 @@ bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight
 
 }
 //------------------------------------------------------------------------------------------------------
-//function that loads and adds a game state to the front of the queue (for temporary states)
-//------------------------------------------------------------------------------------------------------
-void Game::AddState(GameState* state)
-{
-
-	state->OnEnter();
-	//m_gameStates.push_front(state);
-	
-}
-//------------------------------------------------------------------------------------------------------
-//function that loads and adds a game state to the back of the queue (for new states)
-//------------------------------------------------------------------------------------------------------
-void Game::ChangeState(GameState* state)
-{
-
-	state->OnEnter();
-	//m_gameStates.push_back(state);
-	
-}
-//------------------------------------------------------------------------------------------------------
 //function that runs the main game loop and updates all components
 //------------------------------------------------------------------------------------------------------
 bool Game::Run()
@@ -80,7 +60,7 @@ bool Game::Run()
 	m_gameState->OnEnter();
 
 	//main game loop!
-	while (!m_endGame)
+	//while (!m_endGame)
 	{
 
 		//current active state is always the front one
@@ -101,13 +81,29 @@ bool Game::Run()
 			Input::Instance()->Update();
 
 			//update the currently active state
-			m_gameState->Update(m_deltaTime);
+			GameState* nextState = m_gameState->Update(m_deltaTime);
 
 			//render the currently active state
 			m_gameState->Draw();
 			
 			//swap the frame buffer
 			Screen::Instance()->Draw();
+
+			//..
+			if (nextState != m_gameState)
+			{
+				m_gameState->OnExit();
+				delete m_gameState;
+
+				m_gameState = nextState;
+
+				//..
+				if (m_gameState)
+				{
+					m_gameState->OnEnter();
+				}
+
+			}
 
 			//calculate time value passed for one frame call
 			//if vsync is on this value should be around 16ms
@@ -142,17 +138,5 @@ void Game::ShutDown()
 
 	//close down game screen 
 	Screen::Instance()->ShutDown();
-
-}
-//------------------------------------------------------------------------------------------------------
-//function that unloads and removes the front-most game state from the queue
-//------------------------------------------------------------------------------------------------------
-void Game::RemoveState()
-{
-
-	//m_gameStates.front()->OnExit();
-
-	//delete m_gameStates.front();
-	//m_gameStates.pop_front();
 
 }

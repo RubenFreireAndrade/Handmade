@@ -35,7 +35,7 @@ bool MenuState::OnEnter()
 //------------------------------------------------------------------------------------------------------
 //function that waits for a key to be pressed before transitioning to a different state
 //------------------------------------------------------------------------------------------------------
-bool MenuState::Update(int deltaTime)
+GameState* MenuState::Update(int deltaTime)
 {
 
 	//play the background music associated with the image
@@ -49,6 +49,7 @@ bool MenuState::Update(int deltaTime)
 	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::PLAY))
 	{
 		m_image->StopMusic();
+		return new PlayState;
 		//m_isActive = m_isAlive = false;
 		//m_gameHandle->ChangeState(new PlayState(m_gameHandle));
 	}
@@ -57,10 +58,11 @@ bool MenuState::Update(int deltaTime)
 	if (m_menu->GetMenuOption() == static_cast<int>(MenuOption::QUIT))
 	{
 		m_image->StopMusic();
+		return nullptr;
 		//m_isActive = m_isAlive = false;
 	}
 
-	return true;
+	return this;
 
 }
 //------------------------------------------------------------------------------------------------------

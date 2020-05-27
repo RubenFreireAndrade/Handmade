@@ -50,7 +50,7 @@ public:
 public:
 
 	virtual bool OnEnter();
-	virtual bool Update(int deltaTime);
+	virtual GameState* Update(int deltaTime);
 	virtual bool Draw();
 	virtual void OnExit();
 
