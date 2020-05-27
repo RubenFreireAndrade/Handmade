@@ -34,35 +34,20 @@
 | 'GameState' source files last updated in May 2020   							                |
 #==============================================================================================*/
 
-class Game;
-
 class GameState
 {
 
 public:
 	
-	GameState(Game* gameHandle, GameState* previousState);
+	GameState() {}
 	virtual ~GameState() = 0 {}
 
 public:
 
-	bool& IsAlive();
-	bool& IsActive();
-
-public:
-
 	virtual bool OnEnter() = 0;
-	virtual bool Update(int deltaTime) = 0;
+	virtual GameState* Update(int deltaTime) = 0;
 	virtual bool Draw() = 0;
 	virtual void OnExit() = 0;
-
-protected:
-
-	bool m_isAlive;
-	bool m_isActive;
-
-	Game* m_gameHandle;
-	GameState* m_previousState;
 
 };
 

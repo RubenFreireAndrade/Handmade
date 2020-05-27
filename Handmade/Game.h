@@ -43,28 +43,19 @@ class Game
 
 public:
 
-	Game();
+	Game(GameState* initialGameState);
 
 public:
 
 	bool Initialize(const std::string& name, int screenWidth,
 		            int screenHeight, bool fullscreen = false);
-
-	void AddState(GameState* state);
-	void ChangeState(GameState* state);
-
 	bool Run();
 	void ShutDown();
 
 private:
-	
-	void RemoveState();
 
-private:
-
-	bool m_endGame;
 	int m_deltaTime;
-	std::deque<GameState*> m_gameStates;
+	GameState* m_gameState;
 
 };
 
