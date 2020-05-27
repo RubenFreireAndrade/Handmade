@@ -54,7 +54,6 @@ public:
 
 private:
 
-	bool m_endGame;
 	int m_deltaTime;
 	GameState* m_gameState;
 

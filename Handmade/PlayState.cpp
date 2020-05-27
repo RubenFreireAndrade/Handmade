@@ -41,8 +41,6 @@ GameState* PlayState::Update(int deltaTime)
 	{
 		m_image->StopMusic();
 		return new MenuState;
-		//m_isActive = m_isAlive = false;
-		//m_gameHandle->ChangeState(new MenuState(m_gameHandle));
 	}
 
 	//the Q key moves to the ending state
@@ -50,8 +48,6 @@ GameState* PlayState::Update(int deltaTime)
 	{
 		m_image->StopMusic();
 		return new EndState;
-		//m_isActive = m_isAlive = false;
-		//m_gameHandle->ChangeState(new EndState(m_gameHandle));
 	}
 
 	//loop through all game objects in vector and update them only if they are active
@@ -63,6 +59,8 @@ GameState* PlayState::Update(int deltaTime)
 		}
 	}
 
+	//otherwise return reference to self
+	//so that we stay in this game state
 	return this;
 
 }

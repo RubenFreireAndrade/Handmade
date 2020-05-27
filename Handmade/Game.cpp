@@ -12,7 +12,6 @@ Game::Game(GameState* initialGameState)
 {
 
 	m_deltaTime = 0;
-	m_endGame = false;
 	m_gameState = initialGameState;
 
 }
@@ -54,73 +53,54 @@ bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight
 bool Game::Run()
 {
 
-	//GameState* state;
-
-	//..
+	//load up all of the initial game state objects
 	m_gameState->OnEnter();
 
-	//main game loop!
-	//while (!m_endGame)
+	//update and render all objects while the current state is valid
+	//each state will return a pointer to itself, a new game state or null
+	//once the state is null, this loop will end, thereby ending the game
+	while (m_gameState)
 	{
 
-		//current active state is always the front one
-		//state = m_gameStates.front();
+		//save time value to mark the start of the frame
+		int startTime = SDL_GetTicks();
 
-		//update and render all objects while the current state is active
-		//each state will flag itself as inactive after which the loop breaks
-		while (m_gameState)
+		//update screen by clearing SDL frame buffer
+		Screen::Instance()->Update();
+
+		//update input handling by listening for input events
+		Input::Instance()->Update();
+
+		//update the currently active state
+		//store the returned game state to 
+		//determine if we need to change states
+		GameState* nextState = m_gameState->Update(m_deltaTime);
+
+		//render the currently active state
+		m_gameState->Draw();
+			
+		//swap the frame buffer
+		Screen::Instance()->Draw();
+
+		//if the returned game state is different to our
+		//current state then we need to make a change
+		//we exit the old and only enter the new if not null
+		if (nextState != m_gameState)
 		{
+			m_gameState->OnExit();
+			delete m_gameState;
+			m_gameState = nextState;
 
-			//save time value to mark the start of the frame
-			int startTime = SDL_GetTicks();
-
-			//update screen by clearing SDL frame buffer
-			Screen::Instance()->Update();
-
-			//update input handling by listening for input events
-			Input::Instance()->Update();
-
-			//update the currently active state
-			GameState* nextState = m_gameState->Update(m_deltaTime);
-
-			//render the currently active state
-			m_gameState->Draw();
-			
-			//swap the frame buffer
-			Screen::Instance()->Draw();
-
-			//..
-			if (nextState != m_gameState)
+			if (m_gameState)
 			{
-				m_gameState->OnExit();
-				delete m_gameState;
-
-				m_gameState = nextState;
-
-				//..
-				if (m_gameState)
-				{
-					m_gameState->OnEnter();
-				}
-
+				m_gameState->OnEnter();
 			}
-
-			//calculate time value passed for one frame call
-			//if vsync is on this value should be around 16ms
-			m_deltaTime = SDL_GetTicks() - startTime;
-			
 		}
 
-		//if game state is also flagged as dead  
-		//then completely remove all of its objects
-		/*if (!state->IsAlive())
-		{
-			RemoveState();
-		}*/
-
-		//the main game loop will run as long there are game states available
-		//m_endGame = m_gameStates.empty();
-
+		//calculate time value passed for one frame call
+		//if vsync is on this value should be around 16ms
+		m_deltaTime = SDL_GetTicks() - startTime;
+			
 	}
 
 	return true;

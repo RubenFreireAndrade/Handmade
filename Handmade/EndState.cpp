@@ -46,8 +46,6 @@ GameState* EndState::Update(int deltaTime)
 	{
 		m_image->StopMusic();
 		return new PlayState;
-		//m_isActive = m_isAlive = false;
-		//m_gameHandle->ChangeState(new PlayState(m_gameHandle));
 	}
 
 	//if player chose to exit the game then quit altogether
@@ -55,9 +53,10 @@ GameState* EndState::Update(int deltaTime)
 	{
 		m_image->StopMusic();
 		return nullptr;
-		//m_isActive = m_isAlive = false;
 	}
 
+	//otherwise return reference to self
+	//so that we stay in this game state
 	return this;
 
 }

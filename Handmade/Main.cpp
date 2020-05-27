@@ -43,7 +43,7 @@
 int main(int argc, char* args[])
 {
 
-	//create a game!
+	//create a game and pass in the first game state
 	Game* game = new Game(new MenuState);
 
 	//initialize the game
@@ -51,9 +51,6 @@ int main(int argc, char* args[])
 	{
 		return 0;
 	}
-
-	//create the first state to be used in the game
-	//game->AddState(new MenuState(game));
 
 	//run the game
 	if (!game->Run())
