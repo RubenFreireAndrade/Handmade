@@ -34,14 +34,12 @@
 | 'GameState' source files last updated in May 2020   							                |
 #==============================================================================================*/
 
-class Game;
-
 class GameState
 {
 
 public:
 	
-	GameState(Game* gameHandle);
+	GameState() {}
 	virtual ~GameState() = 0 {}
 
 public:
@@ -50,10 +48,6 @@ public:
 	virtual bool Update(int deltaTime) = 0;
 	virtual bool Draw() = 0;
 	virtual void OnExit() = 0;
-
-protected:
-
-	Game* m_gameHandle;
 
 };
 

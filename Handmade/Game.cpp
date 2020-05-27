@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values
 //------------------------------------------------------------------------------------------------------
-Game::Game()
+Game::Game(GameState* initialGameState)
 {
 
 	m_deltaTime = 0;
 	m_endGame = false;
-	
+	m_gameState = initialGameState;
+
 }
 //------------------------------------------------------------------------------------------------------
 //function that initializes all sub-systems of the game
@@ -54,7 +55,7 @@ void Game::AddState(GameState* state)
 {
 
 	state->OnEnter();
-	m_gameStates.push_front(state);
+	//m_gameStates.push_front(state);
 	
 }
 //------------------------------------------------------------------------------------------------------
@@ -64,7 +65,7 @@ void Game::ChangeState(GameState* state)
 {
 
 	state->OnEnter();
-	m_gameStates.push_back(state);
+	//m_gameStates.push_back(state);
 	
 }
 //------------------------------------------------------------------------------------------------------
@@ -73,18 +74,21 @@ void Game::ChangeState(GameState* state)
 bool Game::Run()
 {
 
-	GameState* state;
+	//GameState* state;
+
+	//..
+	m_gameState->OnEnter();
 
 	//main game loop!
 	while (!m_endGame)
 	{
 
 		//current active state is always the front one
-		state = m_gameStates.front();
+		//state = m_gameStates.front();
 
 		//update and render all objects while the current state is active
 		//each state will flag itself as inactive after which the loop breaks
-		while (state)
+		while (m_gameState)
 		{
 
 			//save time value to mark the start of the frame
@@ -97,10 +101,10 @@ bool Game::Run()
 			Input::Instance()->Update();
 
 			//update the currently active state
-			state->Update(m_deltaTime);
+			m_gameState->Update(m_deltaTime);
 
 			//render the currently active state
-			state->Draw();
+			m_gameState->Draw();
 			
 			//swap the frame buffer
 			Screen::Instance()->Draw();
@@ -119,7 +123,7 @@ bool Game::Run()
 		}*/
 
 		//the main game loop will run as long there are game states available
-		m_endGame = m_gameStates.empty();
+		//m_endGame = m_gameStates.empty();
 
 	}
 
@@ -146,9 +150,9 @@ void Game::ShutDown()
 void Game::RemoveState()
 {
 
-	m_gameStates.front()->OnExit();
+	//m_gameStates.front()->OnExit();
 
-	delete m_gameStates.front();
-	m_gameStates.pop_front();
+	//delete m_gameStates.front();
+	//m_gameStates.pop_front();
 
 }

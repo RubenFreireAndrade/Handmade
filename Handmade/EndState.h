@@ -48,7 +48,7 @@ public:
 
 public:
 
-	EndState(Game* gameHandle);
+	EndState();
 	virtual ~EndState() {}
 
 public:

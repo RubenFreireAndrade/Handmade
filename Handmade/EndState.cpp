@@ -6,7 +6,7 @@
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values
 //------------------------------------------------------------------------------------------------------
-EndState::EndState(Game* gameHandle) : GameState(gameHandle)
+EndState::EndState()
 {
 
 	m_menu = nullptr;
@@ -46,7 +46,7 @@ bool EndState::Update(int deltaTime)
 	{
 		m_image->StopMusic();
 		//m_isActive = m_isAlive = false;
-		m_gameHandle->ChangeState(new PlayState(m_gameHandle));
+		//m_gameHandle->ChangeState(new PlayState(m_gameHandle));
 	}
 
 	//if player chose to exit the game then quit altogether

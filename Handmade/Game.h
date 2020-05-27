@@ -43,7 +43,7 @@ class Game
 
 public:
 
-	Game();
+	Game(GameState* initialGameState);
 
 public:
 
@@ -64,7 +64,7 @@ private:
 
 	bool m_endGame;
 	int m_deltaTime;
-	std::deque<GameState*> m_gameStates;
+	GameState* m_gameState;
 
 };
 

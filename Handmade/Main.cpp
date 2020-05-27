@@ -44,7 +44,7 @@ int main(int argc, char* args[])
 {
 
 	//create a game!
-	Game* game = new Game;
+	Game* game = new Game(new MenuState);
 
 	//initialize the game
 	if (!(game->Initialize("<insert game name here>", 1280, 720)))
@@ -53,7 +53,7 @@ int main(int argc, char* args[])
 	}
 
 	//create the first state to be used in the game
-	game->AddState(new MenuState(game));
+	//game->AddState(new MenuState(game));
 
 	//run the game
 	if (!game->Run())

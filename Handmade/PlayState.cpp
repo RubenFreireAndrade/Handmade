@@ -7,7 +7,7 @@
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all defaults
 //------------------------------------------------------------------------------------------------------
-PlayState::PlayState(Game* gameHandle) : GameState(gameHandle)
+PlayState::PlayState()
 {
 
 	m_image = nullptr;
@@ -41,7 +41,7 @@ bool PlayState::Update(int deltaTime)
 	{
 		m_image->StopMusic();
 		//m_isActive = m_isAlive = false;
-		m_gameHandle->ChangeState(new MenuState(m_gameHandle));
+		//m_gameHandle->ChangeState(new MenuState(m_gameHandle));
 	}
 
 	//the Q key moves to the ending state
@@ -49,7 +49,7 @@ bool PlayState::Update(int deltaTime)
 	{
 		m_image->StopMusic();
 		//m_isActive = m_isAlive = false;
-		m_gameHandle->ChangeState(new EndState(m_gameHandle));
+		//m_gameHandle->ChangeState(new EndState(m_gameHandle));
 	}
 
 	//loop through all game objects in vector and update them only if they are active

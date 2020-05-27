@@ -44,7 +44,7 @@ class PlayState : public GameState
 
 public:
 
-	PlayState(Game* gameHandle);
+	PlayState();
 	virtual ~PlayState() {}
 
 public:
