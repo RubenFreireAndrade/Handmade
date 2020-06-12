@@ -59,42 +59,6 @@ const Uint8* Input::GetKeyStates() const
 
 }
 //------------------------------------------------------------------------------------------------------
-//predicate function that checks if mouse cursor collides with passed box bound
-//------------------------------------------------------------------------------------------------------
-bool Input::IsMouseColliding(const AABB& bound) const
-{
-
-	//create a temporary bounding box to represent mouse cursor
-	AABB tempBound;
-
-	//set mouse cursor bounds of 1x1 based on mouse position
-	tempBound.SetPosition(static_cast<int>(m_mousePosition.x), 
-		                  static_cast<int>(m_mousePosition.y));
-	tempBound.SetDimension(1, 1);
-
-	//return flag based on if mouse collides with bound
-	return tempBound.IsColliding(bound);
-
-}
-//------------------------------------------------------------------------------------------------------
-//predicate function that checks if mouse cursor collides with passed sphere bound
-//------------------------------------------------------------------------------------------------------
-bool Input::IsMouseColliding(const Sphere& bound) const
-{
-
-	//create a temporary sphere bound to represent mouse cursor
-	Sphere tempBound;
-
-	//set mouse cursor radius of 1 based on mouse position
-	tempBound.SetPosition(static_cast<int>(m_mousePosition.x), 
-		                  static_cast<int>(m_mousePosition.y));
-	tempBound.SetRadius(1);
-
-	//return flag based on if mouse collides with bound
-	return tempBound.IsColliding(bound);
-
-}
-//------------------------------------------------------------------------------------------------------
 //getter function that returns state of left mouse button
 //------------------------------------------------------------------------------------------------------
 Input::ButtonState Input::GetLeftButtonState() const
@@ -148,12 +112,6 @@ SDL_Point Input::GetMousePosition() const
 	return m_mousePosition;
 
 }
-
-const std::string& Input::GetInput() const
-{
-	return m_input;
-}
-
 //------------------------------------------------------------------------------------------------------
 //setter function that places mouse cursor at passed position
 //------------------------------------------------------------------------------------------------------
@@ -166,7 +124,7 @@ void Input::SetMousePosition(int x, int y)
 //------------------------------------------------------------------------------------------------------
 //setter function that creates a system mouse cursor 
 //------------------------------------------------------------------------------------------------------
-void Input::SetMouseCursorType(CursorType cursorType)
+void Input::SetCursorType(CursorType cursorType)
 {
 
 	//first destroy old cursor object from memory
@@ -182,7 +140,7 @@ void Input::SetMouseCursorType(CursorType cursorType)
 //------------------------------------------------------------------------------------------------------
 //setter function that enables, disables, shows or hides the mouse cursor
 //------------------------------------------------------------------------------------------------------
-void Input::SetMouseCursorState(CursorState cursorEnabled, CursorState cursorVisible)
+void Input::SetCursorState(CursorState cursorEnabled, CursorState cursorVisible)
 {
 
 	//if mouse cursor is enabled then check if it's visible  
@@ -220,19 +178,6 @@ void Input::Update()
 
 	//variable to store SDL event data
 	SDL_Event events;
-
-	//if no events are occuring, then put CPU to sleep for a millisecond
-	//this prevents CPU from running too much 
-	if(!SDL_PollEvent(&events)) 
-	{
-		SDL_Delay(1);
-	}
-	
-	//if previous event was valid, push it back on queue to be processed
-	else 
-	{
-		SDL_PushEvent(&events);
-	}
 
 	//reset window quitting flag 
 	m_isXClicked = false;
@@ -276,21 +221,7 @@ void Input::Update()
 			//string for possible text input in the client code
 			case SDL_KEYDOWN:
 			{
-				
 				m_isKeyPressed = true;
-
-				//erase the last character if a backspace is pressed
-				if (events.key.keysym.sym == SDLK_BACKSPACE && m_input.size() > 0)
-				{
-					m_input.erase(m_input.end() - 1);
-				}
-				
-				//otherwise enter all keys (except the enter key!)
-				else if(events.key.keysym.sym != SDLK_RETURN)
-				{
-					m_input += events.key.keysym.sym;
-				}
-
 				break;
 			}
 

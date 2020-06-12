@@ -31,13 +31,10 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'Input' source files last updated in May 2020   							                    |
+| 'Input' source files last updated in June 2020   							                    |
 #==============================================================================================*/
 
-#include <string>
 #include <SDL.h>
-#include "AABB.h"
-#include "Sphere.h"
 
 class Input
 {
@@ -57,8 +54,6 @@ public:
 	bool IsXClicked() const;
 	bool IsKeyPressed() const;
 	const Uint8* GetKeyStates() const;
-	bool IsMouseColliding(const AABB& bound) const;
-	bool IsMouseColliding(const Sphere& bound) const;
 
 public:
 
@@ -70,17 +65,15 @@ public:
 	SDL_Point GetMouseMotion() const;
 	SDL_Point GetMousePosition() const;
 
-	const std::string& GetInput() const;
-
 	void SetMousePosition(int x, int y);
-	void SetMouseCursorType(CursorType cursorType = CursorType::ARROW);
-	void SetMouseCursorState(CursorState cursorEnabled = CursorState::ON, 
-		                     CursorState cursorVisible = CursorState::SHOW);
+
+	void SetCursorType(CursorType cursorType = CursorType::ARROW);
+	void SetCursorState(CursorState cursorEnabled = CursorState::ON, 
+		                CursorState cursorVisible = CursorState::SHOW);
 
 public:
 
 	void Update();
-	void FlushInput() { m_input.clear(); }
 
 private:
 
@@ -92,7 +85,7 @@ private:
 
 	bool m_isXClicked;
 	bool m_isKeyPressed;
-	std::string m_input;
+	
 
 	const Uint8* m_keyStates;
 	
