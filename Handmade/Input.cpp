@@ -1,6 +1,9 @@
 #include "Input.h"
 #include "Screen.h"
 
+#include <iostream>
+#include <algorithm>
+
 //------------------------------------------------------------------------------------------------------
 //static function that will create an instance of this Input object and return its address
 //------------------------------------------------------------------------------------------------------
@@ -17,10 +20,12 @@ Input* Input::Instance()
 Input::Input()
 {
 
+	m_key = ' ';
 	m_cursor = nullptr;
-	m_keyStates = nullptr;
 	m_isXClicked = false;
-	m_isKeyPressed = false;
+	m_isKeyDown = false;
+
+	m_modifier = HM_MOD_NONE;
 
 	m_mouseWheel = { 0, 0 };
 	m_mouseMotion = { 0, 0 };
@@ -41,21 +46,45 @@ bool Input::IsXClicked() const
 
 }
 //------------------------------------------------------------------------------------------------------
-//predicate function that returns flag stating if a key has been pressed
+//predicate function that returns flag stating if an arbitrary key is pressed down or not
 //------------------------------------------------------------------------------------------------------
-bool Input::IsKeyPressed() const
+bool Input::IsKeyDown() const
 {
 
-	return m_isKeyPressed;
+	return m_isKeyDown;
 
 }
 //------------------------------------------------------------------------------------------------------
-//getter function that returns pointer to array of key states
+//predicate function that returns flag stating if a key has been pressed
+//here we store the state of keyboard in array and query the array using index value
+//the index value corresponds to the physical key code, i.e. the scancode
 //------------------------------------------------------------------------------------------------------
-const Uint8* Input::GetKeyStates() const
+bool Input::IsKeyPressed(int keyCode) const
 {
 
-	return m_keyStates;
+	const Uint8* m_keyStates = SDL_GetKeyboardState(nullptr);
+	return m_keyStates[keyCode];
+
+}
+//------------------------------------------------------------------------------------------------------
+//predicate function that returns flag stating if one or more modifier keys are pressed
+//these keys include CTRL, ALT, SHIFT, etc and we use a binary OR to combine keys
+//a maximum of two modifier keys may be pressed and if one modifier is pressed, mod_2 will be '0'
+//------------------------------------------------------------------------------------------------------
+bool Input::IsModifierPressed(int modifier_1, int modifier_2) const
+{
+
+	return m_modifier == (modifier_1 | modifier_2);
+
+}
+//------------------------------------------------------------------------------------------------------
+//function that returns ASCII code of the key that's currently pressed down
+//this is handy for printing out the characters if needed. Can be used to query as well
+//------------------------------------------------------------------------------------------------------
+char Input::GetKey()
+{
+
+	return m_key;
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -190,9 +219,6 @@ void Input::Update()
 	m_mouseWheel.x = 0;
 	m_mouseWheel.y = 0;
 
-	//store state of keyboard in array
-	m_keyStates = SDL_GetKeyboardState(nullptr);
-
 	//check for events on SDL event queue
 	//keep this loop running until all events have been processed
 	while(SDL_PollEvent(&events))
@@ -209,24 +235,31 @@ void Input::Update()
 				break;
 			}
 		
-			//a key is pressed 
+			//a key is released so we set the flag and the printable key value to false/null
+			//the modifier value is also stored which is 0 if no modifiers are pressed
+			//if a modifier key is still being pressed then that modifier value is stored
+			//for example if we pressed CTRL+ATL and released ALT, we store the value of CTRL
 			case SDL_KEYUP: 
 			{
-				m_isKeyPressed = false;
+				m_isKeyDown = false;
+				m_key = SDLK_UNKNOWN;
+				m_modifier = events.key.keysym.mod;
 				break;
 			}
 		
-			//a key is released 
-			//here we store all entered keyboard keys into a 
-			//string for possible text input in the client code
+			//a key is pressed so we set the flag and the printable key value to true/ASCII (keycode)
+			//we do a binary OR with the current modifier value to combine them
+			//for example if we press LSHIFT+RSHIFT, we combine 0001 and 0010, i.e. 0001 | 0010 = 0011
 			case SDL_KEYDOWN:
 			{
-				m_isKeyPressed = true;
+				m_isKeyDown = true;
+				m_key = events.key.keysym.sym;
+				m_modifier |= events.key.keysym.mod;
 				break;
 			}
 
 			//the mouse was moved 
-			//set the position and mouse motion value
+			//set the position and mouse motion value ..
 			case SDL_MOUSEMOTION:
 			{
 				m_mousePosition.x = events.motion.x;
@@ -236,14 +269,14 @@ void Input::Update()
 				break;
 			}
 
-			//the mouse wheel was moved 
+			//the mouse wheel was moved  ..
 			case SDL_MOUSEWHEEL:
 			{
 				m_mouseWheel.x = events.wheel.x;
 				m_mouseWheel.y = events.wheel.y;
 			}
 
-			//a mouse button was clicked or released
+			//a mouse button was clicked or released ..
 			case SDL_MOUSEBUTTONUP: 
 			case SDL_MOUSEBUTTONDOWN:
 			{

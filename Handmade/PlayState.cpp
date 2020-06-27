@@ -33,18 +33,15 @@ GameState* PlayState::Update(int deltaTime)
 	//when the state transitions to the next state stop it
 	m_image->PlayMusic();
 
-	//read keyboard state
-	const Uint8* keys = Input::Instance()->GetKeyStates();
-
 	//the M key moves to the main menu
-	if (keys[SDL_SCANCODE_M])
+	if (Input::Instance()->IsKeyPressed(HM_KEY_M))
 	{
 		m_image->StopMusic();
 		return new MenuState;
 	}
 
 	//the Q key moves to the ending state
-	if (keys[SDL_SCANCODE_Q])
+	if (Input::Instance()->IsKeyPressed(HM_KEY_Q))
 	{
 		m_image->StopMusic();
 		return new EndState;

@@ -47,15 +47,13 @@ void MainMenu::SetMenuText(const std::string& text)
 void MainMenu::Update(int deltaTime)
 {
 
-	const Uint8* keys = Input::Instance()->GetKeyStates();
-
 	//flag to monitor if key is pressed so that when pressing UP/DOWN
 	//key the selected menu option doesn't move at lightning speed
 	static bool isKeyPressed = false;
 
 	//only if DOWN arrow key is pressed and key was not pressed before move 1 option down the menu
 	//also check if the last menu item has been reached, which means we need to loop back to the top
-	if (keys[SDL_SCANCODE_DOWN] && !isKeyPressed)
+	if (Input::Instance()->IsKeyPressed(HM_KEY_DOWN) && !isKeyPressed)
 	{
 		
 		if (m_menuOptionActive == m_menuText.size() - 1)
@@ -72,7 +70,7 @@ void MainMenu::Update(int deltaTime)
 
 	//only if UP arrow key is pressed and key was not pressed before move 1 option up the menu
 	//also check if the first menu item has been reached, which means we need to go to the bottom
-	if (keys[SDL_SCANCODE_UP] && !isKeyPressed)
+	if (Input::Instance()->IsKeyPressed(HM_KEY_UP) && !isKeyPressed)
 	{
 
 		if (m_menuOptionActive == 0)
@@ -88,14 +86,14 @@ void MainMenu::Update(int deltaTime)
 	}
 
 	//if ENTER key is pressed assign menu item as choice made 
-	if (keys[SDL_SCANCODE_RETURN])
+	if (Input::Instance()->IsKeyPressed(HM_KEY_RETURN))
 	{
 		m_menuOptionChoice = m_menuOptionActive;
 	}
 
 	//update state of key based on if it's pressed or not which will make sure the next time
 	//the frame is called the above code will either move the menu option or keep it still
-	isKeyPressed = Input::Instance()->IsKeyPressed();
+	isKeyPressed = Input::Instance()->IsKeyDown();
 
 	//loop through all menu items and set their initial color to orange
 	for (size_t i = 0; i < m_menuText.size(); i++)
