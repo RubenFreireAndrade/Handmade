@@ -34,8 +34,6 @@
 | 'Input' source files last updated in June 2020   							                    |
 #==============================================================================================*/
 
-
-
 //key codes==============================================
 #define HM_KEY_A 4
 #define HM_KEY_B 5
@@ -296,6 +294,13 @@
 
 //=======================================================
 
+#define HM_MOUSE_NONE 0
+#define HM_MOUSE_LEFT 1
+#define HM_MOUSE_MIDDLE 2
+#define HM_MOUSE_RIGHT 4
+
+//=======================================================
+
 #include <SDL.h>
 #include <vector>
 
@@ -304,7 +309,6 @@ class Input
 
 public:
 
-	enum class ButtonState { UP, DOWN };
 	enum class CursorState { ON = 1, OFF = 0, SHOW = 1, HIDE = 0 };
 	enum class CursorType  { ARROW, IBEAM, WAIT, CROSSHAIR, WAIT_ARROW, NO = 10, HAND = 11 };
 
@@ -318,15 +322,14 @@ public:
 	
 	bool IsXClicked() const;
 	
-	bool IsKeyDown() const;
+	bool IsKeyPressed() const;
 	bool IsKeyPressed(int keyCode) const;
 	bool IsModifierPressed(int modifier_1, int modifier_2 = HM_MOD_NONE) const;
 
-public:
+	bool IsMouseClicked() const;
+	bool IsMouseClicked(int mouseButton_1, int mouseButton_2 = HM_MOUSE_NONE) const;
 
-	ButtonState GetLeftButtonState() const;
-	ButtonState GetMiddleButtonState() const;
-	ButtonState GetRightButtonState() const;
+public:
 
 	SDL_Point GetMouseWheel() const;
 	SDL_Point GetMouseMotion() const;
@@ -351,17 +354,15 @@ private:
 private:
 
 	char m_key;      
-	int m_modifier;
-
-	bool m_isKeyDown;
 	
+	int m_modifier;
+	int m_mouseButton;
+
 	bool m_isXClicked;
+	bool m_isKeyPressed;
+	bool m_isMouseClicked;
 	
 	SDL_Cursor* m_cursor;
-
-	ButtonState m_leftButtonState;
-	ButtonState m_middleButtonState;
-	ButtonState m_rightButtonState;
 
 	SDL_Point m_mouseWheel;
 	SDL_Point m_mouseMotion;

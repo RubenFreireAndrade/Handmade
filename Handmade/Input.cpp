@@ -23,17 +23,17 @@ Input::Input()
 	m_key = ' ';
 	m_cursor = nullptr;
 	m_isXClicked = false;
-	m_isKeyDown = false;
+	
+	m_isKeyPressed = false;
+	m_isMouseClicked = false;
 
 	m_modifier = HM_MOD_NONE;
+
+	m_mouseButton = HM_MOUSE_NONE;
 
 	m_mouseWheel = { 0, 0 };
 	m_mouseMotion = { 0, 0 };
 	m_mousePosition = { 0, 0 };
-
-	m_leftButtonState = ButtonState::UP;
-	m_middleButtonState = ButtonState::UP;
-	m_rightButtonState = ButtonState::UP;
 	
 }
 //------------------------------------------------------------------------------------------------------
@@ -48,10 +48,10 @@ bool Input::IsXClicked() const
 //------------------------------------------------------------------------------------------------------
 //predicate function that returns flag stating if an arbitrary key is pressed down or not
 //------------------------------------------------------------------------------------------------------
-bool Input::IsKeyDown() const
+bool Input::IsKeyPressed() const
 {
 
-	return m_isKeyDown;
+	return m_isKeyPressed;
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -78,6 +78,26 @@ bool Input::IsModifierPressed(int modifier_1, int modifier_2) const
 
 }
 //------------------------------------------------------------------------------------------------------
+//predicate function that returns flag stating if an arbitrary mouse button is clicked or not
+//------------------------------------------------------------------------------------------------------
+bool Input::IsMouseClicked() const
+{
+
+	return m_isMouseClicked;
+
+}
+//------------------------------------------------------------------------------------------------------
+//predicate function that returns flag stating if one or more mouse buttons are clicked
+//these are any of the standard three mouse buttons and we use a binary OR to combine buttons
+//a maximum of two buttons may be clicked and if one button is clicked, mod_2 will be '0'
+//------------------------------------------------------------------------------------------------------
+bool Input::IsMouseClicked(int mouseButton_1, int mouseButton_2) const
+{
+
+	return m_mouseButton == (mouseButton_1 | mouseButton_2);
+
+}
+//------------------------------------------------------------------------------------------------------
 //function that returns ASCII code of the key that's currently pressed down
 //this is handy for printing out the characters if needed. Can be used to query as well
 //------------------------------------------------------------------------------------------------------
@@ -85,33 +105,6 @@ char Input::GetKey()
 {
 
 	return m_key;
-
-}
-//------------------------------------------------------------------------------------------------------
-//getter function that returns state of left mouse button
-//------------------------------------------------------------------------------------------------------
-Input::ButtonState Input::GetLeftButtonState() const
-{
-
-	return m_leftButtonState;
-
-}
-//------------------------------------------------------------------------------------------------------
-//getter function that returns state of middle mouse button
-//------------------------------------------------------------------------------------------------------
-Input::ButtonState Input::GetMiddleButtonState() const
-{
-
-	return m_middleButtonState;
-
-}
-//------------------------------------------------------------------------------------------------------
-//getter function that returns state of right mouse button
-//------------------------------------------------------------------------------------------------------
-Input::ButtonState Input::GetRightButtonState() const
-{
-
-	return m_rightButtonState;
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -241,7 +234,7 @@ void Input::Update()
 			//for example if we pressed CTRL+ATL and released ALT, we store the value of CTRL
 			case SDL_KEYUP: 
 			{
-				m_isKeyDown = false;
+				m_isKeyPressed = false;
 				m_key = SDLK_UNKNOWN;
 				m_modifier = events.key.keysym.mod;
 				break;
@@ -252,7 +245,7 @@ void Input::Update()
 			//for example if we press LSHIFT+RSHIFT, we combine 0001 and 0010, i.e. 0001 | 0010 = 0011
 			case SDL_KEYDOWN:
 			{
-				m_isKeyDown = true;
+				m_isKeyPressed = true;
 				m_key = events.key.keysym.sym;
 				m_modifier |= events.key.keysym.mod;
 				break;
@@ -276,43 +269,43 @@ void Input::Update()
 				m_mouseWheel.y = events.wheel.y;
 			}
 
-			//a mouse button was clicked or released ..
+			//a mouse button was released so we first store the position of the mouse cursor
+			//then we check what button was released and perform a binary XOR to 'undo' a button
+			//for example if LEFT+RIGHT buttons are pressed we have a combo of 0001 and 0100 = 0101
+			//if we release the RIGHT button we essentially do 0101 ^= 0100 = 0001 (LEFT only)
 			case SDL_MOUSEBUTTONUP: 
-			case SDL_MOUSEBUTTONDOWN:
 			{
-				
-				//set position of mouse
+
+				m_isMouseClicked = false;
 				m_mousePosition.x = events.motion.x;
 				m_mousePosition.y = events.motion.y;
-				
-				//temporarily store button state for assigning below
-				ButtonState state = ((events.button.state == SDL_PRESSED) ? ButtonState::DOWN : ButtonState::UP);
 
-				//based on which of the three mouse buttons was pressed 
-				//or released, assign flag to button's state variable
-				switch(events.button.button)
+				switch (events.button.button)
 				{
-				
-					case SDL_BUTTON_LEFT:
-					{
-						m_leftButtonState = state;
-						break;
-					}
-				
-					case SDL_BUTTON_MIDDLE:
-					{
-						m_middleButtonState = state;
-						break;
-					}
+					case SDL_BUTTON_LEFT:   { m_mouseButton ^= HM_MOUSE_LEFT; break;   }
+					case SDL_BUTTON_MIDDLE: { m_mouseButton ^= HM_MOUSE_MIDDLE; break; }
+					case SDL_BUTTON_RIGHT:  { m_mouseButton ^= HM_MOUSE_RIGHT; break;  }
+				}
 
-					case SDL_BUTTON_RIGHT:
-					{
-						m_rightButtonState = state;
-						break;
-					}
-				
-					break;
+				break;
 
+			}
+
+			//a mouse button was pressed so we first store the position of the mouse cursor
+			//then we check what button was released and perform a binary OR to combine buttons
+			//for example if LEFT+RIGHT buttons are pressed we have a combo of 0001 | 0100 = 0101
+			case SDL_MOUSEBUTTONDOWN:
+			{
+
+				m_isMouseClicked = true;
+				m_mousePosition.x = events.motion.x;
+				m_mousePosition.y = events.motion.y;
+
+				switch (events.button.button)
+				{
+					case SDL_BUTTON_LEFT:   { m_mouseButton |= HM_MOUSE_LEFT; break;   }
+					case SDL_BUTTON_MIDDLE: { m_mouseButton |= HM_MOUSE_MIDDLE; break; }
+					case SDL_BUTTON_RIGHT:  { m_mouseButton |= HM_MOUSE_RIGHT; break;  }
 				}
 
 				break;

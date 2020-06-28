@@ -93,7 +93,7 @@ void MainMenu::Update(int deltaTime)
 
 	//update state of key based on if it's pressed or not which will make sure the next time
 	//the frame is called the above code will either move the menu option or keep it still
-	isKeyPressed = Input::Instance()->IsKeyDown();
+	isKeyPressed = Input::Instance()->IsKeyPressed();
 
 	//loop through all menu items and set their initial color to orange
 	for (size_t i = 0; i < m_menuText.size(); i++)
