@@ -53,8 +53,9 @@ public:
 
 public:
 
+	void SetMousePosition(int x, int y);
 	void SetClearColor(Uint8 r, Uint8 g, Uint8 b);
-	
+
 public:
 
 	bool Initialize(const std::string& windowTitle, int width = 1024, 
