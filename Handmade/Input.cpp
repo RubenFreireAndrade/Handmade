@@ -22,7 +22,7 @@ Input::Input()
 
 	m_key = ' ';
 	
-	m_isXClicked = false;
+	m_isWindowClosed = false;
 	
 	m_isKeyPressed = false;
 	m_isMouseClicked = false;
@@ -39,10 +39,10 @@ Input::Input()
 //------------------------------------------------------------------------------------------------------
 //predicate function that returns flag stating if X has been clicked
 //------------------------------------------------------------------------------------------------------
-bool Input::IsXClicked() const
+bool Input::IsWindowClosed() const
 {
 
-	return m_isXClicked;
+	return m_isWindowClosed;
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -135,15 +135,6 @@ SDL_Point Input::GetMousePosition() const
 
 }
 //------------------------------------------------------------------------------------------------------
-//setter function that places mouse cursor at passed position
-//------------------------------------------------------------------------------------------------------
-void Input::SetMousePosition(int x, int y)
-{
-
-	SDL_WarpMouseInWindow(Screen::Instance()->GetWindow(), x, y);
-
-}
-//------------------------------------------------------------------------------------------------------
 //setter function that enables, disables, shows or hides the mouse cursor
 //------------------------------------------------------------------------------------------------------
 void Input::SetCursorState(bool isCursorEnabled, bool isCursorVisible)
@@ -163,7 +154,7 @@ void Input::Update()
 	SDL_Event events;
 
 	//reset window quitting flag 
-	m_isXClicked = false;
+	m_isWindowClosed = false;
 
 	//reset mouse motion so that it's processed from scratch
 	m_mouseMotion.x = 0;
@@ -183,9 +174,11 @@ void Input::Update()
 		{
 		
 			//top right X on game window has been clicked
+			//which signals that we need to close the window
+			//this only works if the application is not fullscreen
 			case SDL_QUIT:
 			{
-				m_isXClicked = true;
+				m_isWindowClosed = true;
 				break;
 			}
 		

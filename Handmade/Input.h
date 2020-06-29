@@ -315,7 +315,7 @@ public:
 
 	char GetKey();
 	
-	bool IsXClicked() const;
+	bool IsWindowClosed() const;
 	
 	bool IsKeyPressed() const;
 	bool IsKeyPressed(int keyCode) const;
@@ -329,8 +329,6 @@ public:
 	SDL_Point GetMouseWheel() const;
 	SDL_Point GetMouseMotion() const;
 	SDL_Point GetMousePosition() const;
-
-	void SetMousePosition(int x, int y);
 
 	void SetCursorState(bool isCursorEnabled, bool isCursorVisible);
 
@@ -351,9 +349,9 @@ private:
 	int m_modifier;
 	int m_mouseButton;
 
-	bool m_isXClicked;
 	bool m_isKeyPressed;
 	bool m_isMouseClicked;
+	bool m_isWindowClosed;
 
 	SDL_Point m_mouseWheel;
 	SDL_Point m_mouseMotion;

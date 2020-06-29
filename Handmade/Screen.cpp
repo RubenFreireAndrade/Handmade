@@ -52,6 +52,15 @@ SDL_Point Screen::GetResolution()
 
 }
 //------------------------------------------------------------------------------------------------------
+//setter function that places mouse cursor at passed position
+//------------------------------------------------------------------------------------------------------
+void Screen::SetMousePosition(int x, int y)
+{
+
+	SDL_WarpMouseInWindow(m_window, x, y);
+
+}
+//------------------------------------------------------------------------------------------------------
 //setter function that assigns a pre-defined color value for clearing the screen
 //------------------------------------------------------------------------------------------------------
 void Screen::SetClearColor(Uint8 r, Uint8 g, Uint8 b)
