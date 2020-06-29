@@ -1,8 +1,5 @@
+#include <SDL.h>
 #include "Input.h"
-#include "Screen.h"
-
-#include <iostream>
-#include <algorithm>
 
 //------------------------------------------------------------------------------------------------------
 //static function that will create an instance of this Input object and return its address
@@ -21,21 +18,65 @@ Input::Input()
 {
 
 	m_key = ' ';
-
-	m_isWindowClosed = false;
-
+	m_mouseWheel = 0;
+	
 	m_isKeyPressed = false;
 	m_isMouseClicked = false;
+	m_isWindowClosed = false;
 
 	m_modifier = HM_MOD_NONE;
-
 	m_mouseButton = HM_MOUSE_NONE;
 
 	m_mouseMotion = std::pair<int, int>(0, 0);
 	m_mousePosition = std::pair<int, int>(0, 0);
 	
-	m_mouseWheel = 0;
-	
+}
+//------------------------------------------------------------------------------------------------------
+//function that returns ASCII code of the key that's currently pressed down
+//this is handy for printing out the characters if needed. Can be used to query as well
+//------------------------------------------------------------------------------------------------------
+char Input::GetKey() const
+{
+
+	return m_key;
+
+}
+//------------------------------------------------------------------------------------------------------
+//function that returns motion value of mouse scroll wheel (middle button)
+//------------------------------------------------------------------------------------------------------
+int Input::GetMouseWheel() const
+{
+
+	return m_mouseWheel;
+
+}
+//------------------------------------------------------------------------------------------------------
+//getter function that returns x and y motion/position of mouse within a pair
+//in the client code, the user needs to store the returned values within a pair (can use auto)
+//if individual values are required (eg. the x coordinate or y motion within an algorithm) 
+//then we just need to access the first/second element of the returned pair
+//------------------------------------------------------------------------------------------------------
+std::pair<int, int> Input::GetMouseMotion() const
+{
+
+	return m_mouseMotion;
+
+}
+std::pair<int, int> Input::GetMousePosition() const
+{
+
+	return m_mousePosition;
+
+}
+//------------------------------------------------------------------------------------------------------
+//setter function that enables, disables, shows or hides the mouse cursor
+//------------------------------------------------------------------------------------------------------
+void Input::SetCursorState(bool isCursorEnabled, bool isCursorVisible)
+{
+
+	SDL_ShowCursor(static_cast<int>(isCursorVisible));
+	SDL_SetRelativeMouseMode(static_cast<SDL_bool>(isCursorEnabled));
+
 }
 //------------------------------------------------------------------------------------------------------
 //predicate function that returns flag stating if X has been clicked
@@ -99,87 +140,42 @@ bool Input::IsMouseClicked(int mouseButton_1, int mouseButton_2) const
 
 }
 //------------------------------------------------------------------------------------------------------
-//getter function that returns x and y motion/position of mouse within a pair
-//in the client code, the user needs to store the returned values within a pair (can use auto)
-//if individual values are required (eg. the x coordinate or y motion within an algorithm) 
-//then we just need to access the first/second element of the returned pair
-//------------------------------------------------------------------------------------------------------
-std::pair<int, int> Input::GetMouseMotion() const
-{
-
-	return m_mouseMotion;
-
-}
-std::pair<int, int> Input::GetMousePosition() const
-{
-
-	return m_mousePosition;
-
-}
-int Input::GetMouseWheel() const
-{
-
-	return m_mouseWheel;
-
-}
-//------------------------------------------------------------------------------------------------------
-//function that returns ASCII code of the key that's currently pressed down
-//this is handy for printing out the characters if needed. Can be used to query as well
-//------------------------------------------------------------------------------------------------------
-char Input::GetKey()
-{
-
-	return m_key;
-
-}
-//------------------------------------------------------------------------------------------------------
-//setter function that enables, disables, shows or hides the mouse cursor
-//------------------------------------------------------------------------------------------------------
-void Input::SetCursorState(bool isCursorEnabled, bool isCursorVisible)
-{
-
-	SDL_ShowCursor(static_cast<int>(isCursorVisible));
-	SDL_SetRelativeMouseMode(static_cast<SDL_bool>(isCursorEnabled));
-	
-}
-//------------------------------------------------------------------------------------------------------
 //function that processes all keyboard and mouse events
 //------------------------------------------------------------------------------------------------------
 void Input::Update()
 {
 
-	//variable to store SDL event data
+	//variable to store all SDL event data
+	//keep it local so old events are destroyed
 	SDL_Event events;
 
-	//reset window quitting flag 
+	//reset window closing flag 
 	m_isWindowClosed = false;
 
-	//reset mouse motion so that it's processed from scratch
+	//reset mouse wheel and motion values so that they're processed from scratch
+	//if old values are kept, there may be issues within the client code
+	m_mouseWheel = 0;
 	m_mouseMotion.first = 0;
 	m_mouseMotion.second = 0;
 
-	//reset mouse wheel so that it's processed from scratch
-	m_mouseWheel = 0;
-
-	//check for events on SDL event queue
-	//keep this loop running until all events have been processed
+	//check for events on SDL event queue and keep this
+	//loop running until all events have been processed
 	while(SDL_PollEvent(&events))
 	{
 			
-		//check which type of event occurred and process accordingly
 		switch(events.type)
 		{
 		
 			//top right X on game window has been clicked
 			//which signals that we need to close the window
-			//this only works if the application is not fullscreen
+			//this only works if application is not fullscreen
 			case SDL_QUIT:
 			{
 				m_isWindowClosed = true;
 				break;
 			}
 		
-			//a key is released so we set the flag and the printable key value to false/null
+			//a key is released we set the flag and the printable key value to false/null
 			//the modifier value is also stored which is 0 if no modifiers are pressed
 			//if a modifier key is still being pressed then that modifier value is stored
 			//for example if we pressed CTRL+ATL and released ALT, we store the value of CTRL
@@ -191,7 +187,7 @@ void Input::Update()
 				break;
 			}
 		
-			//a key is pressed so we set the flag and the printable key value to true/ASCII (keycode)
+			//a key is pressed we set the flag and the printable key value to true/ASCII (keycode)
 			//we do a binary OR with the current modifier value to combine them
 			//for example if we press LSHIFT+RSHIFT, we combine 0001 and 0010, i.e. 0001 | 0010 = 0011
 			case SDL_KEYDOWN:
@@ -245,7 +241,7 @@ void Input::Update()
 			}
 
 			//a mouse button was pressed so we first store the position of the mouse cursor
-			//then we check what button was released and perform a binary OR to combine buttons
+			//then we check what button was clicked and perform a binary OR to combine buttons
 			//for example if LEFT+RIGHT buttons are pressed we have a combo of 0001 | 0100 = 0101
 			case SDL_MOUSEBUTTONDOWN:
 			{

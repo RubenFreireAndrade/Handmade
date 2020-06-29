@@ -34,7 +34,10 @@
 | 'Input' source files last updated in June 2020   							                    |
 #==============================================================================================*/
 
-//key codes==============================================
+//=========================================================================================
+//these are the physical key codes that should be used instead of SDL's scancodes 
+//this prevents users from needing to include 'SDL.h' and being exposed to SDL's types
+//=========================================================================================
 #define HM_KEY_A 4
 #define HM_KEY_B 5
 #define HM_KEY_C 6
@@ -276,7 +279,9 @@
 #define HM_KEY_AUDIOREWIND 285
 #define HM_KEY_AUDIOFASTFORWARD 286
 
-//=======================================================
+//=========================================================================================
+//these are the key codes for the modifier keys
+//=========================================================================================
 
 #define HM_MOD_NONE 0
 #define HM_MOD_LSHIFT 1
@@ -292,14 +297,16 @@
 #define HM_MOD_MODE 16384
 #define HM_MOD_RESERVED 32768
 
-//=======================================================
+//=========================================================================================
+//these are custom-made codes to be used when checking the state of the mouse buttons
+//=========================================================================================
 
 #define HM_MOUSE_NONE 0
 #define HM_MOUSE_LEFT 1
 #define HM_MOUSE_MIDDLE 2
 #define HM_MOUSE_RIGHT 4
 
-//=======================================================
+//=========================================================================================
 
 #include <utility>
 
@@ -312,26 +319,24 @@ public:
 
 public:
 
-	char GetKey();
+	char GetKey() const;
+	int GetMouseWheel() const;
 	
+	std::pair<int, int> GetMouseMotion() const;
+	std::pair<int, int> GetMousePosition() const;
+	
+	void SetCursorState(bool isCursorEnabled, bool isCursorVisible);
+
+public:
+
 	bool IsWindowClosed() const;
 	
 	bool IsKeyPressed() const;
 	bool IsKeyPressed(int keyCode) const;
 	bool IsModifierPressed(int modifier_1, int modifier_2 = HM_MOD_NONE) const;
-
+	
 	bool IsMouseClicked() const;
 	bool IsMouseClicked(int mouseButton_1, int mouseButton_2 = HM_MOUSE_NONE) const;
-
-public:
-
-	int GetMouseWheel() const;
-
-	std::pair<int, int> GetMouseMotion() const;
-	std::pair<int, int> GetMousePosition() const;
-	
-
-	void SetCursorState(bool isCursorEnabled, bool isCursorVisible);
 
 public:
 
@@ -348,16 +353,15 @@ private:
 	char m_key;      
 	
 	int m_modifier;
+	int m_mouseWheel;
 	int m_mouseButton;
 	
-	int m_mouseWheel;
-
-	std::pair<int, int> m_mouseMotion;
-	std::pair<int, int> m_mousePosition;
-
 	bool m_isKeyPressed;
 	bool m_isMouseClicked;
 	bool m_isWindowClosed;
+	
+	std::pair<int, int> m_mouseMotion;
+	std::pair<int, int> m_mousePosition;
 	
 };
 
