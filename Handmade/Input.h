@@ -301,8 +301,7 @@
 
 //=======================================================
 
-#include <SDL.h>
-#include <vector>
+#include <utility>
 
 class Input
 {
@@ -326,9 +325,11 @@ public:
 
 public:
 
-	SDL_Point GetMouseWheel() const;
-	SDL_Point GetMouseMotion() const;
-	SDL_Point GetMousePosition() const;
+	int GetMouseWheel() const;
+
+	std::pair<int, int> GetMouseMotion() const;
+	std::pair<int, int> GetMousePosition() const;
+	
 
 	void SetCursorState(bool isCursorEnabled, bool isCursorVisible);
 
@@ -348,14 +349,15 @@ private:
 	
 	int m_modifier;
 	int m_mouseButton;
+	
+	int m_mouseWheel;
+
+	std::pair<int, int> m_mouseMotion;
+	std::pair<int, int> m_mousePosition;
 
 	bool m_isKeyPressed;
 	bool m_isMouseClicked;
 	bool m_isWindowClosed;
-
-	SDL_Point m_mouseWheel;
-	SDL_Point m_mouseMotion;
-	SDL_Point m_mousePosition;
 	
 };
 

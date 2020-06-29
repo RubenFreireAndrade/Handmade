@@ -21,9 +21,9 @@ Input::Input()
 {
 
 	m_key = ' ';
-	
+
 	m_isWindowClosed = false;
-	
+
 	m_isKeyPressed = false;
 	m_isMouseClicked = false;
 
@@ -31,9 +31,10 @@ Input::Input()
 
 	m_mouseButton = HM_MOUSE_NONE;
 
-	m_mouseWheel = { 0, 0 };
-	m_mouseMotion = { 0, 0 };
-	m_mousePosition = { 0, 0 };
+	m_mouseMotion = std::pair<int, int>(0, 0);
+	m_mousePosition = std::pair<int, int>(0, 0);
+	
+	m_mouseWheel = 0;
 	
 }
 //------------------------------------------------------------------------------------------------------
@@ -98,6 +99,30 @@ bool Input::IsMouseClicked(int mouseButton_1, int mouseButton_2) const
 
 }
 //------------------------------------------------------------------------------------------------------
+//getter function that returns x and y motion/position of mouse within a pair
+//in the client code, the user needs to store the returned values within a pair (can use auto)
+//if individual values are required (eg. the x coordinate or y motion within an algorithm) 
+//then we just need to access the first/second element of the returned pair
+//------------------------------------------------------------------------------------------------------
+std::pair<int, int> Input::GetMouseMotion() const
+{
+
+	return m_mouseMotion;
+
+}
+std::pair<int, int> Input::GetMousePosition() const
+{
+
+	return m_mousePosition;
+
+}
+int Input::GetMouseWheel() const
+{
+
+	return m_mouseWheel;
+
+}
+//------------------------------------------------------------------------------------------------------
 //function that returns ASCII code of the key that's currently pressed down
 //this is handy for printing out the characters if needed. Can be used to query as well
 //------------------------------------------------------------------------------------------------------
@@ -105,33 +130,6 @@ char Input::GetKey()
 {
 
 	return m_key;
-
-}
-//------------------------------------------------------------------------------------------------------
-//getter function that returns motion value of mouse wheel movement
-//------------------------------------------------------------------------------------------------------
-SDL_Point Input::GetMouseWheel() const
-{
-
-	return m_mouseWheel;
-
-}
-//------------------------------------------------------------------------------------------------------
-//getter function that returns motion value of mouse movement
-//------------------------------------------------------------------------------------------------------
-SDL_Point Input::GetMouseMotion() const
-{
-
-	return m_mouseMotion;
-
-}
-//------------------------------------------------------------------------------------------------------
-//getter function that returns position of mouse
-//------------------------------------------------------------------------------------------------------
-SDL_Point Input::GetMousePosition() const
-{
-
-	return m_mousePosition;
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -157,12 +155,11 @@ void Input::Update()
 	m_isWindowClosed = false;
 
 	//reset mouse motion so that it's processed from scratch
-	m_mouseMotion.x = 0;
-	m_mouseMotion.y = 0;
+	m_mouseMotion.first = 0;
+	m_mouseMotion.second = 0;
 
 	//reset mouse wheel so that it's processed from scratch
-	m_mouseWheel.x = 0;
-	m_mouseWheel.y = 0;
+	m_mouseWheel = 0;
 
 	//check for events on SDL event queue
 	//keep this loop running until all events have been processed
@@ -205,22 +202,24 @@ void Input::Update()
 				break;
 			}
 
-			//the mouse was moved 
-			//set the position and mouse motion value ..
+			//the mouse was moved so we store both the position and the motion value
+			//moving left/right on the x axis creates a negative/positive value, respectively
+			//moving up/down on the y axis creates a negative/positive value, respectively
 			case SDL_MOUSEMOTION:
 			{
-				m_mousePosition.x = events.motion.x;
-				m_mousePosition.y = events.motion.y;
-				m_mouseMotion.x = events.motion.xrel;
-				m_mouseMotion.y = events.motion.yrel;
+				m_mousePosition.first = events.motion.x;
+				m_mousePosition.second = events.motion.y;
+				
+				m_mouseMotion.first = events.motion.xrel;
+				m_mouseMotion.second = events.motion.yrel;
 				break;
 			}
 
-			//the mouse wheel was moved  ..
+			//the mouse wheel was moved so store the motion value. We use only the 'y'
+			//scrolling up returns a positive value and scrolling down a negative value
 			case SDL_MOUSEWHEEL:
 			{
-				m_mouseWheel.x = events.wheel.x;
-				m_mouseWheel.y = events.wheel.y;
+				m_mouseWheel = events.wheel.y;
 			}
 
 			//a mouse button was released so we first store the position of the mouse cursor
@@ -231,8 +230,8 @@ void Input::Update()
 			{
 
 				m_isMouseClicked = false;
-				m_mousePosition.x = events.motion.x;
-				m_mousePosition.y = events.motion.y;
+				m_mousePosition.first = events.motion.x;
+				m_mousePosition.second = events.motion.y;
 
 				switch (events.button.button)
 				{
@@ -252,8 +251,8 @@ void Input::Update()
 			{
 
 				m_isMouseClicked = true;
-				m_mousePosition.x = events.motion.x;
-				m_mousePosition.y = events.motion.y;
+				m_mousePosition.first = events.motion.x;
+				m_mousePosition.second = events.motion.y;
 
 				switch (events.button.button)
 				{
