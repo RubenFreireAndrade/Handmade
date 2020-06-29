@@ -31,11 +31,11 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'GameObject' source files last updated in May 2020   	    			                        |
+| 'GameObject' source files last updated in June 2020   	   			                        |
 #==============================================================================================*/
 
 #include <string>
-#include <SDL.h>
+#include <utility>
 
 class GameObject 
 {
@@ -47,17 +47,26 @@ public:
 	
 public:
 
-	bool& IsAlive();
-	bool& IsActive();
-	bool& IsVisible();
+	bool IsAlive() const;
+	bool IsActive() const;
+	bool IsVisible() const;
+
+	void IsAlive(bool flag);
+	void IsActive(bool flag);
+	void IsVisible(bool flag);
 
 public:
 
-	const std::string& GetTag() const;
-	SDL_Point GetPosition();
+	float GetAngle() const;
+	int GetPriority() const;
 
-	void SetTag(const std::string& tag);
+	const std::string& GetTag() const;
+	std::pair<int, int> GetPosition() const;
+	std::pair<int, int> GetDimension() const;
+
 	void SetPosition(int x, int y);
+	void SetDimension(int x, int y);
+	void SetTag(const std::string& tag);
 
 public:
 
@@ -66,12 +75,16 @@ public:
 
 protected:
 
+	float m_angle;
+	int m_priority;
+	
 	bool m_isAlive;
 	bool m_isActive;
 	bool m_isVisible;
 
 	std::string m_tag;
-	SDL_Point m_position;
+	std::pair<int, int> m_position;
+	std::pair<int, int> m_dimension;
 
 };
 

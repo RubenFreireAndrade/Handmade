@@ -1,46 +1,76 @@
 #include "GameObject.h"
 
 //------------------------------------------------------------------------------------------------------
-//constructor that assigns all defaults 
-//------------------------------------------------------------------------------------------------------
 GameObject::GameObject()
 {
 
+	m_angle = 0.0f;
+	m_priority = 0;
+	
 	m_isAlive = true;
 	m_isActive = true;
 	m_isVisible = true;
-	m_position = { 0, 0 };
+
+	m_position = std::pair<int, int>(0, 0);
+	m_dimension = std::pair<int, int>(0, 0);
 	
 }
 //------------------------------------------------------------------------------------------------------
-//getter-setter function that returns memory flag reference
-//------------------------------------------------------------------------------------------------------
-bool& GameObject::IsAlive()
+bool GameObject::IsAlive() const
 {
 
 	return m_isAlive;
 
 }
 //------------------------------------------------------------------------------------------------------
-//getter-setter function that returns active flag reference
-//------------------------------------------------------------------------------------------------------
-bool& GameObject::IsActive()
+bool GameObject::IsActive() const
 {
 
 	return m_isActive;
 
 }
 //------------------------------------------------------------------------------------------------------
-//getter-setter function that returns visibility flag reference
-//------------------------------------------------------------------------------------------------------
-bool& GameObject::IsVisible()
+bool GameObject::IsVisible() const
 {
 
 	return m_isVisible;
 
 }
 //------------------------------------------------------------------------------------------------------
-//getter function that returns game object's tag variable
+void GameObject::IsAlive(bool flag)
+{
+
+	m_isAlive = flag;
+
+}
+//------------------------------------------------------------------------------------------------------
+void GameObject::IsActive(bool flag)
+{
+
+	m_isActive = flag;
+
+}
+//------------------------------------------------------------------------------------------------------
+void GameObject::IsVisible(bool flag)
+{
+
+	m_isVisible = flag;
+
+}
+//------------------------------------------------------------------------------------------------------
+float GameObject::GetAngle() const
+{
+
+	return m_angle;
+
+}
+//------------------------------------------------------------------------------------------------------
+int GameObject::GetPriority() const
+{
+
+	return m_priority;
+
+}
 //------------------------------------------------------------------------------------------------------
 const std::string& GameObject::GetTag() const
 {
@@ -49,30 +79,39 @@ const std::string& GameObject::GetTag() const
 
 }
 //------------------------------------------------------------------------------------------------------
-//getter function that returns game object's position on screen
-//------------------------------------------------------------------------------------------------------
-SDL_Point GameObject::GetPosition()
+std::pair<int, int> GameObject::GetPosition() const
 {
 
 	return m_position;
 
 }
 //------------------------------------------------------------------------------------------------------
-//setter function that assigns game object's tag variable
+std::pair<int, int> GameObject::GetDimension() const
+{
+
+	return m_dimension;
+
+}
+//------------------------------------------------------------------------------------------------------
+void GameObject::SetPosition(int x, int y)
+{
+
+	m_position.first = x;
+	m_position.second = y;
+
+}
+//------------------------------------------------------------------------------------------------------
+void GameObject::SetDimension(int x, int y)
+{
+
+	m_dimension.first = x;
+	m_dimension.second = y;
+
+}
 //------------------------------------------------------------------------------------------------------
 void GameObject::SetTag(const std::string& tag)
 {
 
 	m_tag = tag;
-
-}
-//------------------------------------------------------------------------------------------------------
-//setter function that assigns game object's position on screen
-//------------------------------------------------------------------------------------------------------
-void GameObject::SetPosition(int x, int y)
-{
-
-	m_position.x = x;
-	m_position.y = y;
 
 }
