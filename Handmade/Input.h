@@ -309,11 +309,6 @@ class Input
 
 public:
 
-	enum class CursorState { ON = 1, OFF = 0, SHOW = 1, HIDE = 0 };
-	enum class CursorType  { ARROW, IBEAM, WAIT, CROSSHAIR, WAIT_ARROW, NO = 10, HAND = 11 };
-
-public:
-
 	static Input* Instance();
 
 public:
@@ -337,9 +332,7 @@ public:
 
 	void SetMousePosition(int x, int y);
 
-	void SetCursorType(CursorType cursorType = CursorType::ARROW);
-	void SetCursorState(CursorState cursorEnabled = CursorState::ON, 
-		                CursorState cursorVisible = CursorState::SHOW);
+	void SetCursorState(bool isCursorEnabled, bool isCursorVisible);
 
 public:
 
@@ -361,8 +354,6 @@ private:
 	bool m_isXClicked;
 	bool m_isKeyPressed;
 	bool m_isMouseClicked;
-	
-	SDL_Cursor* m_cursor;
 
 	SDL_Point m_mouseWheel;
 	SDL_Point m_mouseMotion;

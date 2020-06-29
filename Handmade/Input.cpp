@@ -21,7 +21,7 @@ Input::Input()
 {
 
 	m_key = ' ';
-	m_cursor = nullptr;
+	
 	m_isXClicked = false;
 	
 	m_isKeyPressed = false;
@@ -144,52 +144,13 @@ void Input::SetMousePosition(int x, int y)
 
 }
 //------------------------------------------------------------------------------------------------------
-//setter function that creates a system mouse cursor 
-//------------------------------------------------------------------------------------------------------
-void Input::SetCursorType(CursorType cursorType)
-{
-
-	//first destroy old cursor object from memory
-	SDL_FreeCursor(m_cursor);
-
-	//based on type of cursor value passed, create mouse cursor using SDL ID flag value 
-	m_cursor = SDL_CreateSystemCursor(static_cast<SDL_SystemCursor>(cursorType));
-	
-	//use cursor pointer to assign cursor to SDL
-	SDL_SetCursor(m_cursor);
-
-}
-//------------------------------------------------------------------------------------------------------
 //setter function that enables, disables, shows or hides the mouse cursor
 //------------------------------------------------------------------------------------------------------
-void Input::SetCursorState(CursorState cursorEnabled, CursorState cursorVisible)
+void Input::SetCursorState(bool isCursorEnabled, bool isCursorVisible)
 {
 
-	//if mouse cursor is enabled then check if it's visible  
-	//and display the cursor accordingly, and keep the mouse 
-	//cursor within the window border as long as it's enabled
-	if (static_cast<bool>(cursorEnabled))
-	{
-		
-		if (static_cast<bool>(cursorVisible))
-		{
-			SDL_ShowCursor(1);
-			SDL_SetRelativeMouseMode(SDL_FALSE);
-		}
-		else
-		{
-			SDL_ShowCursor(0);
-			SDL_SetRelativeMouseMode(SDL_FALSE);
-		}
-
-	}
-
-	//if mouse cursor is disabled then hide it and free it from the window border
-	else
-	{
-		SDL_ShowCursor(0);
-		SDL_SetRelativeMouseMode(SDL_TRUE);
-	}
+	SDL_ShowCursor(static_cast<int>(isCursorVisible));
+	SDL_SetRelativeMouseMode(static_cast<SDL_bool>(isCursorEnabled));
 	
 }
 //------------------------------------------------------------------------------------------------------
