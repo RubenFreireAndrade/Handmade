@@ -12,7 +12,7 @@ void Sound::Output()
 
 	Debug::ClearLog();
 	Debug::Log("===============================================================");
-	Debug::Log("Size of Sound Data Map: " + std::to_string(s_sounds->size()));
+	Debug::Log("Size of sound data map: " + std::to_string(s_sounds->size()));
 	Debug::Log("===============================================================");
 
 }
@@ -26,7 +26,7 @@ void Sound::Output()
 bool Sound::Load(const std::string& filename, const std::string& mapIndex)
 {
 
-	Debug::Log("Opening and reading audio file: '" + filename + "'");
+	Debug::Log("Opening and reading sound file: '" + filename + "'");
 
 	if (s_sounds->find(mapIndex) != s_sounds->end())
 	{
@@ -141,8 +141,9 @@ bool Sound::SetSound(const std::string& mapIndex)
 
 }
 //------------------------------------------------------------------------------------------------------
-//function that plays the sound effect
-//if playing sound effect fails, display error message and return false
+//function that plays the sound effect on first available free channel
+//play the sound on a loop cycle (if appropriate) based on 'loop' argument passed
+//if playing sound effect fails, display error message and return false for client code to handle
 //------------------------------------------------------------------------------------------------------
 bool Sound::Play(int loop)
 {

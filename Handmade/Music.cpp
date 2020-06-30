@@ -12,7 +12,7 @@ void Music::Output()
 
 	Debug::ClearLog();
 	Debug::Log("===============================================================");
-	Debug::Log("Size of Music Data Map: " + std::to_string(s_music->size()));
+	Debug::Log("Size of music data map: " + std::to_string(s_music->size()));
 	Debug::Log("===============================================================");
 
 }
