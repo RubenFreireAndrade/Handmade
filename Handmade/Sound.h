@@ -1,5 +1,5 @@
-#ifndef SFX_H
-#define SFX_H
+#ifndef SOUND_H
+#define SOUND_H
 
 /*==============================================================================================#
 |                                                                                               |
@@ -31,31 +31,42 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'SFX' source files last updated in May 2020   							                    |
+| 'Sound' source files last updated in June 2020   							                    |
 #==============================================================================================*/
 
+#include <map>
 #include <string>
 #include <SDL_mixer.h>
 
-class SFX
+class Sound
 {
 
 public:
 
-	SFX();
+	static void Output();
+	static bool Load(const std::string& filename, const std::string& mapIndex);
+	static void Unload(const std::string& mapIndex = "");
+
+public:
+
+	Sound();
 
 public:
 
 	void SetVolume(int volume);
-	void SetSFX(const std::string& mapIndex);
+	bool SetSound(const std::string& mapIndex);
 
 public:
 
 	bool Play(int loop = 0);			
 	
 private:
+
+	static std::map<std::string, Mix_Chunk*>* s_sounds;
+
+private:
 	
-	Mix_Chunk* m_sfx;
+	Mix_Chunk* m_sound;
 					
 };
 
