@@ -4,19 +4,6 @@
 std::map<std::string, Mix_Music*>* Music::s_music = new std::map<std::string, Mix_Music*>;
 
 //------------------------------------------------------------------------------------------------------
-//static function that displays total size of the music data map
-//this function can be called from anywhere in the application and is intended for debug purposes
-//------------------------------------------------------------------------------------------------------
-void Music::Output()
-{
-
-	Debug::ClearLog();
-	Debug::Log("===============================================================");
-	Debug::Log("Size of music data map: " + std::to_string(s_music->size()));
-	Debug::Log("===============================================================");
-
-}
-//------------------------------------------------------------------------------------------------------
 //static function that initializes SDL audio sub-system 
 //if audio sub-system initialization failed, display error message and return false
 //------------------------------------------------------------------------------------------------------
@@ -84,10 +71,11 @@ bool Music::Load(const std::string& filename, const std::string& mapIndex)
 void Music::Unload(const std::string& mapIndex)
 {
 
-	Debug::Log("Unloading music data: '" + mapIndex + "'");
-
 	if (!mapIndex.empty())
 	{
+
+		Debug::Log("Unloading music data: '" + mapIndex + "'");
+
 		auto it = s_music->find(mapIndex);
 
 		if (it == s_music->end())
@@ -108,6 +96,8 @@ void Music::Unload(const std::string& mapIndex)
 
 	else 
 	{
+
+		Debug::Log("Unloading all music data.");
 
 		for (auto it = s_music->begin(); it != s_music->end(); it++)
 		{

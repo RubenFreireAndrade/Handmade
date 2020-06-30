@@ -4,19 +4,6 @@
 std::map<std::string, Mix_Chunk*>* Sound::s_sounds = new std::map<std::string, Mix_Chunk*>;
 
 //------------------------------------------------------------------------------------------------------
-//static function that displays total size of the sound data map
-//this function can be called from anywhere in the application and is intended for debug purposes
-//------------------------------------------------------------------------------------------------------
-void Sound::Output()
-{
-
-	Debug::ClearLog();
-	Debug::Log("===============================================================");
-	Debug::Log("Size of sound data map: " + std::to_string(s_sounds->size()));
-	Debug::Log("===============================================================");
-
-}
-//------------------------------------------------------------------------------------------------------
 //static function that loads sound audio data from a raw audio file 
 //first check if sound data exists in map and if it does display warning message
 //and halt loading because we don't want to replace the existing sound data
@@ -62,10 +49,10 @@ bool Sound::Load(const std::string& filename, const std::string& mapIndex)
 void Sound::Unload(const std::string& mapIndex)
 {
 
-	Debug::Log("Unloading sound data: '" + mapIndex + "'");
-
 	if (!mapIndex.empty())
 	{
+
+		Debug::Log("Unloading sound data: '" + mapIndex + "'");
 
 		auto it = s_sounds->find(mapIndex);
 
@@ -87,6 +74,8 @@ void Sound::Unload(const std::string& mapIndex)
 
 	else
 	{
+
+		Debug::Log("Unloading all sound data.");
 
 		for (auto it = s_sounds->begin(); it != s_sounds->end(); it++)
 		{
