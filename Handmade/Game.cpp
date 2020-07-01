@@ -1,4 +1,3 @@
-#include "AudioManager.h"
 #include "Game.h"
 #include "Input.h"
 #include "MenuState.h"
@@ -31,7 +30,7 @@ bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight
 	Screen::Instance()->SetClearColor(100, 149, 237);
 
 	//initialize audio sub-system and return false if error occured
-	if (!(AudioManager::Instance()->Initialize()))
+	if (!(Music::Initialize()))
 	{
 		//not serious - game does not need to end
 		//add your own outcome/messages here...
@@ -114,7 +113,7 @@ void Game::ShutDown()
 
 	//close down font and audio sub-systems
 	TextureManager::Instance()->ShutDown();
-	AudioManager::Instance()->ShutDown();
+	Music::ShutDown();
 
 	//close down game screen 
 	Screen::Instance()->ShutDown();

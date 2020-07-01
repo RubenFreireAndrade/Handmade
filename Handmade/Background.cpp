@@ -1,4 +1,3 @@
-#include "AudioManager.h"
 #include "Background.h"
 #include "Screen.h"
 #include "TextureManager.h"
@@ -13,9 +12,7 @@ Background::Background(const std::string& imageFilename, const std::string& audi
 
 	//load image and audio resources into memory
 	TextureManager::Instance()->LoadTextureFromFile(imageFilename, imageFilename);
-	AudioManager::Instance()->
-	LoadFromFile(audioFilename, AudioManager::AudioType::MUSIC_AUDIO, audioFilename);
-
+	
 	//get resolution so that we can adjust the background image accordingly
 	SDL_Point resolution = Screen::Instance()->GetResolution();
 
@@ -24,8 +21,9 @@ Background::Background(const std::string& imageFilename, const std::string& audi
 	m_image.SetSpriteDimension(resolution.x, resolution.y);
 	m_image.SetTextureDimension(1, 1, resolution.x, resolution.y);
 
-	//link audio resource with music component
-	m_music.SetAudio(audioFilename, Audio::AudioType::MUSIC_AUDIO);
+	//load and link music resource 
+	m_music.Load(audioFilename, audioFilename);
+	m_music.SetMusic(audioFilename);
 
 	//store names of resource tags so that we can remove them in the destructor 
 	m_imageName = imageFilename;
@@ -50,7 +48,7 @@ void Background::PlayMusic()
 
 	if (!m_isPlaying)
 	{
-		m_music.Play(Audio::LoopType::PLAY_ENDLESS);
+		m_music.Play(Music::LoopType::PLAY_ENDLESS);
 		m_isPlaying = true;
 	}
 
@@ -71,9 +69,7 @@ void Background::StopMusic()
 Background::~Background()
 {
 
-	AudioManager::Instance()->
-	UnloadFromMemory(AudioManager::AudioType::MUSIC_AUDIO, 
-		             AudioManager::RemoveType::CUSTOM_AUDIO, m_audioName);
+	m_music.Unload(m_audioName);
 	
 	TextureManager::Instance()->
 	UnloadFromMemory(TextureManager::DataType::TEXTURE_DATA, 

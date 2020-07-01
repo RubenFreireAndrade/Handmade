@@ -1,5 +1,5 @@
-#ifndef AUDIO_H
-#define AUDIO_H
+#ifndef SOUND_H
+#define SOUND_H
 
 /*==============================================================================================#
 |                                                                                               |
@@ -31,40 +31,43 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'Audio' source files last updated in May 2020   							                    |
+| 'Sound' source files last updated in June 2020   							                    |
 #==============================================================================================*/
 
+#include <map>
 #include <string>
 #include <SDL_mixer.h>
 
-class Audio
+class Sound
 {
 
 public:
 
-	enum class AudioType { MUSIC_AUDIO, VOICE_AUDIO };
-	enum class LoopType  { PLAY_ONCE = 1, PLAY_ENDLESS = -1 };
+	static void Output();
+	static bool Load(const std::string& filename, const std::string& mapIndex);
+	static void Unload(const std::string& mapIndex = "");
 
 public:
 
-	Audio();
+	Sound();
 
 public:
 
 	void SetVolume(int volume);
-	void SetAudio(const std::string& mapIndex, AudioType audioType);
+	bool SetSound(const std::string& mapIndex);
 
 public:
 
-	bool Play(LoopType loopType = LoopType::PLAY_ONCE);
-	void Pause();
-	void Resume();
-	void Stop();    			
+	bool Play(int loop = 0);			
+	
+private:
+
+	static std::map<std::string, Mix_Chunk*>* s_sounds;
 
 private:
 	
-	Mix_Music* m_audio;
+	Mix_Chunk* m_sound;
 					
 };
 
-#endif
+#endif	

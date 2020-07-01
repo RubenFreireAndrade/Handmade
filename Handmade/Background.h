@@ -31,11 +31,11 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'Background' source files last updated in May 2020						                    |
+| 'Background' source files last updated in June 2020						                    |
 #==============================================================================================*/
 
-#include "Audio.h"
 #include "GameObject.h"
+#include "Music.h"
 #include "Sprite.h"
 
 class Background : public GameObject
@@ -62,7 +62,7 @@ protected:
 	std::string m_imageName;
 	std::string m_audioName;
 
-	Audio m_music;
+	Music m_music;
 	Sprite m_image;
 
 };
