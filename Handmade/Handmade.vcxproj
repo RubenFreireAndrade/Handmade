@@ -83,7 +83,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>DEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG;NOMINMAX;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,7 +110,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>RELEASE;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>RELEASE;NOMINMAX;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -135,7 +137,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
-    <ClInclude Include="Animation.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="EndState.h" />
@@ -156,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
-    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EndState.cpp" />

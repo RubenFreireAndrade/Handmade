@@ -1,6 +1,5 @@
 #include "Background.h"
 #include "Screen.h"
-#include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
 //constructor that loads and links resources, and assigns all default values
@@ -10,16 +9,14 @@ Background::Background(const std::string& imageFilename, const std::string& audi
 
 	m_isPlaying = false;
 
-	//load image and audio resources into memory
-	TextureManager::Instance()->LoadTextureFromFile(imageFilename, imageFilename);
-	
 	//get resolution so that we can adjust the background image accordingly
 	SDL_Point resolution = Screen::Instance()->GetResolution();
 
-	//link image resource with sprite component
-	m_image.SetTexture(imageFilename);
+	//load and link image resource with sprite component
+	m_image.Load(imageFilename, imageFilename);
+	m_image.SetImage(imageFilename);
 	m_image.SetSpriteDimension(resolution.x, resolution.y);
-	m_image.SetTextureDimension(1, 1, resolution.x, resolution.y);
+	m_image.SetImageDimension(1, 1, resolution.x, resolution.y);
 
 	//load and link music resource 
 	m_music.Load(audioFilename, audioFilename);
@@ -70,9 +67,6 @@ Background::~Background()
 {
 
 	m_music.Unload(m_audioName);
-	
-	TextureManager::Instance()->
-	UnloadFromMemory(TextureManager::DataType::TEXTURE_DATA, 
-		             TextureManager::RemoveType::CUSTOM_DATA, m_imageName);
+	m_image.Unload(m_imageName);
 
 }

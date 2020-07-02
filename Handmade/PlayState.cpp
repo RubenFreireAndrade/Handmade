@@ -19,7 +19,7 @@ PlayState::PlayState()
 bool PlayState::OnEnter()
 {
 
-	m_image = new Background("Assets/Textures/Play_1280x720.png", "Assets/Music/Play.ogg");	
+	m_image = new Background("Assets/Images/Play_1280x720.png", "Assets/Music/Play.ogg");	
 	return true;
 
 }
