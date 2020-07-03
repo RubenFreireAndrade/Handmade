@@ -2,7 +2,7 @@
 #include "Input.h"
 #include "MenuState.h"
 #include "Screen.h"
-#include "TextureManager.h"
+#include "Text.h"
 
 //------------------------------------------------------------------------------------------------------
 //constructor that assigns all default values
@@ -37,7 +37,7 @@ bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight
 	}
 
 	//initialize font sub-system and return false if error occured
-	if (!TextureManager::Instance()->Initialize())
+	if (!Text::Initialize())
 	{
 		//not serious - game does not need to end
 		//add your own outcome/messages here...
@@ -112,7 +112,7 @@ void Game::ShutDown()
 {
 
 	//close down font and audio sub-systems
-	TextureManager::Instance()->ShutDown();
+	Text::ShutDown();
 	Music::ShutDown();
 
 	//close down game screen 

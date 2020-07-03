@@ -20,8 +20,8 @@ bool EndState::OnEnter()
 {
 
 	m_menu = new MainMenu;
-	m_menu->SetMenuText("PLAY AGAIN");
-	m_menu->SetMenuText("QUIT GAME");
+	m_menu->SetMenuText("Play again");
+	m_menu->SetMenuText("Quit game");
 
 	m_image = new Background("Assets/Images/End_1280x720.png", "Assets/Music/End.ogg");
 

@@ -31,7 +31,7 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'MainMenu' source files last updated in May 2020   							                |
+| 'MainMenu' source files last updated in July 2020   							                |
 #==============================================================================================*/
 
 #include <string>
@@ -39,8 +39,10 @@
 #include "GameObject.h"
 #include "Text.h"
 
-const int MENU_TEXT_CHAR_W = 20;
-const int MENU_TEXT_CHAR_H = 60;
+//make sure not to use any arbitrary width and height
+//but rather one that corresponds to the current resolution
+const int MENU_TEXT_CHAR_W = 25;
+const int MENU_TEXT_CHAR_H = 53;
 
 class MainMenu : public GameObject
 {
