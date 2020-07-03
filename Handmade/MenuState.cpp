@@ -21,8 +21,8 @@ bool MenuState::OnEnter()
 {
 
 	m_menu = new MainMenu;
-	m_menu->SetMenuText("PLAY GAME");
-	m_menu->SetMenuText("QUIT GAME");
+	m_menu->SetMenuText("Play game");
+	m_menu->SetMenuText("Quit game");
 
 	m_image = new Background("Assets/Images/Menu_1280x720.png", "Assets/Music/Menu.ogg");
 	

@@ -1,7 +1,6 @@
 #include "Input.h"
 #include "MainMenu.h"
 #include "Screen.h"
-#include "TextureManager.h"
 
 //------------------------------------------------------------------------------------------------------
 //constructor that loads and links resources, and sets up the main menu text defaults
@@ -14,7 +13,7 @@ MainMenu::MainMenu()
 	m_menuOptionChoice = -1;
 
 	//load font resource into memory
-	TextureManager::Instance()->LoadFontFromFile("Assets/Fonts/Quikhand.ttf", 100, "MENU_FONT");
+	Text::Load("Assets/Fonts/Quikhand.ttf", "Menu_Font", Text::FontSize::SMALL);
 
 }
 //------------------------------------------------------------------------------------------------------
@@ -28,14 +27,17 @@ int MainMenu::GetMenuOption() const
 }
 //------------------------------------------------------------------------------------------------------
 //setter function that assigns properties of menu text objects
+//here we create temporary 'Text' objects with white text and
+//add them into the menu's vector container. Copies are being
+//made here so therefore the 'Text' class' copy ctor will be effective
 //------------------------------------------------------------------------------------------------------
 void MainMenu::SetMenuText(const std::string& text)
 {
 
 	Text menuText;
 	
-	menuText.SetFont("MENU_FONT");
-	menuText.SetColor(255, 174, 0);
+	menuText.SetFont("Menu_Font");
+	menuText.SetColor(255, 255, 255);
 	menuText.SetSize(text.size() * MENU_TEXT_CHAR_W, MENU_TEXT_CHAR_H);
 	menuText.SetText(text);
 	m_menuText.push_back(menuText);
@@ -95,10 +97,10 @@ void MainMenu::Update(int deltaTime)
 	//the frame is called the above code will either move the menu option or keep it still
 	isKeyPressed = Input::Instance()->IsKeyPressed();
 
-	//loop through all menu items and set their initial color to orange
+	//loop through all menu items and set their initial color to white
 	for (size_t i = 0; i < m_menuText.size(); i++)
 	{
-		m_menuText[i].SetColor(255, 174, 0);
+		m_menuText[i].SetColor(255, 255, 255);
 	}
 
 	//only set the active menu item to a red color
@@ -146,8 +148,6 @@ void MainMenu::Reset()
 MainMenu::~MainMenu()
 {
 
-	TextureManager::Instance()->
-	UnloadFromMemory(TextureManager::DataType::FONT_DATA, 
-		             TextureManager::RemoveType::CUSTOM_DATA, "MENU_FONT");
+	Text::Unload("Menu_Font");
 
 }
