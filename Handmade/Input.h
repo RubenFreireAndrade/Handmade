@@ -31,7 +31,7 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'Input' source files last updated in June 2020   							                    |
+| 'Input' source files last updated in July 2020   							                    |
 #==============================================================================================*/
 
 //=========================================================================================
@@ -309,6 +309,7 @@
 //=========================================================================================
 
 #include <utility>
+#include "Vector.h"
 
 class Input
 {
@@ -322,8 +323,8 @@ public:
 	char GetKey() const;
 	int GetMouseWheel() const;
 	
-	std::pair<int, int> GetMouseMotion() const;
-	std::pair<int, int> GetMousePosition() const;
+	const Vector<int>& GetMouseMotion() const;
+	const Vector<int>& GetMousePosition() const;
 	
 	void SetCursorState(bool isCursorEnabled, bool isCursorVisible);
 
@@ -360,8 +361,8 @@ private:
 	bool m_isMouseClicked;
 	bool m_isWindowClosed;
 	
-	std::pair<int, int> m_mouseMotion;
-	std::pair<int, int> m_mousePosition;
+	Vector<int> m_mouseMotion;
+	Vector<int> m_mousePosition;
 	
 };
 

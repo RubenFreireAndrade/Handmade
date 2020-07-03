@@ -26,9 +26,6 @@ Input::Input()
 
 	m_modifier = HM_MOD_NONE;
 	m_mouseButton = HM_MOUSE_NONE;
-
-	m_mouseMotion = std::pair<int, int>(0, 0);
-	m_mousePosition = std::pair<int, int>(0, 0);
 	
 }
 //------------------------------------------------------------------------------------------------------
@@ -51,18 +48,16 @@ int Input::GetMouseWheel() const
 
 }
 //------------------------------------------------------------------------------------------------------
-//getter function that returns x and y motion/position of mouse within a pair
-//in the client code, the user needs to store the returned values within a pair (can use auto)
-//if individual values are required (eg. the x coordinate or y motion within an algorithm) 
-//then we just need to access the first/second element of the returned pair
+//getter function that returns x and y motion/position of mouse using a custom vector
+//in the client code, the user needs to store the returned values within a vector
 //------------------------------------------------------------------------------------------------------
-std::pair<int, int> Input::GetMouseMotion() const
+const Vector<int>& Input::GetMouseMotion() const
 {
 
 	return m_mouseMotion;
 
 }
-std::pair<int, int> Input::GetMousePosition() const
+const Vector<int>& Input::GetMousePosition() const
 {
 
 	return m_mousePosition;
@@ -155,8 +150,8 @@ void Input::Update()
 	//reset mouse wheel and motion values so that they're processed from scratch
 	//if old values are kept, there may be issues within the client code
 	m_mouseWheel = 0;
-	m_mouseMotion.first = 0;
-	m_mouseMotion.second = 0;
+	m_mouseMotion.x = 0;
+	m_mouseMotion.y = 0;
 
 	//check for events on SDL event queue and keep this
 	//loop running until all events have been processed
@@ -203,11 +198,11 @@ void Input::Update()
 			//moving up/down on the y axis creates a negative/positive value, respectively
 			case SDL_MOUSEMOTION:
 			{
-				m_mousePosition.first = events.motion.x;
-				m_mousePosition.second = events.motion.y;
+				m_mousePosition.x = events.motion.x;
+				m_mousePosition.y = events.motion.y;
 				
-				m_mouseMotion.first = events.motion.xrel;
-				m_mouseMotion.second = events.motion.yrel;
+				m_mouseMotion.x = events.motion.xrel;
+				m_mouseMotion.y = events.motion.yrel;
 				break;
 			}
 
@@ -226,8 +221,8 @@ void Input::Update()
 			{
 
 				m_isMouseClicked = false;
-				m_mousePosition.first = events.motion.x;
-				m_mousePosition.second = events.motion.y;
+				m_mousePosition.x = events.motion.x;
+				m_mousePosition.y = events.motion.y;
 
 				switch (events.button.button)
 				{
@@ -247,8 +242,8 @@ void Input::Update()
 			{
 
 				m_isMouseClicked = true;
-				m_mousePosition.first = events.motion.x;
-				m_mousePosition.second = events.motion.y;
+				m_mousePosition.x = events.motion.x;
+				m_mousePosition.y = events.motion.y;
 
 				switch (events.button.button)
 				{

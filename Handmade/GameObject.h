@@ -31,11 +31,12 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'GameObject' source files last updated in June 2020   	   			                        |
+| 'GameObject' source files last updated in July 2020   	   			                        |
 #==============================================================================================*/
 
 #include <string>
 #include <utility>
+#include "Vector.h"
 
 class GameObject 
 {
@@ -61,8 +62,8 @@ public:
 	int GetPriority() const;
 
 	const std::string& GetTag() const;
-	std::pair<int, int> GetPosition() const;
-	std::pair<int, int> GetDimension() const;
+	const Vector<int>& GetPosition() const;
+	const Vector<int>& GetDimension() const;
 
 	void SetPosition(int x, int y);
 	void SetDimension(int x, int y);
@@ -83,8 +84,8 @@ protected:
 	bool m_isVisible;
 
 	std::string m_tag;
-	std::pair<int, int> m_position;
-	std::pair<int, int> m_dimension;
+	Vector<int> m_position;
+	Vector<int> m_dimension;
 
 };
 

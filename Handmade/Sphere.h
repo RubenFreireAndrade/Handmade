@@ -34,7 +34,7 @@
 | 'Sphere' source files last updated in May 2020   							                    |
 #==============================================================================================*/
 
-#include <SDL.h>
+#include "Vector.h"
 
 class Sphere
 {
@@ -55,7 +55,7 @@ public:
 private:
 
 	int m_radius;
-	SDL_Point m_position;
+	Vector<int> m_position;
 
 };
 

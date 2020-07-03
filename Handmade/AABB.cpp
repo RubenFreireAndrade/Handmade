@@ -6,10 +6,8 @@
 void AABB::SetPosition(int x, int y)
 {
 
-	m_min = { 0, 0 };
-	m_max = { 0, 0 };
-	m_position = { x, y };
-	m_dimension = { 0, 0 };
+	m_position.x = x;
+	m_position.y = y;
 
 	CreateBox();
 

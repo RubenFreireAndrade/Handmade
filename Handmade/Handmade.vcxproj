@@ -153,6 +153,7 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />

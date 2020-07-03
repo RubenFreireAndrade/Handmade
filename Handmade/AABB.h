@@ -31,10 +31,10 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'AABB' source files last updated in May 2020   							                    |
+| 'AABB' source files last updated in July 2020   							                    |
 #==============================================================================================*/
 
-#include <SDL.h>
+#include "Vector.h"
 
 class AABB
 {
@@ -54,10 +54,10 @@ private:
 
 private:
 
-	SDL_Point m_min;
-	SDL_Point m_max;
-	SDL_Point m_position;
-	SDL_Point m_dimension;
+	Vector<int> m_min;
+	Vector<int> m_max;
+	Vector<int> m_position;
+	Vector<int> m_dimension;
 	
 };
 

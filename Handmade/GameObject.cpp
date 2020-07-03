@@ -10,9 +10,6 @@ GameObject::GameObject()
 	m_isAlive = true;
 	m_isActive = true;
 	m_isVisible = true;
-
-	m_position = std::pair<int, int>(0, 0);
-	m_dimension = std::pair<int, int>(0, 0);
 	
 }
 //------------------------------------------------------------------------------------------------------
@@ -79,14 +76,14 @@ const std::string& GameObject::GetTag() const
 
 }
 //------------------------------------------------------------------------------------------------------
-std::pair<int, int> GameObject::GetPosition() const
+const Vector<int>& GameObject::GetPosition() const
 {
 
 	return m_position;
 
 }
 //------------------------------------------------------------------------------------------------------
-std::pair<int, int> GameObject::GetDimension() const
+const Vector<int>& GameObject::GetDimension() const
 {
 
 	return m_dimension;
@@ -96,16 +93,16 @@ std::pair<int, int> GameObject::GetDimension() const
 void GameObject::SetPosition(int x, int y)
 {
 
-	m_position.first = x;
-	m_position.second = y;
+	m_position.x = x;
+	m_position.y = y;
 
 }
 //------------------------------------------------------------------------------------------------------
 void GameObject::SetDimension(int x, int y)
 {
 
-	m_dimension.first = x;
-	m_dimension.second = y;
+	m_dimension.x = x;
+	m_dimension.y = y;
 
 }
 //------------------------------------------------------------------------------------------------------
