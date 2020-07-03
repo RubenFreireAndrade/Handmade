@@ -31,9 +31,10 @@
 | GitHub: https://github.com/djkarstenv									                        |
 |                                                                                               |
 #===============================================================================================#
-| 'Text' source files last updated in May 2020   							                    |
+| 'Text' source files last updated in July 2020   							                    |
 #==============================================================================================*/
 
+#include <map>
 #include <string>
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -43,35 +44,54 @@ class Text
 
 public:
 
-	Text();
+	enum class FontSize { SMALL = 72, MEDIUM = 144, LARGE = 300 };  //based on 72DPI - keep in multiples of 6
 
 public:
 
-	SDL_Point GetSize() const;
+	static bool Initialize();
+	static bool Load(const std::string& filename, 
+		             const std::string& mapIndex, FontSize fontSize = FontSize::SMALL);
+	static void Unload(const std::string& mapIndex = "");
+	static void ShutDown();
+
+public:
+
+	Text();
+	Text(const Text& copy);
+	~Text();
+
+public:
+
+	const SDL_Point& GetSize() const;
+	const std::string& GetText() const;
 
 public:
 
 	void SetSize(int width, int height);
 	void SetText(const std::string& text);
 	void SetColor(Uint8 r, Uint8 g, Uint8 b);
-	void SetFont(const std::string& mapIndex);
+	bool SetFont(const std::string& mapIndex);
 
 public:
 
-	void Draw(int xPosition = 0, int yPosition = 0);
+	void Draw(int positionX = 0, int positionY = 0);
 
-protected:
+private:
 
 	void CreateText();
 
 private:
 
-	std::string m_text;
-	SDL_Point m_textSize;
+	static std::map<std::string, TTF_Font*>* s_fonts;
 
-	TTF_Font* m_font;
-	SDL_Color m_color;
-	SDL_Texture* m_texture;
+private:
+
+	std::string m_text;               //the raw string text that is used to created the text object to be rendered
+	SDL_Point m_textSize;             //size (in pixels) of the rendered text in its entirety
+
+	TTF_Font* m_font;                 //handle on the font in memory. This is only a reference (no need for copy ctor)
+	SDL_Color m_color;                //color of the rendered text
+	SDL_Texture* m_texture;           //handle on the text object after using font, color and string to create it
 
 };
 
