@@ -36,7 +36,7 @@
 
 #include <string>
 #include <Windows.h>
-#include <SDL.h>
+#include "Vector.h"
 
 class Debug
 {
@@ -51,7 +51,7 @@ public:
 	static void ClearLog();
 	static void Log(float value, const std::string& label = "");
 	static void Log(int x, int y, const std::string& label = "");
-	static void Log(const SDL_Point& point, const std::string& label = "");
+	static void Log(const Vector<int>& point, const std::string& label = "");
 	static void Log(const std::string& message, ErrorCode errorCode = ErrorCode::DEFAULT);
 
 private:

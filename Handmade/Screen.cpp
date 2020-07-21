@@ -45,10 +45,10 @@ SDL_Renderer* Screen::GetRenderer()
 //------------------------------------------------------------------------------------------------------
 //getter function that creates screen size vector and returns it
 //------------------------------------------------------------------------------------------------------
-SDL_Point Screen::GetResolution()
+Vector<int> Screen::GetResolution()
 {
 
-	return SDL_Point{m_width, m_height};
+	return Vector<int>(m_width, m_height);
 
 }
 //------------------------------------------------------------------------------------------------------

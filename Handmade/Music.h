@@ -47,7 +47,6 @@ public:
 
 public:
 
-	static void Output();
 	static bool Initialize(int frequency = 44100, int chunkSize = 1024);
 	static bool Load(const std::string& filename, const std::string& mapIndex);
 	static void Unload(const std::string& mapIndex = "");

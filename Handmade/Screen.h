@@ -36,7 +36,7 @@
 
 #include <string>
 #include <SDL.h>
-#include <SDL_syswm.h>
+#include "Vector.h"
 
 class Screen
 {
@@ -49,7 +49,7 @@ public:
 
 	SDL_Window* GetWindow();
 	SDL_Renderer* GetRenderer();
-	SDL_Point GetResolution();
+	Vector<int> GetResolution();
 
 public:
 

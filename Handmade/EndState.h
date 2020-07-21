@@ -34,7 +34,6 @@
 | 'EndState' source files last updated in May 2020   							                |
 #==============================================================================================*/
 
-#include <SDL.h>
 #include "Background.h"
 #include "GameState.h"
 #include "MainMenu.h"

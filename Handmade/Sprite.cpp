@@ -1,8 +1,8 @@
 #include <algorithm>
 #include <SDL_image.h>
 #include "Debug.h"
-#include "Sprite.h"
 #include "Screen.h"
+#include "Sprite.h"
 
 std::map<std::string, SDL_Texture*>* Sprite::s_images = new std::map<std::string, SDL_Texture*>;
 

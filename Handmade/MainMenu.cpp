@@ -1,6 +1,7 @@
 #include "Input.h"
 #include "MainMenu.h"
 #include "Screen.h"
+#include "Vector.h"
 
 //------------------------------------------------------------------------------------------------------
 //constructor that loads and links resources, and sets up the main menu text defaults
@@ -114,7 +115,7 @@ bool MainMenu::Draw()
 {
 
 	//first get resolution so that we can set the menu position accordingly
-	SDL_Point resolution = Screen::Instance()->GetResolution();
+	Vector<int> resolution = Screen::Instance()->GetResolution();
 
 	//this will position the text in the bottom half of the screen, centered in X
 	//X - divide screen width in half and subtract half the width of each text

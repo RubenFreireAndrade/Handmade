@@ -1,6 +1,3 @@
-#include <time.h>
-#include "Input.h"
-#include "Game.h"
 #include "MenuState.h"
 #include "PlayState.h"
 
@@ -26,9 +23,6 @@ bool MenuState::OnEnter()
 
 	m_image = new Background("Assets/Images/Menu_1280x720.png", "Assets/Music/Menu.ogg");
 	
-	//seed the random number generator
-	srand(static_cast<unsigned int>(time(0)));
-
 	return true;
 
 }

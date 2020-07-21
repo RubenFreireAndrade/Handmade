@@ -1,5 +1,6 @@
 #include "Background.h"
 #include "Screen.h"
+#include "Vector.h"
 
 //------------------------------------------------------------------------------------------------------
 //constructor that loads and links resources, and assigns all default values
@@ -10,7 +11,7 @@ Background::Background(const std::string& imageFilename, const std::string& audi
 	m_isPlaying = false;
 
 	//get resolution so that we can adjust the background image accordingly
-	SDL_Point resolution = Screen::Instance()->GetResolution();
+	Vector<int> resolution = Screen::Instance()->GetResolution();
 
 	//load and link image resource with sprite component
 	m_image.Load(imageFilename, imageFilename);

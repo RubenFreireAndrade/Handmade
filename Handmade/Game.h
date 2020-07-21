@@ -34,7 +34,6 @@
 | 'Game' source files last updated in May 2020   							                    |
 #==============================================================================================*/
 
-#include <deque>
 #include <string>
 #include "GameState.h"
 

@@ -1,5 +1,4 @@
 #include "EndState.h"
-#include "Game.h"
 #include "Input.h"
 #include "MenuState.h"
 #include "PlayState.h"

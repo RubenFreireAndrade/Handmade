@@ -1,5 +1,5 @@
-#include "Music.h"
 #include "Debug.h"
+#include "Music.h"
 
 std::map<std::string, Mix_Music*>* Music::s_music = new std::map<std::string, Mix_Music*>;
 

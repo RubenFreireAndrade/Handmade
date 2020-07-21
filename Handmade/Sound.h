@@ -43,7 +43,6 @@ class Sound
 
 public:
 
-	static void Output();
 	static bool Load(const std::string& filename, const std::string& mapIndex);
 	static void Unload(const std::string& mapIndex = "");
 

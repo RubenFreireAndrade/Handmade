@@ -54,7 +54,7 @@ void Debug::Log(int x, int y, const std::string& label)
 //------------------------------------------------------------------------------------------------------
 //function that displays vector data in separate coordinate format
 //------------------------------------------------------------------------------------------------------
-void Debug::Log(const SDL_Point& point, const std::string& label)
+void Debug::Log(const Vector<int>& point, const std::string& label)
 {
 
 	//set color to a bright white
