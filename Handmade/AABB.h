@@ -36,14 +36,11 @@ public:
 
 	void SetPosition(int x, int y);
 	void SetDimension(int width, int height);
-
+	
 public:
 
+	void Update();
 	bool IsColliding(const AABB& secondBox) const;
-
-private:
-
-	void CreateBox();
 
 private:
 
