@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Sphere' source files last updated on 21 July 2020							                |
+| 'Sphere' source files last updated on 23 July 2020							                |
 #==============================================================================================*/
 
 #include "Vector.h"
