@@ -24,8 +24,10 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Vector' source file last updated on 21 July 2020							                    |
+| 'Vector' source file last updated on 3 August 2020						                    |
 #==============================================================================================*/
+
+#include <math.h>
 
 template <class T> class Vector
 {
@@ -152,7 +154,7 @@ template <class T> Vector<T> Vector<T>::operator-() const
 //======================================================================================================
 template <class T> T Vector<T>::Magnitude() const
 {
-	return sqrtf(SqrMagnitude());
+	return static_cast<T>(sqrtf(static_cast<float>(SqrMagnitude())));
 }
 //======================================================================================================
 template <class T> T Vector<T>::SqrMagnitude() const

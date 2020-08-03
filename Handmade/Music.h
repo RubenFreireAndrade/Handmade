@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Music' source files last updated on 21 July 2020							                    |
+| 'Music' source files last updated on 27 July 2020							                    |
 #==============================================================================================*/
 
 #include <map>
@@ -43,7 +43,7 @@ public:
 	static bool Initialize(int frequency = 44100, int chunkSize = 1024);
 	static bool Load(const std::string& filename, const std::string& mapIndex);
 	static void Unload(const std::string& mapIndex = "");
-	static void ShutDown();
+	static void Shutdown();
 
 public:
 

@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Text' source files last updated on 21 July 2020							                    |
+| 'Text' source files last updated on 28 July 2020							                    |
 #==============================================================================================*/
 
 #include <map>
@@ -37,7 +37,7 @@ class Text
 
 public:
 
-	enum class FontSize { SMALL = 72, MEDIUM = 144, LARGE = 300 };  //based on 72DPI - keep in multiples of 6
+	enum class FontSize { SMALL = 72, MEDIUM = 144, LARGE = 300 };  
 
 public:
 
@@ -45,7 +45,7 @@ public:
 	static bool Load(const std::string& filename, 
 		             const std::string& mapIndex, FontSize fontSize = FontSize::SMALL);
 	static void Unload(const std::string& mapIndex = "");
-	static void ShutDown();
+	static void Shutdown();
 
 public:
 
@@ -79,12 +79,12 @@ private:
 
 private:
 
-	std::string m_text;               //the raw string text that is used to created the text object to be rendered
-	SDL_Point m_textSize;             //size (in pixels) of the rendered text in its entirety
+	std::string m_text;               
+	SDL_Point m_textSize;             
 
-	TTF_Font* m_font;                 //handle on the font in memory. This is only a reference (no need for copy ctor)
-	SDL_Color m_color;                //color of the rendered text
-	SDL_Texture* m_texture;           //handle on the text object after using font, color and string to create it
+	TTF_Font* m_font;                
+	SDL_Color m_color;                
+	SDL_Texture* m_texture;           
 
 };
 

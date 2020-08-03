@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Sound' source files last updated on 21 July 2020							                    |
+| 'Sound' source files last updated on 27 July 2020							                    |
 #==============================================================================================*/
 
 #include <map>

@@ -112,8 +112,8 @@ void Game::ShutDown()
 {
 
 	//close down font and audio sub-systems
-	Text::ShutDown();
-	Music::ShutDown();
+	Text::Shutdown();
+	Music::Shutdown();
 
 	//close down game screen 
 	Screen::Instance()->ShutDown();

@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Sprite' source files last updated on 21 July 2020							                |
+| 'Sprite' source files last updated on 27 July 2020							                |
 #==============================================================================================*/
 
 #include <map>
@@ -76,7 +76,7 @@ private:
 
 private:
 
-	int m_imageIndex;
+	int m_imageCel;
 	float m_animationVelocity;
 	
 	bool m_isAnimated;
@@ -84,10 +84,10 @@ private:
 	bool m_isAnimationLooping;
 	bool m_isAnimationLoopFinal;
 
-	SDL_Texture* m_image;               //handle on the image in memory. This is only a reference (no need for copy ctor)
-	SDL_Point m_celDimension;           //dimension (in pixels) of the individual image 'cutout' 
-	SDL_Point m_imageDimension;         //dimension (in pixels) of the image on the hard-drive (resolution)
-	SDL_Point m_spriteDimension;        //dimension (in pixels) of the sprite image rendered on-screen
+	SDL_Texture* m_image;               
+	SDL_Point m_celDimension;           
+	SDL_Point m_imageDimension;         
+	SDL_Point m_spriteDimension;        
 
 };
 
