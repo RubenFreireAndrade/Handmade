@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Screen' source files last updated on 21 July 2020							                |
+| 'Screen' source files last updated on 6 August 2020							                |
 #==============================================================================================*/
 
 #include <string>
@@ -53,11 +53,9 @@ public:
 
 	bool Initialize(const std::string& windowTitle, int width = 1024, 
 		            int height = 768, bool fullscreen = false);
-	
 	void Update();
 	void Draw();
-
-	void ShutDown();
+	void Shutdown();
 
 private:
 

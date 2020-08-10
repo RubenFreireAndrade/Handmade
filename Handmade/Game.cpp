@@ -116,6 +116,6 @@ void Game::ShutDown()
 	Music::Shutdown();
 
 	//close down game screen 
-	Screen::Instance()->ShutDown();
+	Screen::Instance()->Shutdown();
 
 }
