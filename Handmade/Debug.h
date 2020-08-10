@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Debug' source files last updated on 21 July 2020							                    |
+| 'Debug' source files last updated on 10 August 2020						                    |
 #==============================================================================================*/
 
 #include <string>

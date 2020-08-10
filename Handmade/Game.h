@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Game' source files last updated on 21 July 2020							                    |
+| 'Game' source files last updated on 10 August 2020						                    |
 #==============================================================================================*/
 
 #include <string>
@@ -42,7 +42,7 @@ public:
 	bool Initialize(const std::string& name, int screenWidth,
 		            int screenHeight, bool fullscreen = false);
 	bool Run();
-	void ShutDown();
+	void Shutdown();
 
 private:
 
