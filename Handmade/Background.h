@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'Background' source files last updated on 21 July 2020							            |
+| 'Background' source files last updated on 11 August 2020							            |
 #==============================================================================================*/
 
 #include "GameObject.h"
@@ -52,8 +52,8 @@ public:
 protected:
 
 	bool m_isPlaying;
-	std::string m_imageName;
-	std::string m_audioName;
+	std::string m_imageID;
+	std::string m_audioID;
 
 	Music m_music;
 	Sprite m_image;

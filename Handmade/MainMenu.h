@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'MainMenu' source files last updated on 21 July 2020							                |
+| 'MainMenu' source files last updated on 11 August 2020						                |
 #==============================================================================================*/
 
 #include <string>
@@ -32,8 +32,6 @@
 #include "GameObject.h"
 #include "Text.h"
 
-//make sure not to use any arbitrary width and height
-//but rather one that corresponds to the current resolution
 const int MENU_TEXT_CHAR_W = 25;
 const int MENU_TEXT_CHAR_H = 53;
 

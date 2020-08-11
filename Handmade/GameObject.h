@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'GameObject' source files last updated on 21 July 2020							            |
+| 'GameObject' source files last updated on 11 August 2020							            |
 #==============================================================================================*/
 
 #include <string>
