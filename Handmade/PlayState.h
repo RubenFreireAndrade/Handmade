@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'PlayState' source files last updated on 21 July 2020							                |
+| 'PlayState' source files last updated on 11 August 2020						                |
 #==============================================================================================*/
 
 #include <vector>

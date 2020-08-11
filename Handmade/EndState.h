@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'EndState' source files last updated on 21 July 2020							                |
+| 'EndState' source files last updated on 11 August 2020						                |
 #==============================================================================================*/
 
 #include "Background.h"

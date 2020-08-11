@@ -24,7 +24,7 @@
 | GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
 |                                                                                               |
 #===============================================================================================#
-| 'MenuState' source files last updated on 21 July 2020							                |
+| 'MenuState' source files last updated on 10 August 2020						                |
 #==============================================================================================*/
 
 #include "Background.h"
