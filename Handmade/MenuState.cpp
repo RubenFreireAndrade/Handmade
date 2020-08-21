@@ -11,7 +11,7 @@ MenuState::MenuState()
 bool MenuState::OnEnter()
 {
 	m_menu = new MainMenu;
-	m_image = new Background("Assets/Images/Menu_1280x720.png", "Assets/Music/Menu.ogg");
+	m_image = new Background("Assets/Images/Menu_1280x720.png", "Assets/Music/Journeys.ogg");
 	m_menu->SetMenuText("Play game");
 	m_menu->SetMenuText("Quit game");
 	return true;
