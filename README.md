@@ -8,4 +8,4 @@ Handmade Lite is an educational Visual Studio framework, written by Karsten Verm
 
 #### Thank you for your support!
 
-©2020 Karsten Vermeulen
+©2021 Karsten Vermeulen
