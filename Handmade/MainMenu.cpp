@@ -41,7 +41,7 @@ void MainMenu::Update(int deltaTime)
 		{
 			m_menuOptionActive = 0;
 		}
-		
+
 		else
 		{
 			m_menuOptionActive++;
@@ -80,13 +80,13 @@ bool MainMenu::Draw()
 {
 	Vector<int> resolution = Screen::Instance()->GetResolution();
 
-	int posY = static_cast<int>((resolution.y - resolution.y / 4) - 
-		                        (m_menuText.size() / 2 * MENU_TEXT_CHAR_H));
+	int posY = static_cast<int>((resolution.y - resolution.y / 4) -
+							    (m_menuText.size() / 2 * MENU_TEXT_CHAR_H));
 
 	for (size_t i = 0; i < m_menuText.size(); i++)
 	{
 		m_menuText[i].Draw(static_cast<int>((resolution.x / 2) - m_menuText[i].GetSize().x / 2),  //x
-			               static_cast<int>(posY + i * MENU_TEXT_CHAR_H));                        //y
+						   static_cast<int>(posY + i * MENU_TEXT_CHAR_H));                        //y
 	}
 
 	return true;

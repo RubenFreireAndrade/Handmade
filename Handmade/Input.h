@@ -1,31 +1,8 @@
-#ifndef INPUT_H
-#define INPUT_H
+#pragma once
 
-/*==============================================================================================#
-|                                                                                               |
-| Handmade Lite is an educational Visual Studio framework, written by Karsten Vermeulen,        |
-| designed to assist with educating other fellow programmers, programming students, and anyone  |
-| else wishing to learn about game development, C++, and object-oriented programming. This      |
-| project is not open source and therefore has no license affiliated with it. Please be         |
-| respectful and do not distribute the engine or its code as your work. You may alter or tweak  |
-| the engine code as a learning experience and you may also 'borrow' code and functionality     |
-| and use it to create your own game engine. Finally, please do use Handmade Lite to develop    |
-| a game.                                                                                       |
-|                                                                                               |
-| Designed to teach. Made from scratch. Built by hand.							                |
-|	                                                                                            |
-#===============================================================================================#
-|                                                                                               |
-| If you like Handmade Lite and wish to show your support, if you have any questions about      |
-| the project, or if you just want to reach out, please do get in touch:                        |
-|																						        |
-| Facebook | https://www.facebook.com/Handmade-Lite-107188757745777								|
-| Twitter  | https://twitter.com/KarstensCorner													|
-| GitHub   | https://github.com/djkarstenv/Handmade-Lite									    |
-|                                                                                               |
-#===============================================================================================#
-| 'Input' source files last updated on 10 August 2020  					                        |
-#==============================================================================================*/
+/*===================================================================#
+| 'Input' source files last updated on 11 May 2021                   |
+#===================================================================*/
 
 //======================================================================================================
 //these are the physical key codes  
@@ -79,14 +56,14 @@
 #define HM_KEY_LEFTBRACKET 47
 #define HM_KEY_RIGHTBRACKET 48
 #define HM_KEY_BACKSLASH 49 
-                              
+
 #define HM_KEY_SEMICOLON 51
 #define HM_KEY_APOSTROPHE 52
 #define HM_KEY_GRAVE 53 
 #define HM_KEY_COMMA 54
 #define HM_KEY_PERIOD 55
 #define HM_KEY_SLASH 56
- 
+
 #define HM_KEY_CAPSLOCK 57
 
 #define HM_KEY_F1 58
@@ -267,7 +244,7 @@
 
 #define HM_KEY_APP1 283
 #define HM_KEY_APP2 284
- 
+
 #define HM_KEY_AUDIOREWIND 285
 #define HM_KEY_AUDIOFASTFORWARD 286
 
@@ -309,28 +286,22 @@ public:
 
 	static Input* Instance();
 
-public:
-
 	char GetKey() const;
 	int GetMouseWheel() const;
-	
+
 	const Vector<int>& GetMouseMotion() const;
 	const Vector<int>& GetMousePosition() const;
-	
+
 	void SetCursorState(bool isCursorEnabled, bool isCursorVisible);
 
-public:
-
 	bool IsWindowClosed() const;
-	
+
 	bool IsKeyPressed() const;
 	bool IsKeyPressed(int keyCode) const;
 	bool IsModifierPressed(int modifier_1, int modifier_2 = HM_MOD_NONE) const;
-	
+
 	bool IsMouseClicked() const;
 	bool IsMouseClicked(int mouseButton_1, int mouseButton_2 = HM_MOUSE_NONE) const;
-
-public:
 
 	void Update();
 
@@ -340,21 +311,17 @@ private:
 	Input(const Input&);
 	Input& operator=(Input&);
 
-private:
+	char m_key;
 
-	char m_key;      
-	
 	int m_modifier;
 	int m_mouseWheel;
 	int m_mouseButton;
-	
+
 	bool m_isKeyPressed;
 	bool m_isMouseClicked;
 	bool m_isWindowClosed;
-	
+
 	Vector<int> m_mouseMotion;
 	Vector<int> m_mousePosition;
-	
-};
 
-#endif
+};

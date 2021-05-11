@@ -11,7 +11,7 @@ PlayState::PlayState()
 //======================================================================================================
 bool PlayState::OnEnter()
 {
-	m_image = new Background("Assets/Images/Play_1280x720.png", "Assets/Music/Aircord.ogg");	
+	m_image = new Background("Assets/Images/Play_1280x720.png", "Assets/Music/Aircord.ogg");
 	return true;
 }
 //======================================================================================================
@@ -53,7 +53,7 @@ bool PlayState::Draw()
 			(*it)->Draw();
 		}
 	}
-	
+
 	return true;
 }
 //======================================================================================================

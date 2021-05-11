@@ -9,7 +9,7 @@ void AABB::SetPosition(int x, int y)
 //======================================================================================================
 void AABB::SetDimension(int width, int height)
 {
-	m_dimension.x = width; 
+	m_dimension.x = width;
 	m_dimension.y = height;
 }
 //======================================================================================================

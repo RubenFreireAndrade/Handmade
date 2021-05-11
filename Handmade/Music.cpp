@@ -31,7 +31,7 @@ bool Music::Load(const std::string& filename, const std::string& mapIndex)
 		Debug::Log("===============================================================");
 		return false;
 	}
-	
+
 	Mix_Music* music = Mix_LoadMUS(filename.c_str());
 
 	if (!music)
@@ -42,7 +42,7 @@ bool Music::Load(const std::string& filename, const std::string& mapIndex)
 	}
 
 	(*s_music)[mapIndex] = music;
-	
+
 	Debug::Log("File opened and read successfully.", Debug::ErrorCode::SUCCESS);
 	Debug::Log("===============================================================");
 
@@ -73,7 +73,7 @@ void Music::Unload(const std::string& mapIndex)
 		}
 	}
 
-	else 
+	else
 	{
 		Debug::Log("Unloading all music data.");
 
@@ -121,22 +121,22 @@ bool Music::SetMusic(const std::string& mapIndex)
 //======================================================================================================
 bool Music::Play(LoopType loopType)
 {
-	if(!Mix_PlayingMusic())
+	if (!Mix_PlayingMusic())
 	{
-		if(Mix_PlayMusic(m_music, static_cast<int>(loopType)) == -1)
+		if (Mix_PlayMusic(m_music, static_cast<int>(loopType)) == -1)
 		{
 			Debug::Log("Music could not be played.", Debug::ErrorCode::FAILURE);
 			Debug::Log("===============================================================");
 			return false;
 		}
 	}
-	
+
 	return true;
 }
 //======================================================================================================
 void Music::Pause()
 {
-	if(!Mix_PausedMusic())
+	if (!Mix_PausedMusic())
 	{
 		Mix_PauseMusic();
 	}
@@ -144,7 +144,7 @@ void Music::Pause()
 //======================================================================================================
 void Music::Resume()
 {
-	if(Mix_PausedMusic())
+	if (Mix_PausedMusic())
 	{
 		Mix_ResumeMusic();
 	}
@@ -152,7 +152,7 @@ void Music::Resume()
 //======================================================================================================
 void Music::Stop()
 {
-	if(Mix_PlayingMusic())
+	if (Mix_PlayingMusic())
 	{
 		Mix_HaltMusic();
 	}

@@ -55,7 +55,7 @@ void Text::Unload(const std::string& mapIndex)
 	if (!mapIndex.empty())
 	{
 		Debug::Log("Unloading font data: '" + mapIndex + "'");
-	
+
 		auto it = s_fonts->find(mapIndex);
 
 		if (it == s_fonts->end())

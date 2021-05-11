@@ -53,10 +53,10 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 
 	Uint32 screenFlag = (fullscreen) ? SDL_WINDOW_FULLSCREEN : 0;
 
-	m_window = SDL_CreateWindow(windowTitle.c_str(), 
-		                        SDL_WINDOWPOS_CENTERED, 
-		                        SDL_WINDOWPOS_CENTERED,
-		                        width, height, screenFlag);
+	m_window = SDL_CreateWindow(windowTitle.c_str(),
+								SDL_WINDOWPOS_CENTERED,
+								SDL_WINDOWPOS_CENTERED,
+								width, height, screenFlag);
 
 	if (!m_window)
 	{
@@ -66,9 +66,9 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 		return false;
 	}
 
-	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | 
-		                                          SDL_RENDERER_PRESENTVSYNC);
-	
+	m_renderer = SDL_CreateRenderer(m_window, -1, 
+								    SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
 	if (!m_renderer)
 	{
 		Debug::Log("Renderer could not be created.", Debug::ErrorCode::FAILURE);

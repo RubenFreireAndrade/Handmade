@@ -49,7 +49,7 @@ bool Game::Run()
 		GameState* nextState = m_gameState->Update(m_deltaTime);
 
 		m_gameState->Draw();
-			
+
 		Screen::Instance()->Draw();
 
 		if (nextState != m_gameState)
@@ -64,7 +64,7 @@ bool Game::Run()
 			}
 		}
 
-		m_deltaTime = SDL_GetTicks() - startTime;	
+		m_deltaTime = SDL_GetTicks() - startTime;
 	}
 
 	return true;

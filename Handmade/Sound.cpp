@@ -23,7 +23,7 @@ bool Sound::Load(const std::string& filename, const std::string& mapIndex)
 		Debug::Log("===============================================================");
 		return false;
 	}
-	
+
 	(*s_sounds)[mapIndex] = sound;
 
 	Debug::Log("File opened and read successfully.", Debug::ErrorCode::SUCCESS);
