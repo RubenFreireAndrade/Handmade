@@ -8,6 +8,9 @@
 #include <string>
 #include <SDL_mixer.h>
 
+//TODO - Adjust volume level when starting the game
+//TODO - Normalize audio volume
+
 class Music
 {
 

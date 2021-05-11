@@ -8,6 +8,11 @@
 #include <string>
 #include <SDL_render.h>
 
+//TODO - Reset animation cel back to 0
+//TODO - Add an 'assert' to make sure when setting image cel dimensions are set
+//TODO - Dimension of sprite must relate to dimension of game object base class
+//TODO - Fix bug when setting animation velocity to a negative number
+
 class Sprite
 {
 
