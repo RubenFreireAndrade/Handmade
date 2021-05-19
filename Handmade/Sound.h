@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'Sound' source files last updated on 11 May 2021                   |
+| 'Sound' source files last updated on 19 May 2021                   |
 #===================================================================*/
 
 #include <map>
@@ -18,7 +18,7 @@ public:
 
 	Sound();
 
-	void SetVolume(int volume);
+	void SetVolume(float volume);
 	bool SetSound(const std::string& mapIndex);
 
 	bool Play(int loop = 0);

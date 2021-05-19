@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Debug.h"
 #include "Sound.h"
 
@@ -77,9 +78,10 @@ Sound::Sound()
 	m_sound = nullptr;
 }
 //======================================================================================================
-void Sound::SetVolume(int volume)
+void Sound::SetVolume(float volume)
 {
-	Mix_VolumeChunk(m_sound, volume);
+	volume = std::clamp(volume, 0.0f, 1.0f);
+	Mix_VolumeChunk(m_sound, static_cast<int>(volume * 128.0f));
 }
 //======================================================================================================
 bool Sound::SetSound(const std::string& mapIndex)
