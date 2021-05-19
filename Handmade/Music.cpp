@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Debug.h"
 #include "Music.h"
 
@@ -99,9 +100,10 @@ Music::Music()
 	m_music = nullptr;
 }
 //======================================================================================================
-void Music::SetVolume(int volume)
+void Music::SetVolume(float volume)
 {
-	Mix_VolumeMusic(volume);
+	volume = std::clamp(volume, 0.0f, 1.0f);
+	Mix_VolumeMusic(static_cast<int>(volume * 128.0f));
 }
 //======================================================================================================
 bool Music::SetMusic(const std::string& mapIndex)

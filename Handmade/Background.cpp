@@ -15,6 +15,7 @@ Background::Background(const std::string& imageFilename, const std::string& audi
 
 	m_music.Load(audioFilename, audioFilename);
 	m_music.SetMusic(audioFilename);
+	m_music.SetVolume(0.5f);
 
 	m_imageID = imageFilename;
 	m_audioID = audioFilename;

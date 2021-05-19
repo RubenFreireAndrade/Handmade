@@ -1,15 +1,12 @@
 #pragma once
 
 /*===================================================================#
-| 'Music' source files last updated on 11 May 2021                   |
+| 'Music' source files last updated on 19 May 2021                   |
 #===================================================================*/
 
 #include <map>
 #include <string>
 #include <SDL_mixer.h>
-
-//TODO - Adjust volume level when starting the game
-//TODO - Normalize audio volume
 
 class Music
 {
@@ -29,7 +26,7 @@ public:
 
 	Music();
 
-	void SetVolume(int volume);
+	void SetVolume(float volume);
 	bool SetMusic(const std::string& mapIndex);
 
 	bool Play(LoopType loopType = LoopType::PLAY_ONCE);
