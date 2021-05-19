@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'AABB' source files last updated on 11 May 2021                    |
+| 'AABB' source files last updated on 19 May 2021                    |
 #===================================================================*/
 
 #include "Vector.h"

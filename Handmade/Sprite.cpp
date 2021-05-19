@@ -176,7 +176,7 @@ void Sprite::Update(int deltaTime)
 		//the image index is zero based and is a whole number value counting from
 		//top left and going right and down the sprite sheet, and is capable of 'wrapping'
 		m_imageCel = static_cast<int>(totalTime * m_animationVelocity) %
-					 static_cast<int>(m_imageDimension.x * m_imageDimension.y);
+			static_cast<int>(m_imageDimension.x * m_imageDimension.y);
 
 		//if animation is set to cycle endlessly then set the kill and final flags
 		//to false so that no other final checks are made and that the animation loops
@@ -189,7 +189,7 @@ void Sprite::Update(int deltaTime)
 		//otherwise if animation is set to cycle once and the last image
 		//cel has been reached then flag this as the final animation loop
 		else if (!m_isAnimationLooping &&
-				  m_imageCel == (m_imageDimension.x * m_imageDimension.y - 1))
+			m_imageCel == (m_imageDimension.x * m_imageDimension.y - 1))
 		{
 			m_isAnimationLoopFinal = true;
 		}
@@ -236,6 +236,6 @@ void Sprite::Draw(int positionX, int positionY, double angle, FlipType flipType)
 
 		//render the sprite using all values passed and determined above
 		SDL_RenderCopyEx(Screen::Instance()->GetRenderer(),
-					     m_image, &src, &dst, angle, &centrePoint, static_cast<SDL_RendererFlip>(flipType));
+			m_image, &src, &dst, angle, &centrePoint, static_cast<SDL_RendererFlip>(flipType));
 	}
 }

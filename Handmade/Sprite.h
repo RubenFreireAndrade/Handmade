@@ -44,9 +44,9 @@ public:
 	void Update(int deltaTime);
 
 	void Draw(int positionX = 0,
-			  int positionY = 0,
-			  double angle = 0.0,
-			  FlipType flipType = FlipType::NO_FLIP);
+		int positionY = 0,
+		double angle = 0.0,
+		FlipType flipType = FlipType::NO_FLIP);
 
 private:
 

@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'Sphere' source files last updated on 11 May 2021                  |
+| 'Sphere' source files last updated on 19 May 2021                  |
 #===================================================================*/
 
 #include "Vector.h"

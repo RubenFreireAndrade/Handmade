@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'Text' source files last updated on 11 May 2021                    |
+| 'Text' source files last updated on 19 May 2021                    |
 #===================================================================*/
 
 #include <map>
@@ -23,8 +23,8 @@ public:
 
 	static bool Initialize();
 	static bool Load(const std::string& filename,
-					 const std::string& mapIndex,
-					 FontSize fontSize = FontSize::SMALL);
+		const std::string& mapIndex,
+		FontSize fontSize = FontSize::SMALL);
 	static void Unload(const std::string& mapIndex = "");
 	static void Shutdown();
 
