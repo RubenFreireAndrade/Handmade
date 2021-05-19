@@ -1,9 +1,10 @@
 #pragma once
 
 /*===================================================================#
-| 'MenuState' source files last updated on 11 May 2021               |
+| 'MenuState' source files last updated on 19 May 2021               |
 #===================================================================*/
 
+#include <memory>
 #include "Background.h"
 #include "GameState.h"
 #include "MainMenu.h"
@@ -19,7 +20,7 @@ public:
 		QUIT
 	};
 
-	MenuState();
+	MenuState() {}
 	virtual ~MenuState() {}
 
 	virtual bool OnEnter();
@@ -29,7 +30,7 @@ public:
 
 private:
 
-	MainMenu* m_menu;
-	Background* m_image;
+	std::unique_ptr<MainMenu> m_menu;
+	std::unique_ptr<Background> m_image;
 
 };

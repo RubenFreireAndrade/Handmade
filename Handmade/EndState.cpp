@@ -2,18 +2,15 @@
 #include "PlayState.h"
 
 //======================================================================================================
-EndState::EndState()
-{
-	m_menu = nullptr;
-	m_image = nullptr;
-}
-//======================================================================================================
 bool EndState::OnEnter()
 {
-	m_menu = new MainMenu;
-	m_image = new Background("Assets/Images/End_1280x720.png", "Assets/Music/Glory.ogg");
+	m_menu = std::make_unique<MainMenu>();
+	m_image = std::make_unique<Background>("Assets/Images/End_1280x720.png",
+		"Assets/Music/Glory.ogg");
+
 	m_menu->SetMenuText("Play again");
 	m_menu->SetMenuText("Quit game");
+
 	return true;
 }
 //======================================================================================================
@@ -46,6 +43,5 @@ bool EndState::Draw()
 //======================================================================================================
 void EndState::OnExit()
 {
-	delete m_image;
-	delete m_menu;
+	//Unload any resources you might have here...
 }

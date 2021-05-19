@@ -1,9 +1,10 @@
 #pragma once
 
 /*===================================================================#
-| 'Music' source files last updated on 11 May 2021                   |
+| 'Music' source files last updated on 19 May 2021                   |
 #===================================================================*/
 
+#include <memory>
 #include <vector>
 #include "Background.h"
 #include "GameObject.h"
@@ -14,7 +15,7 @@ class PlayState : public GameState
 
 public:
 
-	PlayState();
+	PlayState() {}
 	virtual ~PlayState() {}
 
 	virtual bool OnEnter();
@@ -24,7 +25,7 @@ public:
 
 private:
 
-	Background* m_image;
-	std::vector<GameObject*> m_gameObjects;
+	std::unique_ptr<Background> m_image;
+	std::vector<std::unique_ptr<GameObject>> m_gameObjects;
 
 };

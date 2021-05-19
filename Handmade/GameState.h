@@ -1,10 +1,10 @@
 #pragma once
 
 /*===================================================================#
-| 'GameState' source files last updated on 11 May 2021               |
+| 'GameState' source files last updated on 19 May 2021               |
 #===================================================================*/
 
-//TODO - Add default screens fof each game state
+//TODO - Add default screens for each game state
 //TODO - Cannot load resources in game states ctor
 //TODO - Consider RAII to load/release resources in the ctor/dtor
 //This would remove the need for OnEnter/OnExit?

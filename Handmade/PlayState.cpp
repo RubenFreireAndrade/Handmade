@@ -4,14 +4,10 @@
 #include "PlayState.h"
 
 //======================================================================================================
-PlayState::PlayState()
-{
-	m_image = nullptr;
-}
-//======================================================================================================
 bool PlayState::OnEnter()
 {
-	m_image = new Background("Assets/Images/Play_1280x720.png", "Assets/Music/Aircord.ogg");
+	m_image = std::make_unique<Background>("Assets/Images/Play_1280x720.png",
+		"Assets/Music/Aircord.ogg");
 	return true;
 }
 //======================================================================================================
@@ -59,11 +55,5 @@ bool PlayState::Draw()
 //======================================================================================================
 void PlayState::OnExit()
 {
-	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++)
-	{
-		delete (*it);
-	}
-
 	m_gameObjects.clear();
-	delete m_image;
 }

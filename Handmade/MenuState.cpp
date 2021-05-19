@@ -2,18 +2,15 @@
 #include "PlayState.h"
 
 //======================================================================================================
-MenuState::MenuState()
-{
-	m_menu = nullptr;
-	m_image = nullptr;
-}
-//======================================================================================================
 bool MenuState::OnEnter()
 {
-	m_menu = new MainMenu;
-	m_image = new Background("Assets/Images/Menu_1280x720.png", "Assets/Music/Journeys.ogg");
+	m_menu = std::make_unique<MainMenu>();
+	m_image = std::make_unique<Background>("Assets/Images/Menu_1280x720.png",
+		"Assets/Music/Journeys.ogg");
+
 	m_menu->SetMenuText("Play game");
 	m_menu->SetMenuText("Quit game");
+
 	return true;
 }
 //======================================================================================================
@@ -46,6 +43,5 @@ bool MenuState::Draw()
 //======================================================================================================
 void MenuState::OnExit()
 {
-	delete m_image;
-	delete m_menu;
+	//Unload any resources you might have here...
 }
