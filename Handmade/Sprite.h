@@ -1,17 +1,12 @@
 #pragma once
 
 /*===================================================================#
-| 'Sprite' source files last updated on 11 May 2021                  |
+| 'Sprite' source files last updated on 19 May 2021                  |
 #===================================================================*/
 
 #include <map>
 #include <string>
 #include <SDL_render.h>
-
-//TODO - Reset animation cel back to 0
-//TODO - Add an 'assert' to make sure when setting image cel dimensions are set
-//TODO - Dimension of sprite must relate to dimension of game object base class
-//TODO - Fix bug when setting animation velocity to a negative number
 
 class Sprite
 {
@@ -41,9 +36,10 @@ public:
 	void SetSpriteDimension(int width, int height);
 	void SetImageDimension(int columns, int rows, int width, int height);
 
+	void ResetAnimation();
 	void Update(int deltaTime);
 
-	void Draw(int positionX = 0,
+	void Render(int positionX = 0,
 		int positionY = 0,
 		double angle = 0.0,
 		FlipType flipType = FlipType::NO_FLIP);
@@ -52,6 +48,7 @@ private:
 
 	int m_imageCel;
 	float m_animationVelocity;
+	float m_animationRunningTime;
 
 	bool m_isAnimated;
 	bool m_isAnimationDead;

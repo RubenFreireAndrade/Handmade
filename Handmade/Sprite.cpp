@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <algorithm>
 #include <SDL_image.h>
 #include "Debug.h"
@@ -82,6 +83,7 @@ Sprite::Sprite()
 {
 	m_imageCel = 0;
 	m_animationVelocity = 0.0f;
+	m_animationRunningTime = 0.0f;
 
 	m_isAnimated = false;
 	m_isAnimationDead = false;
@@ -116,13 +118,18 @@ void Sprite::IsAnimationLooping(bool flag)
 //======================================================================================================
 void Sprite::SetImageCel(int column, int row)
 {
-	row = std::max(row, 1);
-	column = std::max(column, 1);
+	//Make sure your column and row index values positive 
+	//and within the range of the pre-defined image atlas
+	//Also make sure that you call 'SetImageCel' after setting the image dimension
+	assert(column > 0 && column <= m_imageDimension.x);
+	assert(row > 0 && row <= m_imageDimension.y);
+
 	m_imageCel = ((row - 1) * m_imageDimension.x) + (column - 1);
 }
 //======================================================================================================
 void Sprite::SetAnimationVelocity(float velocity)
 {
+	assert(velocity >= 0.0f);
 	m_animationVelocity = velocity;
 }
 //======================================================================================================
@@ -159,6 +166,14 @@ void Sprite::SetImageDimension(int columns, int rows, int width, int height)
 	m_celDimension.y = height / rows;
 }
 //======================================================================================================
+void Sprite::ResetAnimation()
+{
+	m_imageCel = 0;
+	m_isAnimationDead = false;
+	m_animationRunningTime = 0.0f;
+	m_isAnimationLoopFinal = false;
+}
+//======================================================================================================
 void Sprite::Update(int deltaTime)
 {
 	//if sprite is an animation we have to calculate the 
@@ -169,13 +184,12 @@ void Sprite::Update(int deltaTime)
 		//this is done by adding on the delta time each frame
 		//we divide by 1000.0f because its MS time and we need
 		//to make sure that we don't trim the decimal portion 
-		static float totalTime = 0.0f;
-		totalTime += deltaTime / 1000.0f;
+		m_animationRunningTime += deltaTime / 1000.0f;
 
 		//aquire index value of specific texture cel to 'cut out' using a formula
 		//the image index is zero based and is a whole number value counting from
 		//top left and going right and down the sprite sheet, and is capable of 'wrapping'
-		m_imageCel = static_cast<int>(totalTime * m_animationVelocity) %
+		m_imageCel = static_cast<int>(m_animationRunningTime * m_animationVelocity) %
 			static_cast<int>(m_imageDimension.x * m_imageDimension.y);
 
 		//if animation is set to cycle endlessly then set the kill and final flags
@@ -205,7 +219,7 @@ void Sprite::Update(int deltaTime)
 	}
 }
 //======================================================================================================
-void Sprite::Draw(int positionX, int positionY, double angle, FlipType flipType)
+void Sprite::Render(int positionX, int positionY, double angle, FlipType flipType)
 {
 	//if animation is set to run, then render the
 	//sprite using the internal blitting function
