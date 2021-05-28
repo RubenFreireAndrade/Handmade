@@ -1,10 +1,9 @@
 #pragma once
 
 /*===================================================================#
-| 'MenuState' source files last updated on 19 May 2021               |
+| 'MenuState' source files last updated on 28 May 2021               |
 #===================================================================*/
 
-#include <memory>
 #include "Background.h"
 #include "GameState.h"
 #include "MainMenu.h"
@@ -25,12 +24,12 @@ public:
 
 	virtual bool OnEnter();
 	virtual GameState* Update(int deltaTime);
-	virtual bool Draw();
+	virtual bool Render();
 	virtual void OnExit();
 
 private:
 
-	std::unique_ptr<MainMenu> m_menu;
-	std::unique_ptr<Background> m_image;
+	MainMenu m_menu;
+	Background m_image;
 
 };

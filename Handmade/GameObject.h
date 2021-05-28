@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'GameObject' source files last updated on 11 May 2021              |
+| 'GameObject' source files last updated on 28 May 2021              |
 #===================================================================*/
 
 #include <string>
@@ -35,7 +35,7 @@ public:
 	void SetTag(const std::string& tag);
 
 	virtual void Update(int deltaTime) = 0;
-	virtual bool Draw() = 0;
+	virtual bool Render() = 0;
 
 protected:
 

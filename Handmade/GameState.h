@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'GameState' source files last updated on 19 May 2021               |
+| 'GameState' source files last updated on 28 May 2021               |
 #===================================================================*/
 
 //TODO - Add default screens for each game state
@@ -19,7 +19,7 @@ public:
 
 	virtual bool OnEnter() = 0;
 	virtual GameState* Update(int deltaTime) = 0;
-	virtual bool Draw() = 0;
+	virtual bool Render() = 0;
 	virtual void OnExit() = 0;
 
 };

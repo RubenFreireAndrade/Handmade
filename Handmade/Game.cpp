@@ -8,7 +8,7 @@
 Game::Game(GameState* initialGameState)
 {
 	m_deltaTime = 0;
-	m_gameState = initialGameState;
+	m_gameState.reset(initialGameState);
 }
 //======================================================================================================
 bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight, bool fullscreen)
@@ -48,15 +48,14 @@ bool Game::Run()
 
 		GameState* nextState = m_gameState->Update(m_deltaTime);
 
-		m_gameState->Draw();
+		m_gameState->Render();
 
 		Screen::Instance()->Draw();
 
-		if (nextState != m_gameState)
+		if (nextState != m_gameState.get())
 		{
 			m_gameState->OnExit();
-			delete m_gameState;
-			m_gameState = nextState;
+			m_gameState.reset(nextState);
 
 			if (m_gameState)
 			{

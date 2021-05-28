@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'Background' source files last updated on 19 May 2021              |
+| 'Background' source files last updated on 28 May 2021              |
 #===================================================================*/
 
 #include "GameObject.h"
@@ -13,14 +13,15 @@ class Background : public GameObject
 
 public:
 
-	Background(const std::string& imageFilename, const std::string& audioFilename);
+	Background();
 	virtual ~Background();
 
-	virtual void Update(int deltaTime) {}
-	virtual bool Draw();
-
+	void Load(const std::string& imageFilename, const std::string& audioFilename);
 	void PlayMusic();
 	void StopMusic();
+
+	virtual void Update(int deltaTime) {}
+	virtual bool Render();
 
 protected:
 

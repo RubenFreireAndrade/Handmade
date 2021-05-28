@@ -1,9 +1,10 @@
 #pragma once
 
 /*===================================================================#
-| 'Game' source files last updated on 11 May 2021                    |
+| 'Game' source files last updated on 28 May 2021                    |
 #===================================================================*/
 
+#include <memory>
 #include <string>
 #include "GameState.h"
 
@@ -15,9 +16,9 @@ public:
 	Game(GameState* initialGameState);
 
 	bool Initialize(const std::string& name,
-					int screenWidth,
-					int screenHeight,
-					bool fullscreen = false);
+		int screenWidth,
+		int screenHeight,
+		bool fullscreen = false);
 
 	bool Run();
 	void Shutdown();
@@ -25,6 +26,6 @@ public:
 private:
 
 	int m_deltaTime;
-	GameState* m_gameState;
+	std::unique_ptr<GameState> m_gameState;
 
 };

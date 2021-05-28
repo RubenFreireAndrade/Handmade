@@ -3,9 +3,25 @@
 #include "Vector.h"
 
 //======================================================================================================
-Background::Background(const std::string& imageFilename, const std::string& audioFilename)
+Background::Background()
 {
 	m_isPlaying = false;
+}
+//======================================================================================================
+Background::~Background()
+{
+	m_music.Unload(m_audioID);
+	m_image.Unload(m_imageID);
+}
+//======================================================================================================
+bool Background::Render()
+{
+	m_image.Render();
+	return true;
+}
+//======================================================================================================
+void Background::Load(const std::string& imageFilename, const std::string& audioFilename)
+{
 	Vector<int> resolution = Screen::Instance()->GetResolution();
 
 	m_image.Load(imageFilename, imageFilename);
@@ -19,18 +35,6 @@ Background::Background(const std::string& imageFilename, const std::string& audi
 
 	m_imageID = imageFilename;
 	m_audioID = audioFilename;
-}
-//======================================================================================================
-Background::~Background()
-{
-	m_music.Unload(m_audioID);
-	m_image.Unload(m_imageID);
-}
-//======================================================================================================
-bool Background::Draw()
-{
-	m_image.Render();
-	return true;
 }
 //======================================================================================================
 void Background::PlayMusic()

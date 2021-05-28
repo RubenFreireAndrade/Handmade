@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'MainMenu' source files last updated on 11 May 2021                |
+| 'MainMenu' source files last updated on 28 May 2021                |
 #===================================================================*/
 
 #include <string>
@@ -18,13 +18,13 @@ class MainMenu : public GameObject
 public:
 
 	MainMenu();
-	virtual ~MainMenu();
+	virtual ~MainMenu() {}
 
 	int GetMenuOption() const;
 	void SetMenuText(const std::string& text);
 
 	virtual void Update(int deltaTime);
-	virtual bool Draw();
+	virtual bool Render();
 
 	void Reset();
 

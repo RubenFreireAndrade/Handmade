@@ -1,10 +1,9 @@
 #pragma once
 
 /*===================================================================#
-| 'Music' source files last updated on 19 May 2021                   |
+| 'PlayState' source files last updated on 28 May 2021               |
 #===================================================================*/
 
-#include <memory>
 #include <vector>
 #include "Background.h"
 #include "GameObject.h"
@@ -20,12 +19,12 @@ public:
 
 	virtual bool OnEnter();
 	virtual GameState* Update(int deltaTime);
-	virtual bool Draw();
+	virtual bool Render();
 	virtual void OnExit();
 
 private:
 
-	std::unique_ptr<Background> m_image;
-	std::vector<std::unique_ptr<GameObject>> m_gameObjects;
+	Background m_image;
+	std::vector<GameObject> m_gameObjects;
 
 };

@@ -8,12 +8,6 @@ MainMenu::MainMenu()
 {
 	m_menuOptionActive = 0;
 	m_menuOptionChoice = -1;
-	Text::Load("Assets/Fonts/Quikhand.ttf", "Menu_Font", Text::FontSize::SMALL);
-}
-//======================================================================================================
-MainMenu::~MainMenu()
-{
-	Text::Unload("Menu_Font");
 }
 //======================================================================================================
 int MainMenu::GetMenuOption() const
@@ -76,7 +70,7 @@ void MainMenu::Update(int deltaTime)
 	m_menuText[m_menuOptionActive].SetColor(240, 0, 0);
 }
 //======================================================================================================
-bool MainMenu::Draw()
+bool MainMenu::Render()
 {
 	Vector<int> resolution = Screen::Instance()->GetResolution();
 
