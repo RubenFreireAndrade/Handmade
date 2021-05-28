@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'Text' source files last updated on 19 May 2021                    |
+| 'Text' source files last updated on 28 May 2021                    |
 #===================================================================*/
 
 #include <map>
@@ -40,7 +40,7 @@ public:
 	void SetColor(Uint8 r, Uint8 g, Uint8 b);
 	bool SetFont(const std::string& mapIndex);
 
-	void Draw(int positionX = 0, int positionY = 0);
+	void Render(int positionX = 0, int positionY = 0);
 
 private:
 

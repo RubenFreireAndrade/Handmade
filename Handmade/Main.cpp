@@ -6,7 +6,6 @@
 #include "MenuState.h"
 
 //TODO - Add 'assert' where required
-//TODO - Replace 'Draw' with 'Render'
 //TODO - Use 'auto' and range-based for loops where possible
 //TODO - Consider RAII for class design
 //TODO - Load settings from a config file

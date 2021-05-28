@@ -163,7 +163,7 @@ bool Text::SetFont(const std::string& mapIndex)
 	return true;
 }
 //======================================================================================================
-void Text::Draw(int positionX, int positionY)
+void Text::Render(int positionX, int positionY)
 {
 	SDL_Rect dst;
 

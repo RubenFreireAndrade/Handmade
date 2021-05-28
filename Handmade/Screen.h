@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'Screen' source files last updated on 11 May 2021                  |
+| 'Screen' source files last updated on 28 May 2021                  |
 #===================================================================*/
 
 #include <string>
@@ -27,8 +27,8 @@ public:
 					int height = 768,
 					bool fullscreen = false);
 
-	void Update();
-	void Draw();
+	void Clear();
+	void Present();
 	void Shutdown();
 
 private:

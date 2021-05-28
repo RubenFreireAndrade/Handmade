@@ -83,12 +83,12 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 	return true;
 }
 //======================================================================================================
-void Screen::Update()
+void Screen::Clear()
 {
 	SDL_RenderClear(m_renderer);
 }
 //======================================================================================================
-void Screen::Draw()
+void Screen::Present()
 {
 	SDL_RenderPresent(m_renderer);
 }

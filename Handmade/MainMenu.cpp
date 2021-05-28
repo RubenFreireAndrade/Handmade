@@ -79,7 +79,7 @@ bool MainMenu::Render()
 
 	for (size_t i = 0; i < m_menuText.size(); i++)
 	{
-		m_menuText[i].Draw(static_cast<int>((resolution.x / 2) - m_menuText[i].GetSize().x / 2),  //x
+		m_menuText[i].Render(static_cast<int>((resolution.x / 2) - m_menuText[i].GetSize().x / 2),  //x
 			static_cast<int>(posY + i * MENU_TEXT_CHAR_H));  //y
 	}
 

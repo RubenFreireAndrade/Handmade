@@ -43,14 +43,14 @@ bool Game::Run()
 	{
 		int startTime = SDL_GetTicks();
 
-		Screen::Instance()->Update();
+		Screen::Instance()->Clear();
 		Input::Instance()->Update();
 
 		GameState* nextState = m_gameState->Update(m_deltaTime);
 
 		m_gameState->Render();
 
-		Screen::Instance()->Draw();
+		Screen::Instance()->Present();
 
 		if (nextState != m_gameState.get())
 		{
