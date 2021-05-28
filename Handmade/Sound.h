@@ -1,12 +1,15 @@
 #pragma once
 
 /*===================================================================#
-| 'Sound' source files last updated on 19 May 2021                   |
+| 'Sound' source files last updated on 28 May 2021                   |
 #===================================================================*/
 
 #include <map>
 #include <string>
 #include <SDL_mixer.h>
+
+//TODO - Add proper error messages
+//TODO - Make sure asserts are disabled in Release mode
 
 class Sound
 {

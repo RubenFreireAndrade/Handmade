@@ -9,6 +9,9 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+//TODO - Add proper error messages
+//TODO - Make sure asserts are disabled in Release mode
+
 class Text
 {
 

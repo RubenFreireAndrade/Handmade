@@ -1,51 +1,38 @@
-#include "Debug.h"
+#include <assert.h>
 #include "Screen.h"
 #include "Text.h"
+#include "Utility.h"
 
 std::map<std::string, TTF_Font*>* Text::s_fonts = new std::map<std::string, TTF_Font*>;
 
 //======================================================================================================
 bool Text::Initialize()
 {
-	Debug::Log("Initializing font sub-system...");
-
 	if (TTF_Init() == -1)
 	{
-		Debug::Log("Font sub-system did not initialize properly.", Debug::ErrorCode::FAILURE);
-		Debug::Log("===============================================================");
+		Utility::Log(MESSAGE_BOX,
+			"Font sub-system did not initialize properly.", Utility::Severity::FAILURE);
 		return false;
 	}
-
-	Debug::Log("Font sub-system successfully setup", Debug::ErrorCode::SUCCESS);
-	Debug::Log("===============================================================");
 
 	return true;
 }
 //======================================================================================================
 bool Text::Load(const std::string& filename, const std::string& mapIndex, FontSize fontSize)
 {
-	Debug::Log("Opening and reading font file: '" + filename + "'");
-
-	if (s_fonts->find(mapIndex) != s_fonts->end())
-	{
-		Debug::Log("Font data already loaded in memory.", Debug::ErrorCode::WARNING);
-		Debug::Log("===============================================================");
-		return false;
-	}
+	//Font data already loaded in memory
+	assert(s_fonts->find(mapIndex) == s_fonts->end());
 
 	TTF_Font* font = TTF_OpenFont(filename.c_str(), static_cast<int>(fontSize));
 
 	if (!font)
 	{
-		Debug::Log("File could not be loaded.", Debug::ErrorCode::FAILURE);
-		Debug::Log("===============================================================");
+		Utility::Log(MESSAGE_BOX,
+			"File could not be loaded.", Utility::Severity::FAILURE);
 		return false;
 	}
 
 	(*s_fonts)[mapIndex] = font;
-
-	Debug::Log("File opened and read successfully.", Debug::ErrorCode::SUCCESS);
-	Debug::Log("===============================================================");
 
 	return true;
 }
@@ -54,39 +41,23 @@ void Text::Unload(const std::string& mapIndex)
 {
 	if (!mapIndex.empty())
 	{
-		Debug::Log("Unloading font data: '" + mapIndex + "'");
-
 		auto it = s_fonts->find(mapIndex);
 
-		if (it == s_fonts->end())
-		{
-			Debug::Log("Font data not found. Please enter a valid ID.", Debug::ErrorCode::WARNING);
-			Debug::Log("===============================================================");
-		}
+		//Font data not found, so make sure to enter a valid ID
+		assert(it != s_fonts->end());
 
-		else
-		{
-			TTF_CloseFont(it->second);
-			s_fonts->erase(it);
-
-			Debug::Log("Font data unloaded successfully.", Debug::ErrorCode::SUCCESS);
-			Debug::Log("===============================================================");
-		}
+		TTF_CloseFont(it->second);
+		s_fonts->erase(it);
 	}
 
 	else
 	{
-		Debug::Log("Unloading all font data.");
-
 		for (auto it = s_fonts->begin(); it != s_fonts->end(); it++)
 		{
 			TTF_CloseFont(it->second);
 		}
 
 		s_fonts->clear();
-
-		Debug::Log("All font data unloaded successfully.", Debug::ErrorCode::SUCCESS);
-		Debug::Log("===============================================================");
 	}
 }
 //======================================================================================================
@@ -152,12 +123,8 @@ bool Text::SetFont(const std::string& mapIndex)
 {
 	auto it = s_fonts->find(mapIndex);
 
-	if (it == s_fonts->end())
-	{
-		Debug::Log("Font data not found. Please enter a valid ID.", Debug::ErrorCode::WARNING);
-		Debug::Log("===============================================================");
-		return false;
-	}
+	//Font data not found, so make sure to enter a valid ID
+	assert(it != s_fonts->end());
 
 	m_font = (*it).second;
 	return true;
@@ -180,6 +147,9 @@ void Text::Render(int positionX, int positionY)
 //======================================================================================================
 void Text::CreateText()
 {
+	//This means the font has not properly been loaded
+	assert(m_font != nullptr);
+
 	//create text object using font style, text string and color 
 	//value and store in a temporary pointer to be used below
 	SDL_Surface* textSurface = TTF_RenderText_Blended(m_font, m_text.c_str(), m_color);

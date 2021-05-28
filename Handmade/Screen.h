@@ -4,9 +4,13 @@
 | 'Screen' source files last updated on 28 May 2021                  |
 #===================================================================*/
 
+#include <Windows.h>
 #include <string>
 #include <SDL.h>
 #include "Vector.h"
+
+//TODO - Add proper error messages
+//TODO - Make sure asserts are disabled in Release mode
 
 class Screen
 {
@@ -15,6 +19,7 @@ public:
 
 	static Screen* Instance();
 
+	HWND GetWindowHandle();
 	SDL_Window* GetWindow();
 	SDL_Renderer* GetRenderer();
 	Vector<int> GetResolution();
@@ -23,9 +28,9 @@ public:
 	void SetClearColor(Uint8 r, Uint8 g, Uint8 b);
 
 	bool Initialize(const std::string& windowTitle,
-					int width = 1024,
-					int height = 768,
-					bool fullscreen = false);
+		int width = 1024,
+		int height = 768,
+		bool fullscreen = false);
 
 	void Clear();
 	void Present();
@@ -40,6 +45,7 @@ private:
 	int m_width;
 	int m_height;
 
+	HWND m_windowHandle;
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;
 

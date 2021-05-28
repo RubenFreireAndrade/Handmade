@@ -4,6 +4,8 @@
 #include "Screen.h"
 #include "Text.h"
 
+#include "Utility.h"
+
 //======================================================================================================
 Game::Game(GameState* initialGameState)
 {

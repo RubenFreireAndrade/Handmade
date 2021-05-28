@@ -1,5 +1,6 @@
-#include "Debug.h"
+#include <SDL_syswm.h>
 #include "Screen.h"
+#include "Utility.h"
 
 //======================================================================================================
 Screen* Screen::Instance()
@@ -14,6 +15,12 @@ Screen::Screen()
 	m_height = 0;
 	m_window = nullptr;
 	m_renderer = nullptr;
+	m_windowHandle = nullptr;
+}
+//======================================================================================================
+HWND Screen::GetWindowHandle()
+{
+	return m_windowHandle;
 }
 //======================================================================================================
 SDL_Window* Screen::GetWindow()
@@ -45,37 +52,41 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 	{
-		Debug::Log("SDL did not initialize properly.", Debug::ErrorCode::FAILURE);
-		Debug::Log("===============================================================");
-		Debug::PauseLog();
+		Utility::Log(MESSAGE_BOX,
+			"SDL did not initialize properly.", Utility::Severity::FAILURE);
 		return false;
 	}
 
 	Uint32 screenFlag = (fullscreen) ? SDL_WINDOW_FULLSCREEN : 0;
 
 	m_window = SDL_CreateWindow(windowTitle.c_str(),
-								SDL_WINDOWPOS_CENTERED,
-								SDL_WINDOWPOS_CENTERED,
-								width, height, screenFlag);
+		SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED,
+		width, height, screenFlag);
 
 	if (!m_window)
 	{
-		Debug::Log("Game window could not be created.", Debug::ErrorCode::FAILURE);
-		Debug::Log("===============================================================");
-		Debug::PauseLog();
+		Utility::Log(MESSAGE_BOX,
+			"Game window could not be created.", Utility::Severity::FAILURE);
 		return false;
 	}
 
-	m_renderer = SDL_CreateRenderer(m_window, -1, 
-								    SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	m_renderer = SDL_CreateRenderer(m_window, -1,
+		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	if (!m_renderer)
 	{
-		Debug::Log("Renderer could not be created.", Debug::ErrorCode::FAILURE);
-		Debug::Log("===============================================================");
-		Debug::PauseLog();
+		Utility::Log(MESSAGE_BOX,
+			"Renderer could not be created.", Utility::Severity::FAILURE);
 		return false;
 	}
+
+	//Use this to get Windows handle on game window for
+	//use with Windows message boxes and other stuff 
+	SDL_SysWMinfo systemInfo;
+	SDL_VERSION(&systemInfo.version);
+	SDL_GetWindowWMInfo(m_window, &systemInfo);
+	m_windowHandle = systemInfo.info.win.window;
 
 	m_width = width;
 	m_height = height;

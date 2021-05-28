@@ -1,30 +1,24 @@
-#include <assert.h>
 #include <algorithm>
+#include <assert.h>
 #include <SDL_image.h>
-#include "Debug.h"
 #include "Screen.h"
 #include "Sprite.h"
+#include "Utility.h"
 
 std::map<std::string, SDL_Texture*>* Sprite::s_images = new std::map<std::string, SDL_Texture*>;
 
 //======================================================================================================
 bool Sprite::Load(const std::string& filename, const std::string& mapIndex)
 {
-	Debug::Log("Opening and reading image file: '" + filename + "'");
-
-	if (s_images->find(mapIndex) != s_images->end())
-	{
-		Debug::Log("Image data already loaded in memory.", Debug::ErrorCode::WARNING);
-		Debug::Log("===============================================================");
-		return false;
-	}
+	//Image data already loaded in memory
+	assert(s_images->find(mapIndex) == s_images->end());
 
 	SDL_Surface* imageData = IMG_Load(filename.c_str());
 
 	if (!imageData)
 	{
-		Debug::Log("File could not be loaded.", Debug::ErrorCode::FAILURE);
-		Debug::Log("===============================================================");
+		Utility::Log(MESSAGE_BOX,
+			"File could not be loaded.", Utility::Severity::FAILURE);
 		return false;
 	}
 
@@ -33,9 +27,6 @@ bool Sprite::Load(const std::string& filename, const std::string& mapIndex)
 
 	(*s_images)[mapIndex] = image;
 
-	Debug::Log("File opened and read successfully.", Debug::ErrorCode::SUCCESS);
-	Debug::Log("===============================================================");
-
 	return true;
 }
 //======================================================================================================
@@ -43,39 +34,23 @@ void Sprite::Unload(const std::string& mapIndex)
 {
 	if (!mapIndex.empty())
 	{
-		Debug::Log("Unloading image data: '" + mapIndex + "'");
-
 		auto it = s_images->find(mapIndex);
 
-		if (it == s_images->end())
-		{
-			Debug::Log("Image data not found. Please enter a valid ID.", Debug::ErrorCode::WARNING);
-			Debug::Log("===============================================================");
-		}
+		//Image data not found, so make sure to enter a valid ID
+		assert(it != s_images->end());
 
-		else
-		{
-			SDL_DestroyTexture(it->second);
-			s_images->erase(it);
-
-			Debug::Log("Image data unloaded successfully.", Debug::ErrorCode::SUCCESS);
-			Debug::Log("===============================================================");
-		}
+		SDL_DestroyTexture(it->second);
+		s_images->erase(it);
 	}
 
 	else
 	{
-		Debug::Log("Unloading all image data.");
-
 		for (auto it = s_images->begin(); it != s_images->end(); it++)
 		{
 			SDL_DestroyTexture(it->second);
 		}
 
 		s_images->clear();
-
-		Debug::Log("All image data unloaded successfully.", Debug::ErrorCode::SUCCESS);
-		Debug::Log("===============================================================");
 	}
 }
 //======================================================================================================
@@ -118,7 +93,7 @@ void Sprite::IsAnimationLooping(bool flag)
 //======================================================================================================
 void Sprite::SetImageCel(int column, int row)
 {
-	//Make sure your column and row index values positive 
+	//Make sure your column and row index values are positive 
 	//and within the range of the pre-defined image atlas
 	//Also make sure that you call 'SetImageCel' after setting the image dimension
 	assert(column > 0 && column <= m_imageDimension.x);
@@ -137,12 +112,8 @@ bool Sprite::SetImage(const std::string& mapIndex)
 {
 	auto it = s_images->find(mapIndex);
 
-	if (it == s_images->end())
-	{
-		Debug::Log("Image data not found. Please enter a valid ID.", Debug::ErrorCode::WARNING);
-		Debug::Log("===============================================================");
-		return false;
-	}
+	//Image data not found, so make sure to enter a valid ID
+	assert(it != s_images->end());
 
 	m_image = (*it).second;
 	return true;

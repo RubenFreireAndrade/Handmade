@@ -87,7 +87,7 @@
     <ClInclude Include="Screen.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Debug.h">
+    <ClInclude Include="Utility.h">
       <Filter>Header Files\Main</Filter>
     </ClInclude>
     <ClInclude Include="Music.h">
@@ -143,7 +143,7 @@
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Debug.cpp">
+    <ClCompile Include="Utility.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
     <ClCompile Include="Music.cpp">
