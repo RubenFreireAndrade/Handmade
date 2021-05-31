@@ -3,7 +3,7 @@
 #include "Music.h"
 #include "Utility.h"
 
-std::map<std::string, Mix_Music*>* Music::s_music = new std::map<std::string, Mix_Music*>;
+std::unique_ptr<MusicMap> Music::s_music = std::make_unique<MusicMap>();
 
 //======================================================================================================
 bool Music::Initialize(int frequency, int chunkSize)
@@ -32,8 +32,7 @@ bool Music::Load(const std::string& filename, const std::string& mapIndex)
 		return false;
 	}
 
-	(*s_music)[mapIndex] = music;
-
+	s_music->insert(std::pair<std::string, Mix_Music*>(mapIndex, music));
 	return true;
 }
 //======================================================================================================
@@ -52,9 +51,9 @@ void Music::Unload(const std::string& mapIndex)
 
 	else
 	{
-		for (auto it = s_music->begin(); it != s_music->end(); it++)
+		for (const auto& music : (*s_music))
 		{
-			Mix_FreeMusic(it->second);
+			Mix_FreeMusic(music.second);
 		}
 
 		s_music->clear();

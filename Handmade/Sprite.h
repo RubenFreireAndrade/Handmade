@@ -1,15 +1,18 @@
 #pragma once
 
 /*===================================================================#
-| 'Sprite' source files last updated on 28 May 2021                  |
+| 'Sprite' source files last updated on 31 May 2021                  |
 #===================================================================*/
 
 #include <map>
+#include <memory>
 #include <string>
 #include <SDL_render.h>
 
 //TODO - Add proper error messages
 //TODO - Make sure asserts are disabled in Release mode
+
+typedef std::map<std::string, SDL_Texture*> TextureMap;
 
 class Sprite
 {
@@ -63,6 +66,6 @@ private:
 	SDL_Point m_imageDimension;
 	SDL_Point m_spriteDimension;
 
-	static std::map<std::string, SDL_Texture*>* s_images;
+	static std::unique_ptr<TextureMap> s_textures;
 
 };

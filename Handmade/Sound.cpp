@@ -3,7 +3,7 @@
 #include "Sound.h"
 #include "Utility.h"
 
-std::map<std::string, Mix_Chunk*>* Sound::s_sounds = new std::map<std::string, Mix_Chunk*>;
+std::unique_ptr<SoundMap> Sound::s_sounds = std::make_unique<SoundMap>();
 
 //======================================================================================================
 bool Sound::Load(const std::string& filename, const std::string& mapIndex)
@@ -20,8 +20,7 @@ bool Sound::Load(const std::string& filename, const std::string& mapIndex)
 		return false;
 	}
 
-	(*s_sounds)[mapIndex] = sound;
-
+	s_sounds->insert(std::pair<std::string, Mix_Chunk*>(mapIndex, sound));
 	return true;
 }
 //======================================================================================================
@@ -40,9 +39,9 @@ void Sound::Unload(const std::string& mapIndex)
 
 	else
 	{
-		for (auto it = s_sounds->begin(); it != s_sounds->end(); it++)
+		for (const auto& sound : (*s_sounds))
 		{
-			Mix_FreeChunk(it->second);
+			Mix_FreeChunk(sound.second);
 		}
 
 		s_sounds->clear();

@@ -3,7 +3,7 @@
 #include "Text.h"
 #include "Utility.h"
 
-std::map<std::string, TTF_Font*>* Text::s_fonts = new std::map<std::string, TTF_Font*>;
+std::unique_ptr<FontMap> Text::s_fonts = std::make_unique<FontMap>();
 
 //======================================================================================================
 bool Text::Initialize()
@@ -32,8 +32,7 @@ bool Text::Load(const std::string& filename, const std::string& mapIndex, FontSi
 		return false;
 	}
 
-	(*s_fonts)[mapIndex] = font;
-
+	s_fonts->insert(std::pair<std::string, TTF_Font*>(mapIndex, font));
 	return true;
 }
 //======================================================================================================
@@ -52,9 +51,9 @@ void Text::Unload(const std::string& mapIndex)
 
 	else
 	{
-		for (auto it = s_fonts->begin(); it != s_fonts->end(); it++)
+		for (const auto& font : (*s_fonts))
 		{
-			TTF_CloseFont(it->second);
+			TTF_CloseFont(font.second);
 		}
 
 		s_fonts->clear();

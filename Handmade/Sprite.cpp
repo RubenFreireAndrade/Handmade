@@ -5,13 +5,13 @@
 #include "Sprite.h"
 #include "Utility.h"
 
-std::map<std::string, SDL_Texture*>* Sprite::s_images = new std::map<std::string, SDL_Texture*>;
+std::unique_ptr<TextureMap> Sprite::s_textures = std::make_unique<TextureMap>();
 
 //======================================================================================================
 bool Sprite::Load(const std::string& filename, const std::string& mapIndex)
 {
 	//Image data already loaded in memory
-	assert(s_images->find(mapIndex) == s_images->end());
+	assert(s_textures->find(mapIndex) == s_textures->end());
 
 	SDL_Surface* imageData = IMG_Load(filename.c_str());
 
@@ -22,11 +22,10 @@ bool Sprite::Load(const std::string& filename, const std::string& mapIndex)
 		return false;
 	}
 
-	SDL_Texture* image = SDL_CreateTextureFromSurface(Screen::Instance()->GetRenderer(), imageData);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(Screen::Instance()->GetRenderer(), imageData);
 	SDL_FreeSurface(imageData);
 
-	(*s_images)[mapIndex] = image;
-
+	s_textures->insert(std::pair<std::string, SDL_Texture*>(mapIndex, texture));
 	return true;
 }
 //======================================================================================================
@@ -34,23 +33,23 @@ void Sprite::Unload(const std::string& mapIndex)
 {
 	if (!mapIndex.empty())
 	{
-		auto it = s_images->find(mapIndex);
+		auto it = s_textures->find(mapIndex);
 
 		//Image data not found, so make sure to enter a valid ID
-		assert(it != s_images->end());
+		assert(it != s_textures->end());
 
 		SDL_DestroyTexture(it->second);
-		s_images->erase(it);
+		s_textures->erase(it);
 	}
 
 	else
 	{
-		for (auto it = s_images->begin(); it != s_images->end(); it++)
+		for (const auto& texture : (*s_textures))
 		{
-			SDL_DestroyTexture(it->second);
+			SDL_DestroyTexture(texture.second);
 		}
 
-		s_images->clear();
+		s_textures->clear();
 	}
 }
 //======================================================================================================
@@ -110,10 +109,10 @@ void Sprite::SetAnimationVelocity(float velocity)
 //======================================================================================================
 bool Sprite::SetImage(const std::string& mapIndex)
 {
-	auto it = s_images->find(mapIndex);
+	auto it = s_textures->find(mapIndex);
 
 	//Image data not found, so make sure to enter a valid ID
-	assert(it != s_images->end());
+	assert(it != s_textures->end());
 
 	m_image = (*it).second;
 	return true;

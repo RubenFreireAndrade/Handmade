@@ -62,9 +62,9 @@ void MainMenu::Update(int deltaTime)
 
 	isKeyPressed = Input::Instance()->IsKeyPressed();
 
-	for (size_t i = 0; i < m_menuText.size(); i++)
+	for (auto& menuItem : m_menuText)
 	{
-		m_menuText[i].SetColor(255, 255, 255);
+		menuItem.SetColor(255, 255, 255);
 	}
 
 	m_menuText[m_menuOptionActive].SetColor(240, 0, 0);
@@ -77,10 +77,11 @@ bool MainMenu::Render()
 	int posY = static_cast<int>((resolution.y - resolution.y / 4) -
 		(m_menuText.size() / 2 * MENU_TEXT_CHAR_H));
 
-	for (size_t i = 0; i < m_menuText.size(); i++)
+	int count = 0;
+	for (auto& menuItem : m_menuText)
 	{
-		m_menuText[i].Render(static_cast<int>((resolution.x / 2) - m_menuText[i].GetSize().x / 2),  //x
-			static_cast<int>(posY + i * MENU_TEXT_CHAR_H));  //y
+		menuItem.Render(static_cast<int>((resolution.x / 2) - menuItem.GetSize().x / 2),  //x
+			static_cast<int>(posY + (count++) * MENU_TEXT_CHAR_H));  //y
 	}
 
 	return true;

@@ -1,16 +1,19 @@
 #pragma once
 
 /*===================================================================#
-| 'Text' source files last updated on 28 May 2021                    |
+| 'Text' source files last updated on 31 May 2021                    |
 #===================================================================*/
 
 #include <map>
+#include <memory>
 #include <string>
 #include <SDL.h>
 #include <SDL_ttf.h>
 
 //TODO - Add proper error messages
 //TODO - Make sure asserts are disabled in Release mode
+
+typedef std::map<std::string, TTF_Font*> FontMap;
 
 class Text
 {
@@ -56,6 +59,6 @@ private:
 	SDL_Color m_color;
 	SDL_Texture* m_texture;
 
-	static std::map<std::string, TTF_Font*>* s_fonts;
+	static std::unique_ptr<FontMap> s_fonts;
 
 };

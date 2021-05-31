@@ -26,11 +26,11 @@ GameState* PlayState::Update(int deltaTime)
 		return new EndState;
 	}
 
-	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++)
+	for (auto& gameObject : m_gameObjects)
 	{
-		if ((*it).IsActive())
+		if (gameObject.IsActive())
 		{
-			(*it).Update(deltaTime);
+			gameObject.Update(deltaTime);
 		}
 	}
 
@@ -41,11 +41,11 @@ bool PlayState::Render()
 {
 	m_image.Render();
 
-	for (auto it = m_gameObjects.begin(); it != m_gameObjects.end(); it++)
+	for (auto& gameObject : m_gameObjects)
 	{
-		if ((*it).IsActive() && (*it).IsVisible())
+		if (gameObject.IsActive() && gameObject.IsVisible())
 		{
-			(*it).Render();
+			gameObject.Render();
 		}
 	}
 

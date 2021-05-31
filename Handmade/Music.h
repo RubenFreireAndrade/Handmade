@@ -1,15 +1,18 @@
 #pragma once
 
 /*===================================================================#
-| 'Music' source files last updated on 28 May 2021                   |
+| 'Music' source files last updated on 31 May 2021                   |
 #===================================================================*/
 
 #include <map>
+#include <memory>
 #include <string>
 #include <SDL_mixer.h>
 
 //TODO - Add proper error messages
 //TODO - Make sure asserts are disabled in Release mode
+
+typedef std::map<std::string, Mix_Music*> MusicMap;
 
 class Music
 {
@@ -40,6 +43,6 @@ public:
 private:
 
 	Mix_Music* m_music;
-	static std::map<std::string, Mix_Music*>* s_music;
+	static std::unique_ptr<MusicMap> s_music;
 
 };

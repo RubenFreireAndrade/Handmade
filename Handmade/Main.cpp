@@ -1,14 +1,14 @@
 /*===================================================================#
-| 'Main' source file last updated on 28 May 2021                     |
+| 'Main' source file last updated on 31 May 2021                     |
 #===================================================================*/
 
 #include "Game.h"
 #include "MenuState.h"
 
 //TODO - Add 'assert' where required
-//TODO - Use 'auto' and range-based for loops where possible
 //TODO - Consider RAII for class design
 //TODO - Load settings from a config file
+//TODO - Make sure all code is const correct
 
 int main(int argc, char* args[])
 {
