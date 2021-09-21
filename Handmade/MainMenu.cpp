@@ -21,7 +21,7 @@ void MainMenu::SetMenuText(const std::string& text)
 	menuText.SetFont("Menu_Font");
 	menuText.SetColor(255, 255, 255);
 	menuText.SetSize(text.size() * MENU_TEXT_CHAR_W, MENU_TEXT_CHAR_H);
-	menuText.SetText(text);
+	menuText.SetString(text);
 	m_menuText.push_back(menuText);
 }
 //======================================================================================================

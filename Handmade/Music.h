@@ -1,7 +1,9 @@
 #pragma once
 
 /*===================================================================#
-| 'Music' source files last updated on 31 May 2021                   |
+| 'Music' source files last updated on 21 September 2021             |
+#====================================================================#
+| Class has not been fully tested. No known issues found.            |
 #===================================================================*/
 
 #include <map>
@@ -12,30 +14,30 @@
 //TODO - Add proper error messages
 //TODO - Make sure asserts are disabled in Release mode
 
-typedef std::map<std::string, Mix_Music*> MusicMap;
+typedef std::map<std::string, Mix_Music*> Musics;
 
 class Music
 {
 
 public:
 
-	enum class LoopType
+	enum class Loop
 	{
-		PLAY_ONCE = 1,
-		PLAY_ENDLESS = -1
+		Once = 1,
+		Ongoing = -1
 	};
 
 	static bool Initialize(int frequency = 44100, int chunkSize = 1024);
-	static bool Load(const std::string& filename, const std::string& mapIndex);
-	static void Unload(const std::string& mapIndex = "");
+	static bool Load(const std::string& filename, const std::string& tag);
+	static void Unload(const std::string& tag = "");
 	static void Shutdown();
 
 	Music();
 
 	void SetVolume(float volume);
-	bool SetMusic(const std::string& mapIndex);
+	bool SetMusic(const std::string& tag);
 
-	bool Play(LoopType loopType = LoopType::PLAY_ONCE);
+	bool Play(Loop loop = Loop::Once);
 	void Pause();
 	void Resume();
 	void Stop();
@@ -43,6 +45,6 @@ public:
 private:
 
 	Mix_Music* m_music;
-	static std::unique_ptr<MusicMap> s_music;
+	static std::unique_ptr<Musics> s_musics;
 
 };

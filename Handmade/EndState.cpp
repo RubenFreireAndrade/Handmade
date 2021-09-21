@@ -4,7 +4,7 @@
 //======================================================================================================
 bool EndState::OnEnter()
 {
-	Text::Load("Assets/Fonts/Quikhand.ttf", "Menu_Font", Text::FontSize::SMALL);
+	Text::Load("Assets/Fonts/Quikhand.ttf", "Menu_Font", Text::FontSize::Small);
 	
 	m_image.Load("Assets/Images/End_1280x720.png", "Assets/Music/Glory.ogg");
 	m_menu.SetMenuText("Play again");

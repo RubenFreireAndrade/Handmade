@@ -3,7 +3,7 @@
 #include "Music.h"
 #include "Utility.h"
 
-std::unique_ptr<MusicMap> Music::s_music = std::make_unique<MusicMap>();
+std::unique_ptr<Musics> Music::s_musics = std::make_unique<Musics>();
 
 //======================================================================================================
 bool Music::Initialize(int frequency, int chunkSize)
@@ -18,10 +18,9 @@ bool Music::Initialize(int frequency, int chunkSize)
 	return true;
 }
 //======================================================================================================
-bool Music::Load(const std::string& filename, const std::string& mapIndex)
+bool Music::Load(const std::string& filename, const std::string& tag)
 {
-	//Music data already loaded in memory
-	assert(s_music->find(mapIndex) == s_music->end());
+	assert(s_musics->find(tag) == s_musics->end());
 
 	Mix_Music* music = Mix_LoadMUS(filename.c_str());
 
@@ -32,31 +31,28 @@ bool Music::Load(const std::string& filename, const std::string& mapIndex)
 		return false;
 	}
 
-	s_music->insert(std::pair<std::string, Mix_Music*>(mapIndex, music));
+	s_musics->insert(std::pair<std::string, Mix_Music*>(tag, music));
 	return true;
 }
 //======================================================================================================
-void Music::Unload(const std::string& mapIndex)
+void Music::Unload(const std::string& tag)
 {
-	if (!mapIndex.empty())
+	if (!tag.empty())
 	{
-		auto it = s_music->find(mapIndex);
-
-		//Music data not found, so make sure to enter a valid ID
-		assert(it != s_music->end());
-
+		auto it = s_musics->find(tag);
+		assert(it != s_musics->end());
 		Mix_FreeMusic(it->second);
-		s_music->erase(it);
+		s_musics->erase(it);
 	}
 
 	else
 	{
-		for (const auto& music : (*s_music))
+		for (const auto& music : *s_musics)
 		{
 			Mix_FreeMusic(music.second);
 		}
 
-		s_music->clear();
+		s_musics->clear();
 	}
 }
 //======================================================================================================
@@ -76,22 +72,19 @@ void Music::SetVolume(float volume)
 	Mix_VolumeMusic(static_cast<int>(volume * 128.0f));
 }
 //======================================================================================================
-bool Music::SetMusic(const std::string& mapIndex)
+bool Music::SetMusic(const std::string& tag)
 {
-	auto it = s_music->find(mapIndex);
-
-	//Music data not found, so make sure to enter a valid ID
-	assert(it != s_music->end());
-
+	auto it = s_musics->find(tag);
+	assert(it != s_musics->end());
 	m_music = (*it).second;
 	return true;
 }
 //======================================================================================================
-bool Music::Play(LoopType loopType)
+bool Music::Play(Loop loop)
 {
 	if (!Mix_PlayingMusic())
 	{
-		if (Mix_PlayMusic(m_music, static_cast<int>(loopType)) == -1)
+		if (Mix_PlayMusic(m_music, static_cast<int>(loop)) == -1)
 		{
 			Utility::Log(MESSAGE_BOX,
 				"Music could not be played.", Utility::Severity::FAILURE);

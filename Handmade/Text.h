@@ -1,7 +1,9 @@
 #pragma once
 
 /*===================================================================#
-| 'Text' source files last updated on 31 May 2021                    |
+| 'Text' source files last updated on 21 September 2021              |
+#====================================================================#
+| Class has not been fully tested. No known issues found.            |
 #===================================================================*/
 
 #include <map>
@@ -13,7 +15,7 @@
 //TODO - Add proper error messages
 //TODO - Make sure asserts are disabled in Release mode
 
-typedef std::map<std::string, TTF_Font*> FontMap;
+typedef std::map<std::string, TTF_Font*> Fonts;
 
 class Text
 {
@@ -22,16 +24,16 @@ public:
 
 	enum class FontSize
 	{
-		SMALL = 72,
-		MEDIUM = 144,
-		LARGE = 300
+		Small = 72,
+		Medium = 144,
+		Large = 300
 	};
 
 	static bool Initialize();
 	static bool Load(const std::string& filename,
-		const std::string& mapIndex,
-		FontSize fontSize = FontSize::SMALL);
-	static void Unload(const std::string& mapIndex = "");
+		const std::string& tag,
+		FontSize fontSize = FontSize::Small);
+	static void Unload(const std::string& tag = "");
 	static void Shutdown();
 
 	Text();
@@ -39,26 +41,26 @@ public:
 	~Text();
 
 	const SDL_Point& GetSize() const;
-	const std::string& GetText() const;
+	const std::string& GetString() const;
 
 	void SetSize(int width, int height);
-	void SetText(const std::string& text);
+	bool SetFont(const std::string& tag);
 	void SetColor(Uint8 r, Uint8 g, Uint8 b);
-	bool SetFont(const std::string& mapIndex);
+	void SetString(const std::string& string);
 
-	void Render(int positionX = 0, int positionY = 0);
+	void Render(int x = 0, int y = 0);
 
 private:
 
 	void CreateText();
 
-	std::string m_text;
+	std::string m_string;
 	SDL_Point m_textSize;
 
 	TTF_Font* m_font;
 	SDL_Color m_color;
 	SDL_Texture* m_texture;
 
-	static std::unique_ptr<FontMap> s_fonts;
+	static std::unique_ptr<Fonts> s_fonts;
 
 };

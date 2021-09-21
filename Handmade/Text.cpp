@@ -3,7 +3,7 @@
 #include "Text.h"
 #include "Utility.h"
 
-std::unique_ptr<FontMap> Text::s_fonts = std::make_unique<FontMap>();
+std::unique_ptr<Fonts> Text::s_fonts = std::make_unique<Fonts>();
 
 //======================================================================================================
 bool Text::Initialize()
@@ -18,10 +18,9 @@ bool Text::Initialize()
 	return true;
 }
 //======================================================================================================
-bool Text::Load(const std::string& filename, const std::string& mapIndex, FontSize fontSize)
+bool Text::Load(const std::string& filename, const std::string& tag, FontSize fontSize)
 {
-	//Font data already loaded in memory
-	assert(s_fonts->find(mapIndex) == s_fonts->end());
+	assert(s_fonts->find(tag) == s_fonts->end());
 
 	TTF_Font* font = TTF_OpenFont(filename.c_str(), static_cast<int>(fontSize));
 
@@ -32,26 +31,23 @@ bool Text::Load(const std::string& filename, const std::string& mapIndex, FontSi
 		return false;
 	}
 
-	s_fonts->insert(std::pair<std::string, TTF_Font*>(mapIndex, font));
+	s_fonts->insert(std::pair<std::string, TTF_Font*>(tag, font));
 	return true;
 }
 //======================================================================================================
-void Text::Unload(const std::string& mapIndex)
+void Text::Unload(const std::string& tag)
 {
-	if (!mapIndex.empty())
+	if (!tag.empty())
 	{
-		auto it = s_fonts->find(mapIndex);
-
-		//Font data not found, so make sure to enter a valid ID
+		auto it = s_fonts->find(tag);
 		assert(it != s_fonts->end());
-
 		TTF_CloseFont(it->second);
 		s_fonts->erase(it);
 	}
 
 	else
 	{
-		for (const auto& font : (*s_fonts))
+		for (const auto& font : *s_fonts)
 		{
 			TTF_CloseFont(font.second);
 		}
@@ -75,11 +71,11 @@ Text::Text()
 //======================================================================================================
 Text::Text(const Text& copy)
 {
-	m_text = copy.m_text;
+	m_texture = nullptr;
 	m_font = copy.m_font;
 	m_color = copy.m_color;
+	m_string = copy.m_string;
 	m_textSize = copy.m_textSize;
-	m_texture = nullptr;
 	CreateText();
 }
 //======================================================================================================
@@ -93,9 +89,9 @@ const SDL_Point& Text::GetSize() const
 	return m_textSize;
 }
 //======================================================================================================
-const std::string& Text::GetText() const
+const std::string& Text::GetString() const
 {
-	return m_text;
+	return m_string;
 }
 //======================================================================================================
 void Text::SetSize(int width, int height)
@@ -104,9 +100,9 @@ void Text::SetSize(int width, int height)
 	m_textSize.y = height;
 }
 //======================================================================================================
-void Text::SetText(const std::string& text)
+void Text::SetString(const std::string& string)
 {
-	m_text = text;
+	m_string = string;
 	CreateText();
 }
 //======================================================================================================
@@ -118,46 +114,33 @@ void Text::SetColor(Uint8 r, Uint8 g, Uint8 b)
 	CreateText();
 }
 //======================================================================================================
-bool Text::SetFont(const std::string& mapIndex)
+bool Text::SetFont(const std::string& tag)
 {
-	auto it = s_fonts->find(mapIndex);
-
-	//Font data not found, so make sure to enter a valid ID
+	auto it = s_fonts->find(tag);
 	assert(it != s_fonts->end());
-
 	m_font = (*it).second;
 	return true;
 }
 //======================================================================================================
-void Text::Render(int positionX, int positionY)
+void Text::Render(int x, int y)
 {
 	SDL_Rect dst;
 
-	//assign dimension of rectangular block to 
-	//which text will be rendered to on screen
-	dst.x = positionX;
-	dst.y = positionY;
+	dst.x = x;
+	dst.y = y;
 	dst.w = m_textSize.x;
 	dst.h = m_textSize.y;
 
-	//render the text object using all values passed and determined above
 	SDL_RenderCopy(Screen::Instance()->GetRenderer(), m_texture, nullptr, &dst);
 }
 //======================================================================================================
 void Text::CreateText()
 {
-	//This means the font has not properly been loaded
 	assert(m_font != nullptr);
+	SDL_Surface* textSurface = TTF_RenderText_Blended(m_font, m_string.c_str(), m_color);
 
-	//create text object using font style, text string and color 
-	//value and store in a temporary pointer to be used below
-	SDL_Surface* textSurface = TTF_RenderText_Blended(m_font, m_text.c_str(), m_color);
-
-	//free the old texture first before creating a new
-	//texture object from surface object loaded above
 	SDL_DestroyTexture(m_texture);
 	m_texture = SDL_CreateTextureFromSurface(Screen::Instance()->GetRenderer(), textSurface);
 
-	//remove temporary SDL surface object as we don't need it anymore
 	SDL_FreeSurface(textSurface);
 }

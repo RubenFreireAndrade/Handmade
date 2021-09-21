@@ -3,13 +3,12 @@
 #include "Sound.h"
 #include "Utility.h"
 
-std::unique_ptr<SoundMap> Sound::s_sounds = std::make_unique<SoundMap>();
+std::unique_ptr<Sounds> Sound::s_sounds = std::make_unique<Sounds>();
 
 //======================================================================================================
-bool Sound::Load(const std::string& filename, const std::string& mapIndex)
+bool Sound::Load(const std::string& filename, const std::string& tag)
 {
-	//Sound data already loaded in memory
-	assert(s_sounds->find(mapIndex) == s_sounds->end());
+	assert(s_sounds->find(tag) == s_sounds->end());
 
 	Mix_Chunk* sound = Mix_LoadWAV(filename.c_str());
 
@@ -20,26 +19,23 @@ bool Sound::Load(const std::string& filename, const std::string& mapIndex)
 		return false;
 	}
 
-	s_sounds->insert(std::pair<std::string, Mix_Chunk*>(mapIndex, sound));
+	s_sounds->insert(std::pair<std::string, Mix_Chunk*>(tag, sound));
 	return true;
 }
 //======================================================================================================
-void Sound::Unload(const std::string& mapIndex)
+void Sound::Unload(const std::string& tag)
 {
-	if (!mapIndex.empty())
+	if (!tag.empty())
 	{
-		auto it = s_sounds->find(mapIndex);
-
-		//Sound data not found, so make sure to enter a valid ID
+		auto it = s_sounds->find(tag);
 		assert(it != s_sounds->end());
-
 		Mix_FreeChunk(it->second);
 		s_sounds->erase(it);
 	}
 
 	else
 	{
-		for (const auto& sound : (*s_sounds))
+		for (const auto& sound : *s_sounds)
 		{
 			Mix_FreeChunk(sound.second);
 		}
@@ -59,13 +55,10 @@ void Sound::SetVolume(float volume)
 	Mix_VolumeChunk(m_sound, static_cast<int>(volume * 128.0f));
 }
 //======================================================================================================
-bool Sound::SetSound(const std::string& mapIndex)
+bool Sound::SetSound(const std::string& tag)
 {
-	auto it = s_sounds->find(mapIndex);
-
-	//Sound data not found, so make sure to enter a valid ID
+	auto it = s_sounds->find(tag);
 	assert(it != s_sounds->end());
-
 	m_sound = (*it).second;
 	return true;
 }

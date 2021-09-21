@@ -1,7 +1,9 @@
 #pragma once
 
 /*===================================================================#
-| 'Sprite' source files last updated on 31 May 2021                  |
+| 'Sprite' source files last updated on 21 September 2021            |
+#====================================================================#
+| Class has not been fully tested. No known issues found.            |
 #===================================================================*/
 
 #include <map>
@@ -12,22 +14,22 @@
 //TODO - Add proper error messages
 //TODO - Make sure asserts are disabled in Release mode
 
-typedef std::map<std::string, SDL_Texture*> TextureMap;
+typedef std::map<std::string, SDL_Texture*> Textures;
 
 class Sprite
 {
 
 public:
 
-	enum class FlipType
+	enum class Flip
 	{
-		NO_FLIP = SDL_FLIP_NONE,
-		HORIZONTAL = SDL_FLIP_HORIZONTAL,
-		VERTICAL = SDL_FLIP_VERTICAL
+		None = SDL_FLIP_NONE,
+		Vertical = SDL_FLIP_VERTICAL,
+		Horizontal = SDL_FLIP_HORIZONTAL
 	};
 
-	static bool Load(const std::string& filename, const std::string& mapIndex);
-	static void Unload(const std::string& mapIndex = "");
+	static bool Load(const std::string& filename, const std::string& tag);
+	static void Unload(const std::string& tag = "");
 
 	Sprite();
 
@@ -36,19 +38,19 @@ public:
 	bool IsAnimationLooping();
 	void IsAnimationLooping(bool flag);
 
+	bool SetImage(const std::string& tag);
 	void SetImageCel(int column, int row);
 	void SetAnimationVelocity(float velocity);
-	bool SetImage(const std::string& mapIndex);
 	void SetSpriteDimension(int width, int height);
 	void SetImageDimension(int columns, int rows, int width, int height);
 
 	void ResetAnimation();
 	void Update(int deltaTime);
 
-	void Render(int positionX = 0,
-		int positionY = 0,
-		double angle = 0.0,
-		FlipType flipType = FlipType::NO_FLIP);
+	void Render(int x = 0, 
+		int y = 0,
+		double angle = 0.0, 
+		Flip flip = Flip::None);
 
 private:
 
@@ -66,6 +68,6 @@ private:
 	SDL_Point m_imageDimension;
 	SDL_Point m_spriteDimension;
 
-	static std::unique_ptr<TextureMap> s_textures;
+	static std::unique_ptr<Textures> s_textures;
 
 };

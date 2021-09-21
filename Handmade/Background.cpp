@@ -41,7 +41,7 @@ void Background::PlayMusic()
 {
 	if (!m_isPlaying)
 	{
-		m_music.Play(Music::LoopType::PLAY_ENDLESS);
+		m_music.Play(Music::Loop::Ongoing);
 		m_isPlaying = true;
 	}
 }
