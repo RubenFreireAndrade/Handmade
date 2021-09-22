@@ -15,8 +15,10 @@ bool Sound::Load(const std::string& filename, const std::string& tag)
 
 	if (!sound)
 	{
-		Utility::Log(MESSAGE_BOX,
-			"File could not be loaded.", Utility::Severity::Failure);
+		Utility::Log(Utility::Destination::WindowsMessageBox,
+			"Error loading sound file \"" + (s_rootFolder + filename) + "\"\n\n"
+			"Possible causes could be a corrupt or missing file. Another reason could be "
+			"that the filename and/or path are incorrectly spelt.", Utility::Severity::Failure);
 		return false;
 	}
 
@@ -68,8 +70,8 @@ bool Sound::Play(int loop)
 {
 	if (Mix_PlayChannel(-1, m_sound, loop) == -1)
 	{
-		Utility::Log(MESSAGE_BOX,
-			"Music could not be played.", Utility::Severity::Failure);
+		Utility::Log(Utility::Destination::WindowsMessageBox,
+			"Sound could not be played.", Utility::Severity::Failure);
 		return false;
 	}
 

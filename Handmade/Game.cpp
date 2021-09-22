@@ -3,6 +3,7 @@
 #include "Music.h"
 #include "Screen.h"
 #include "Text.h"
+#include "Utility.h"
 
 //======================================================================================================
 Game::Game(GameState* initialGameState)
@@ -32,6 +33,7 @@ bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight
 		//Add your own outcome/messages here...
 	}
 
+	Utility::SetWindowHandle(Screen::Instance()->GetWindowHandle());
 	return true;
 }
 //======================================================================================================

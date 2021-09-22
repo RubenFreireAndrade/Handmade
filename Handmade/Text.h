@@ -12,9 +12,6 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-//TODO - Add proper error messages
-//TODO - Make sure asserts are disabled in Release mode
-
 typedef std::map<std::string, TTF_Font*> Fonts;
 
 class Text

@@ -15,15 +15,7 @@
 #include <map>
 #include <string>
 #include <vector>
-
-//TODO - Consider replacing these with enums
-
-#define KEY 0
-#define VALUE 1
-
-#define FILE 2
-#define VS_OUTPUT 4
-#define MESSAGE_BOX 8
+#include "Vector.h"
 
 class Utility
 {
@@ -37,16 +29,34 @@ public:
 		Default = MB_ICONINFORMATION
 	};
 
+	enum class Destination
+	{
+		LogFile,
+		OutputWindow,
+		WindowsMessageBox
+	};
+
+	static void SetWindowHandle(HWND windowHandle);
+
 	static void RemoveCharacter(std::string& string, char character);
 
-	static void ParseString(const std::string& string,
+	static void ParseString(std::string& string,
 		std::vector<std::string>& subStrings, char token);
 
 	static bool LoadConfigFile(const std::string& filename,
 		std::map<std::string, std::string>& dataMap);
 
-	static void Log(int destination, float value, const std::string& label = "");
-	static void Log(int destination, const std::string& message, Severity severity = Severity::Default);
-	static void Log(int destination, float x, float y, float z, const std::string& label = "");
+	static void Log(Destination destination,
+		float value, const std::string& label = "");
+	static void Log(Destination destination,
+		const Vector<float>& value, const std::string& label = "");
+	static void Log(Destination destination,
+		const std::string& message, Severity severity = Severity::Default);
+	static void Log(Destination destination,
+		float x, float y, const std::string& label = "");
+
+private:
+
+	static HWND s_windowHandle;
 
 };

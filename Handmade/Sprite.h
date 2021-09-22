@@ -11,9 +11,6 @@
 #include <string>
 #include <SDL_render.h>
 
-//TODO - Add proper error messages
-//TODO - Make sure asserts are disabled in Release mode
-
 typedef std::map<std::string, SDL_Texture*> Textures;
 
 class Sprite

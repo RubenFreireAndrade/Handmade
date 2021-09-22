@@ -17,8 +17,10 @@ bool Sprite::Load(const std::string& filename, const std::string& tag)
 
 	if (!imageData)
 	{
-		Utility::Log(MESSAGE_BOX,
-			"File could not be loaded.", Utility::Severity::Failure);
+		Utility::Log(Utility::Destination::WindowsMessageBox,
+			"Error loading image file \"" + (s_rootFolder + filename) + "\"\n\n"
+			"Possible causes could be a corrupt or missing file. Another reason could be "
+			"that the filename and/or path are incorrectly spelt.", Utility::Severity::Failure);
 		return false;
 	}
 
