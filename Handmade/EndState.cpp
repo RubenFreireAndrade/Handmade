@@ -18,13 +18,13 @@ GameState* EndState::Update(int deltaTime)
 	m_image.PlayMusic();
 	m_menu.Update(deltaTime);
 
-	if (m_menu.GetMenuOption() == static_cast<int>(MenuOption::PLAY))
+	if (m_menu.GetMenuOption() == static_cast<int>(MenuOption::Play))
 	{
 		m_image.StopMusic();
 		return new PlayState;
 	}
 
-	if (m_menu.GetMenuOption() == static_cast<int>(MenuOption::QUIT))
+	if (m_menu.GetMenuOption() == static_cast<int>(MenuOption::Quit))
 	{
 		m_image.StopMusic();
 		return nullptr;

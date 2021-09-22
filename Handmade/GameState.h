@@ -2,6 +2,8 @@
 
 /*===================================================================#
 | 'GameState' source files last updated on 28 May 2021               |
+#====================================================================#
+| Class has not been fully tested. No known issues found.            |
 #===================================================================*/
 
 //TODO - Add default screens for each game state

@@ -1,7 +1,9 @@
 #pragma once
 
 /*===================================================================#
-| 'MenuState' source files last updated on 28 May 2021               |
+| 'MenuState' source files last updated on 22 September 2021         |
+#====================================================================#
+| Class has not been fully tested. No known issues found.            |
 #===================================================================*/
 
 #include "Background.h"
@@ -15,8 +17,8 @@ public:
 
 	enum class MenuOption
 	{
-		PLAY,
-		QUIT
+		Play,
+		Quit
 	};
 
 	MenuState() {}
