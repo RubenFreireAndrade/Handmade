@@ -45,6 +45,8 @@ public:
 private:
 
 	Mix_Music* m_music;
+
+	static std::string s_rootFolder;
 	static std::unique_ptr<Musics> s_musics;
 
 };

@@ -5,6 +5,7 @@
 #include "Sprite.h"
 #include "Utility.h"
 
+std::string Sprite::s_rootFolder = "Assets/Images/";
 std::unique_ptr<Textures> Sprite::s_textures = std::make_unique<Textures>();
 
 //======================================================================================================
@@ -12,7 +13,7 @@ bool Sprite::Load(const std::string& filename, const std::string& tag)
 {
 	assert(s_textures->find(tag) == s_textures->end());
 
-	SDL_Surface* imageData = IMG_Load(filename.c_str());
+	SDL_Surface* imageData = IMG_Load((s_rootFolder + filename).c_str());
 
 	if (!imageData)
 	{

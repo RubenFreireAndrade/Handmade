@@ -3,6 +3,7 @@
 #include "Music.h"
 #include "Utility.h"
 
+std::string Music::s_rootFolder = "Assets/Music/";
 std::unique_ptr<Musics> Music::s_musics = std::make_unique<Musics>();
 
 //======================================================================================================
@@ -22,7 +23,7 @@ bool Music::Load(const std::string& filename, const std::string& tag)
 {
 	assert(s_musics->find(tag) == s_musics->end());
 
-	Mix_Music* music = Mix_LoadMUS(filename.c_str());
+	Mix_Music* music = Mix_LoadMUS((s_rootFolder + filename).c_str());
 
 	if (!music)
 	{

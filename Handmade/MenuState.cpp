@@ -4,9 +4,9 @@
 //======================================================================================================
 bool MenuState::OnEnter()
 {
-	Text::Load("Assets/Fonts/Quikhand.ttf", "Menu_Font", Text::FontSize::Small);
+	Text::Load("Quikhand.ttf", "Menu_Font", Text::FontSize::Small);
 	
-	m_image.Load("Assets/Images/Menu_1280x720.png", "Assets/Music/Journeys.ogg");
+	m_image.Load("Menu_1280x720.png", "Journeys.ogg");
 	m_menu.SetMenuText("Play game");
 	m_menu.SetMenuText("Quit game");
 

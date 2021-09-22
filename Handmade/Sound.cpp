@@ -3,6 +3,7 @@
 #include "Sound.h"
 #include "Utility.h"
 
+std::string Sound::s_rootFolder = "Assets/Sounds/";
 std::unique_ptr<Sounds> Sound::s_sounds = std::make_unique<Sounds>();
 
 //======================================================================================================
@@ -10,7 +11,7 @@ bool Sound::Load(const std::string& filename, const std::string& tag)
 {
 	assert(s_sounds->find(tag) == s_sounds->end());
 
-	Mix_Chunk* sound = Mix_LoadWAV(filename.c_str());
+	Mix_Chunk* sound = Mix_LoadWAV((s_rootFolder + filename).c_str());
 
 	if (!sound)
 	{

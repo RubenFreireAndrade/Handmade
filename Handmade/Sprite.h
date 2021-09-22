@@ -68,6 +68,7 @@ private:
 	SDL_Point m_imageDimension;
 	SDL_Point m_spriteDimension;
 
+	static std::string s_rootFolder;
 	static std::unique_ptr<Textures> s_textures;
 
 };

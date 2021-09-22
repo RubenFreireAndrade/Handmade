@@ -34,6 +34,8 @@ public:
 private:
 
 	Mix_Chunk* m_sound;
+
+	static std::string s_rootFolder;
 	static std::unique_ptr<Sounds> s_sounds;
 
 };

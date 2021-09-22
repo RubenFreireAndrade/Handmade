@@ -3,6 +3,7 @@
 #include "Text.h"
 #include "Utility.h"
 
+std::string Text::s_rootFolder = "Assets/Fonts/";
 std::unique_ptr<Fonts> Text::s_fonts = std::make_unique<Fonts>();
 
 //======================================================================================================
@@ -22,7 +23,7 @@ bool Text::Load(const std::string& filename, const std::string& tag, FontSize fo
 {
 	assert(s_fonts->find(tag) == s_fonts->end());
 
-	TTF_Font* font = TTF_OpenFont(filename.c_str(), static_cast<int>(fontSize));
+	TTF_Font* font = TTF_OpenFont((s_rootFolder + filename).c_str(), static_cast<int>(fontSize));
 
 	if (!font)
 	{

@@ -61,6 +61,7 @@ private:
 	SDL_Color m_color;
 	SDL_Texture* m_texture;
 
+	static std::string s_rootFolder;
 	static std::unique_ptr<Fonts> s_fonts;
 
 };
