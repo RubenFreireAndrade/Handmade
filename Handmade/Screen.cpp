@@ -53,7 +53,7 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"SDL did not initialize properly.", Utility::Severity::FAILURE);
+			"SDL did not initialize properly.", Utility::Severity::Failure);
 		return false;
 	}
 
@@ -67,7 +67,7 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 	if (!m_window)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"Game window could not be created.", Utility::Severity::FAILURE);
+			"Game window could not be created.", Utility::Severity::Failure);
 		return false;
 	}
 
@@ -77,7 +77,7 @@ bool Screen::Initialize(const std::string& windowTitle, int width, int height, b
 	if (!m_renderer)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"Renderer could not be created.", Utility::Severity::FAILURE);
+			"Renderer could not be created.", Utility::Severity::Failure);
 		return false;
 	}
 

@@ -4,33 +4,33 @@
 #include "Screen.h"
 #include "Utility.h"
 
-void Utility::RemoveCharacter(std::string& str, char character)
+void Utility::RemoveCharacter(std::string& string, char character)
 {
-	auto it = std::find(str.begin(), str.end(), character);
+	auto it = std::find(string.begin(), string.end(), character);
 
-	if (it != str.end())
+	if (it != string.end())
 	{
 		do
 		{
-			str.erase(it);
-			it = std::find(str.begin(), str.end(), character);
-		} while (it != str.end());
+			string.erase(it);
+			it = std::find(string.begin(), string.end(), character);
+		} while (it != string.end());
 	}
 }
 
-void Utility::ParseString(const std::string& str, std::vector<std::string>& subStrings, char token)
+void Utility::ParseString(const std::string& string, std::vector<std::string>& subStrings, char token)
 {
 	size_t start = 0;
 	size_t end = 0;
 
-	assert(!str.empty());
+	assert(!string.empty());
 
 	while (end != std::string::npos)
 	{
-		end = str.find(token, start);
+		end = string.find(token, start);
 		if ((end - start) > 0)
 		{
-			subStrings.push_back(str.substr(start, end - start));
+			subStrings.push_back(string.substr(start, end - start));
 		}
 		start = end + 1;
 	}
@@ -103,19 +103,19 @@ void Utility::Log(int destination, const std::string& message, Severity severity
 		{
 			MessageBox(Screen::Instance()->GetWindowHandle(),
 				reinterpret_cast<LPCSTR>(std::string(message.begin(), message.end()).c_str()),
-				"Log", severity | MB_OK);
+				"Log", static_cast<int>(severity) | MB_OK);
 		}
 
 		else if (destination == VS_OUTPUT)
 		{
 			std::string finalMessage;
 
-			if (severity == FAILURE)
+			if (severity == Severity::Failure)
 			{
 				finalMessage = "[FAILURE] " + message + "\n";
 			}
 
-			else if (severity == WARNING)
+			else if (severity == Severity::Warning)
 			{
 				finalMessage = "[WARNING] " + message + "\n";
 			}
@@ -134,12 +134,12 @@ void Utility::Log(int destination, const std::string& message, Severity severity
 			std::string finalMessage;
 			std::fstream file("Data/Output.log", std::ios_base::out | std::ios_base::app);
 
-			if (severity == FAILURE)
+			if (severity == Severity::Failure)
 			{
 				finalMessage = "[FAILURE] " + message + "\n";
 			}
 
-			else if (severity == WARNING)
+			else if (severity == Severity::Warning)
 			{
 				finalMessage = "[WARNING] " + message + "\n";
 			}

@@ -17,7 +17,7 @@ bool Sprite::Load(const std::string& filename, const std::string& tag)
 	if (!imageData)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"File could not be loaded.", Utility::Severity::FAILURE);
+			"File could not be loaded.", Utility::Severity::Failure);
 		return false;
 	}
 

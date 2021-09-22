@@ -4,8 +4,6 @@
 #include "Screen.h"
 #include "Text.h"
 
-#include "Utility.h"
-
 //======================================================================================================
 Game::Game(GameState* initialGameState)
 {
@@ -24,14 +22,14 @@ bool Game::Initialize(const std::string& name, int screenWidth, int screenHeight
 
 	if (!(Music::Initialize()))
 	{
-		//not serious - game does not need to end
-		//add your own outcome/messages here...
+		//Not serious - game does not need to end
+		//Add your own outcome/messages here...
 	}
 
 	if (!Text::Initialize())
 	{
-		//not serious - game does not need to end
-		//add your own outcome/messages here...
+		//Not serious - game does not need to end
+		//Add your own outcome/messages here...
 	}
 
 	return true;

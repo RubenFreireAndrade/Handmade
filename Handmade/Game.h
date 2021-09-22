@@ -1,7 +1,9 @@
 #pragma once
 
 /*===================================================================#
-| 'Game' source files last updated on 28 May 2021                    |
+| 'Game' source files last updated on 22 September 2021              |
+#====================================================================#
+| Class has not been fully tested. No known issues found.            |
 #===================================================================*/
 
 #include <memory>

@@ -15,7 +15,7 @@ bool Sound::Load(const std::string& filename, const std::string& tag)
 	if (!sound)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"File could not be loaded.", Utility::Severity::FAILURE);
+			"File could not be loaded.", Utility::Severity::Failure);
 		return false;
 	}
 
@@ -68,7 +68,7 @@ bool Sound::Play(int loop)
 	if (Mix_PlayChannel(-1, m_sound, loop) == -1)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"Music could not be played.", Utility::Severity::FAILURE);
+			"Music could not be played.", Utility::Severity::Failure);
 		return false;
 	}
 

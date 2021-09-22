@@ -11,7 +11,7 @@ bool Music::Initialize(int frequency, int chunkSize)
 	if (Mix_OpenAudio(frequency, AUDIO_S16SYS, 2, chunkSize) == -1)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"Audio sub-system did not initialize properly.", Utility::Severity::FAILURE);
+			"Audio sub-system did not initialize properly.", Utility::Severity::Failure);
 		return false;
 	}
 
@@ -27,7 +27,7 @@ bool Music::Load(const std::string& filename, const std::string& tag)
 	if (!music)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"File could not be loaded.", Utility::Severity::FAILURE);
+			"File could not be loaded.", Utility::Severity::Failure);
 		return false;
 	}
 
@@ -87,7 +87,7 @@ bool Music::Play(Loop loop)
 		if (Mix_PlayMusic(m_music, static_cast<int>(loop)) == -1)
 		{
 			Utility::Log(MESSAGE_BOX,
-				"Music could not be played.", Utility::Severity::FAILURE);
+				"Music could not be played.", Utility::Severity::Failure);
 			return false;
 		}
 	}

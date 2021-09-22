@@ -1,5 +1,5 @@
 /*===================================================================#
-| 'Main' source file last updated on 31 May 2021                     |
+| 'Main' source file last updated on 22 September 2021               |
 #===================================================================*/
 
 #include "Game.h"
@@ -19,7 +19,8 @@ int main(int argc, char* args[])
 		if (!game.Run())
 		{
 			game.Shutdown();
-			return 0;
 		}
 	}
+
+	return 0;
 }

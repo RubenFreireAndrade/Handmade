@@ -11,7 +11,7 @@ bool Text::Initialize()
 	if (TTF_Init() == -1)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"Font sub-system did not initialize properly.", Utility::Severity::FAILURE);
+			"Font sub-system did not initialize properly.", Utility::Severity::Failure);
 		return false;
 	}
 
@@ -27,7 +27,7 @@ bool Text::Load(const std::string& filename, const std::string& tag, FontSize fo
 	if (!font)
 	{
 		Utility::Log(MESSAGE_BOX,
-			"File could not be loaded.", Utility::Severity::FAILURE);
+			"File could not be loaded.", Utility::Severity::Failure);
 		return false;
 	}
 

@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'Screen' source files last updated on 28 May 2021                  |
+| 'Screen' source files last updated on 22 September 2021            |
 #===================================================================*/
 
 #include <Windows.h>
