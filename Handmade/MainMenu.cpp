@@ -15,13 +15,13 @@ int MainMenu::GetMenuOption() const
 	return m_menuOptionChoice;
 }
 //======================================================================================================
-void MainMenu::SetMenuText(const std::string& text)
+void MainMenu::SetMenuText(const std::string& string)
 {
 	Text menuText;
 	menuText.SetFont("Menu_Font");
 	menuText.SetColor(255, 255, 255);
-	menuText.SetSize(text.size() * MENU_TEXT_CHAR_W, MENU_TEXT_CHAR_H);
-	menuText.SetString(text);
+	menuText.SetSize(string.size() * MENU_TEXT_CHAR_W, MENU_TEXT_CHAR_H);
+	menuText.SetString(string);
 	m_menuText.push_back(menuText);
 }
 //======================================================================================================

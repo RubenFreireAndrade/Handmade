@@ -1,7 +1,9 @@
 #pragma once
 
 /*===================================================================#
-| 'Background' source files last updated on 28 May 2021              |
+| 'Background' source files last updated on 22 September 2021        |
+#====================================================================#
+| Class has not been fully tested. No known issues found.            |
 #===================================================================*/
 
 #include "GameObject.h"
@@ -16,7 +18,8 @@ public:
 	Background();
 	virtual ~Background();
 
-	void Load(const std::string& imageFilename, const std::string& audioFilename);
+	void Load(const std::string& imageFilename,
+		const std::string& audioFilename);
 	void PlayMusic();
 	void StopMusic();
 

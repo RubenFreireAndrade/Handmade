@@ -1,7 +1,9 @@
 #pragma once
 
 /*===================================================================#
-| 'MainMenu' source files last updated on 31 May 2021                |
+| 'MainMenu' source files last updated on 22 September 2021          |
+#====================================================================#
+| Class has not been fully tested. No known issues found.            |
 #===================================================================*/
 
 #include <string>
@@ -21,7 +23,7 @@ public:
 	virtual ~MainMenu() {}
 
 	int GetMenuOption() const;
-	void SetMenuText(const std::string& text);
+	void SetMenuText(const std::string& string);
 
 	virtual void Update(int deltaTime);
 	virtual bool Render();
