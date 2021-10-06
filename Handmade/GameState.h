@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'GameState' source files last updated on 28 May 2021               |
+| 'GameState' source files last updated on 6 October 2021            |
 #====================================================================#
 | Class has not been fully tested. No known issues found.            |
 #===================================================================*/
@@ -16,12 +16,25 @@ class GameState
 
 public:
 
-	GameState() {}
+	GameState();
 	virtual ~GameState() = 0 {}
+
+	bool IsAlive() const;
+	bool IsActive() const;
+
+	void IsAlive(bool flag);
+	void IsActive(bool flag);
 
 	virtual bool OnEnter() = 0;
 	virtual GameState* Update(int deltaTime) = 0;
 	virtual bool Render() = 0;
 	virtual void OnExit() = 0;
+
+private:
+
+	//TODO - Fix this later
+	bool m_isAlive;
+	bool m_isActive;
+	GameState* m_previousState;
 
 };

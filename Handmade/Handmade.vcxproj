@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="EndState.cpp" />
     <ClCompile Include="Game.cpp" />
