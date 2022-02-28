@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'Text' source files last updated on 22 September 2021              |
+| 'Text' source files last updated on 28 February 2022               |
 #====================================================================#
 | Class has not been fully tested. No known issues found.            |
 #===================================================================*/
@@ -33,7 +33,7 @@ public:
 	static void Unload(const std::string& tag = "");
 	static void Shutdown();
 
-	Text();
+	Text() {}
 	Text(const Text& copy);
 	~Text();
 
@@ -52,11 +52,11 @@ private:
 	void CreateText();
 
 	std::string m_string;
-	SDL_Point m_textSize;
+	SDL_Point m_textSize{ 0, 0 };
 
-	TTF_Font* m_font;
-	SDL_Color m_color;
-	SDL_Texture* m_texture;
+	TTF_Font* m_font{ nullptr };
+	SDL_Texture* m_texture{ nullptr };
+	SDL_Color m_color{ 255, 255, 255 };
 
 	static std::string s_rootFolder;
 	static std::unique_ptr<Fonts> s_fonts;
