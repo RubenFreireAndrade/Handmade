@@ -52,23 +52,6 @@ void Sprite::Unload(const std::string& tag)
 	}
 }
 //======================================================================================================
-Sprite::Sprite()
-{
-	m_imageCel = 0;
-	m_animationVelocity = 0.0f;
-	m_animationRunningTime = 0.0f;
-
-	m_isAnimated = false;
-	m_isAnimationDead = false;
-	m_isAnimationLooping = true;
-	m_isAnimationLoopFinal = false;
-
-	m_image = nullptr;
-	m_celDimension = { 0, 0 };
-	m_imageDimension = { 1, 1 };
-	m_spriteDimension = { 0, 0 };
-}
-//======================================================================================================
 bool Sprite::IsAnimationDead()
 {
 	return m_isAnimationDead;

@@ -1,7 +1,7 @@
 #pragma once
 
 /*===================================================================#
-| 'Sprite' source files last updated on 22 September 2021            |
+| 'Sprite' source files last updated on 28 February 2022             |
 #====================================================================#
 | Class has not been fully tested. No known issues found.            |
 #===================================================================*/
@@ -28,7 +28,7 @@ public:
 	static bool Load(const std::string& filename, const std::string& tag);
 	static void Unload(const std::string& tag = "");
 
-	Sprite();
+	Sprite() {}
 
 	bool IsAnimationDead();
 	void IsAnimated(bool flag);
@@ -44,26 +44,26 @@ public:
 	void ResetAnimation();
 	void Update(int deltaTime);
 
-	void Render(int x = 0, 
+	void Render(int x = 0,
 		int y = 0,
-		double angle = 0.0, 
+		double angle = 0.0,
 		Flip flip = Flip::None);
 
 private:
 
-	int m_imageCel;
-	float m_animationVelocity;
-	float m_animationRunningTime;
+	int m_imageCel{ 0 };
+	float m_animationVelocity{ 0.0f };
+	float m_animationRunningTime{ 0.0f };
 
-	bool m_isAnimated;
-	bool m_isAnimationDead;
-	bool m_isAnimationLooping;
-	bool m_isAnimationLoopFinal;
+	bool m_isAnimated{ false };
+	bool m_isAnimationDead{ false };
+	bool m_isAnimationLooping{ true };
+	bool m_isAnimationLoopFinal{ false };
 
-	SDL_Texture* m_image;
-	SDL_Point m_celDimension;
-	SDL_Point m_imageDimension;
-	SDL_Point m_spriteDimension;
+	SDL_Texture* m_image{ nullptr };
+	SDL_Point m_celDimension = { 0, 0 };
+	SDL_Point m_imageDimension = { 1, 1 };
+	SDL_Point m_spriteDimension = { 0, 0 };
 
 	static std::string s_rootFolder;
 	static std::unique_ptr<Textures> s_textures;
