@@ -71,7 +71,7 @@ Text::Text(const Text& copy)
 	m_color = copy.m_color;
 	m_string = copy.m_string;
 	m_textSize = copy.m_textSize;
-	CreateText();
+	m_isDirty = true;
 }
 //======================================================================================================
 Text::~Text()
@@ -98,7 +98,7 @@ void Text::SetSize(int width, int height)
 void Text::SetString(const std::string& string)
 {
 	m_string = string;
-	CreateText();
+	m_isDirty = true;
 }
 //======================================================================================================
 void Text::SetColor(Uint8 r, Uint8 g, Uint8 b)
@@ -106,7 +106,7 @@ void Text::SetColor(Uint8 r, Uint8 g, Uint8 b)
 	m_color.r = r;
 	m_color.g = g;
 	m_color.b = b;
-	CreateText();
+	m_isDirty = true;
 }
 //======================================================================================================
 bool Text::SetFont(const std::string& tag)
@@ -114,6 +114,7 @@ bool Text::SetFont(const std::string& tag)
 	auto it = s_fonts->find(tag);
 	assert(it != s_fonts->end());
 	m_font = (*it).second;
+	m_isDirty = true;
 	return true;
 }
 //======================================================================================================
@@ -125,6 +126,12 @@ void Text::Render(int x, int y)
 	dst.y = y;
 	dst.w = m_textSize.x;
 	dst.h = m_textSize.y;
+
+	if (m_isDirty)
+	{
+		CreateText();
+		m_isDirty = false;
+	}
 
 	SDL_RenderCopy(Screen::Instance()->GetRenderer(), m_texture, nullptr, &dst);
 }

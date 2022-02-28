@@ -52,6 +52,7 @@ private:
 	void CreateText();
 
 	std::string m_string;
+	bool m_isDirty{ true };
 	SDL_Point m_textSize{ 0, 0 };
 
 	TTF_Font* m_font{ nullptr };
