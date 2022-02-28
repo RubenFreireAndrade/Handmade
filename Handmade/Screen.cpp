@@ -9,15 +9,6 @@ Screen* Screen::Instance()
 	return screenObject;
 }
 //======================================================================================================
-Screen::Screen()
-{
-	m_width = 0;
-	m_height = 0;
-	m_window = nullptr;
-	m_renderer = nullptr;
-	m_windowHandle = nullptr;
-}
-//======================================================================================================
 HWND Screen::GetWindowHandle()
 {
 	return m_windowHandle;

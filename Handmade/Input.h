@@ -307,15 +307,15 @@ private:
 	Input(const Input&);
 	Input& operator=(Input&);
 
-	char m_key;
+	char m_key{ ' ' };
 
-	int m_modifier;
-	int m_mouseWheel;
-	int m_mouseButton;
+	int m_mouseWheel{ 0 };
+	int m_modifier{ HM_MOD_NONE };
+	int m_mouseButton{ HM_MOUSE_NONE };
 
-	bool m_isKeyPressed;
-	bool m_isMouseClicked;
-	bool m_isWindowClosed;
+	bool m_isKeyPressed{ false };
+	bool m_isMouseClicked{ false };
+	bool m_isWindowClosed{ false };
 
 	Vector<int> m_mouseMotion;
 	Vector<int> m_mousePosition;

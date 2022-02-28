@@ -10,7 +10,7 @@ class GameState
 
 public:
 
-	GameState();
+	GameState() {}
 	virtual ~GameState() = 0 {}
 
 	bool IsAlive() const;
@@ -27,8 +27,8 @@ public:
 private:
 
 	//TODO - Fix this later
-	bool m_isAlive;
-	bool m_isActive;
-	GameState* m_previousState;
+	bool m_isAlive{ true };
+	bool m_isActive{ true };
+	GameState* m_previousState{ nullptr };
 
 };

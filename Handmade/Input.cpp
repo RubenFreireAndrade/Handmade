@@ -8,19 +8,6 @@ Input* Input::Instance()
 	return inputObject;
 }
 //======================================================================================================
-Input::Input()
-{
-	m_key = ' ';
-	m_mouseWheel = 0;
-
-	m_isKeyPressed = false;
-	m_isMouseClicked = false;
-	m_isWindowClosed = false;
-
-	m_modifier = HM_MOD_NONE;
-	m_mouseButton = HM_MOUSE_NONE;
-}
-//======================================================================================================
 char Input::GetKey() const
 {
 	return m_key;

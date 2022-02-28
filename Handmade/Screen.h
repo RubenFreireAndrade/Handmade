@@ -30,15 +30,15 @@ public:
 
 private:
 
-	Screen();
+	Screen() {}
 	Screen(const Screen&);
 	Screen& operator=(const Screen&);
 
-	int m_width;
-	int m_height;
+	int m_width{ 0 };
+	int m_height{ 0 };
 
-	HWND m_windowHandle;
-	SDL_Window* m_window;
-	SDL_Renderer* m_renderer;
+	HWND m_windowHandle{ nullptr };
+	SDL_Window* m_window{ nullptr };
+	SDL_Renderer* m_renderer{ nullptr };
 
 };
