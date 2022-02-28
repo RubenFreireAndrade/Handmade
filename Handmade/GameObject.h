@@ -34,8 +34,8 @@ public:
 
 protected:
 
-	float m_angle{ 0.0f };
 	int m_priority{ 0 };
+	float m_angle{ 0.0f };
 
 	bool m_isAlive{ true };
 	bool m_isActive{ true };
