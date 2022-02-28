@@ -22,7 +22,7 @@ public:
 	static void Unload(const std::string& tag = "");
 	static void Shutdown();
 
-	Music();
+	Music() {}
 
 	void SetVolume(float volume);
 	bool SetMusic(const std::string& tag);

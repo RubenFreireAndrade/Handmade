@@ -8,7 +8,7 @@ class Background : public GameObject
 
 public:
 
-	Background();
+	Background() {}
 	virtual ~Background();
 
 	void Load(const std::string& imageFilename,

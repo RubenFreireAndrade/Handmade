@@ -12,7 +12,7 @@ class MainMenu : public GameObject
 
 public:
 
-	MainMenu();
+	MainMenu() {}
 	virtual ~MainMenu() {}
 
 	int GetMenuOption() const;

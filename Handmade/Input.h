@@ -303,7 +303,7 @@ public:
 
 private:
 
-	Input();
+	Input() {}
 	Input(const Input&);
 	Input& operator=(Input&);
 

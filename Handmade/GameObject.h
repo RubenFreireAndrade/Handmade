@@ -7,7 +7,7 @@ class GameObject
 
 public:
 
-	GameObject();
+	GameObject() {}
 	virtual ~GameObject() = 0 {}
 
 	bool IsAlive() const;
