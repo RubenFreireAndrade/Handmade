@@ -4,12 +4,6 @@
 #include "Vector.h"
 
 //======================================================================================================
-MainMenu::MainMenu()
-{
-	m_menuOptionActive = 0;
-	m_menuOptionChoice = -1;
-}
-//======================================================================================================
 int MainMenu::GetMenuOption() const
 {
 	return m_menuOptionChoice;

@@ -1,15 +1,6 @@
 #include "GameObject.h"
 
 //======================================================================================================
-GameObject::GameObject()
-{
-	m_angle = 0.0f;
-	m_priority = 0;
-	m_isAlive = true;
-	m_isActive = true;
-	m_isVisible = true;
-}
-//======================================================================================================
 bool GameObject::IsAlive() const
 {
 	return m_isAlive;

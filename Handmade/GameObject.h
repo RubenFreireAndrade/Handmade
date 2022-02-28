@@ -34,12 +34,12 @@ public:
 
 protected:
 
-	float m_angle;
-	int m_priority;
+	float m_angle{ 0.0f };
+	int m_priority{ 0 };
 
-	bool m_isAlive;
-	bool m_isActive;
-	bool m_isVisible;
+	bool m_isAlive{ true };
+	bool m_isActive{ true };
+	bool m_isVisible{ true };
 
 	std::string m_tag;
 	Vector<int> m_position;

@@ -21,9 +21,9 @@ public:
 
 protected:
 
-	bool m_isPlaying;
 	std::string m_imageID;
 	std::string m_audioID;
+	bool m_isPlaying{ false };
 
 	Music m_music;
 	Sprite m_image;

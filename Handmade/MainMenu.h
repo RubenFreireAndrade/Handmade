@@ -25,8 +25,8 @@ public:
 
 private:
 
-	int m_menuOptionChoice;
-	int m_menuOptionActive;
+	int m_menuOptionActive{ 0 };
+	int m_menuOptionChoice{ -1 };
 	std::vector<Text> m_menuText;
 
 };
