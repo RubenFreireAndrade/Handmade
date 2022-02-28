@@ -14,7 +14,7 @@ public:
 	static bool Load(const std::string& filename, const std::string& tag);
 	static void Unload(const std::string& tag = "");
 
-	Sound();
+	Sound() {}
 
 	void SetVolume(float volume);
 	bool SetSound(const std::string& tag);
@@ -23,7 +23,7 @@ public:
 
 private:
 
-	Mix_Chunk* m_sound;
+	Mix_Chunk* m_sound{ nullptr };
 
 	static std::string s_rootFolder;
 	static std::unique_ptr<Sounds> s_sounds;

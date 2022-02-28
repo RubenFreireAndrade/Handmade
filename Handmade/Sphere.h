@@ -6,7 +6,7 @@ class Sphere
 
 public:
 
-	Sphere();
+	Sphere() {}
 
 	void SetRadius(int radius);
 	void SetPosition(int x, int y);
@@ -15,7 +15,7 @@ public:
 
 private:
 
-	int m_radius;
+	int m_radius{ 0 };
 	Vector<int> m_position;
 
 };
