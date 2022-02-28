@@ -1,11 +1,4 @@
 #pragma once
-
-/*===================================================================#
-| 'Game' source files last updated on 6 October 2021                 |
-#====================================================================#
-| Class has not been fully tested. No known issues found.            |
-#===================================================================*/
-
 #include <deque>
 #include <memory>
 #include <string>

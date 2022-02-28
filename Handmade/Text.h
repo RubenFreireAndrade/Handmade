@@ -1,11 +1,4 @@
 #pragma once
-
-/*===================================================================#
-| 'Text' source files last updated on 28 February 2022               |
-#====================================================================#
-| Class has not been fully tested. No known issues found.            |
-#===================================================================*/
-
 #include <map>
 #include <memory>
 #include <string>

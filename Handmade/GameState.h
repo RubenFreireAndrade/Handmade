@@ -1,11 +1,5 @@
 #pragma once
 
-/*===================================================================#
-| 'GameState' source files last updated on 6 October 2021            |
-#====================================================================#
-| Class has not been fully tested. No known issues found.            |
-#===================================================================*/
-
 //TODO - Add default screens for each game state
 //TODO - Cannot load resources in game states ctor
 //TODO - Consider RAII to load/release resources in the ctor/dtor

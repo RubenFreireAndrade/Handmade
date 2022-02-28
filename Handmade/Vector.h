@@ -1,11 +1,4 @@
 #pragma once
-
-/*===================================================================#
-| 'Vector' source files last updated on 11 May 2021                  |
-#====================================================================#
-| Class has not been fully tested. No known issues found.            |
-#===================================================================*/
-
 #include <math.h>
 
 template <class T> class Vector

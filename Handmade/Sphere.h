@@ -1,11 +1,4 @@
 #pragma once
-
-/*===================================================================#
-| 'Sphere' source files last updated on 19 May 2021                  |
-#====================================================================#
-| Class has not been fully tested. No known issues found.            |
-#===================================================================*/
-
 #include "Vector.h"
 
 class Sphere

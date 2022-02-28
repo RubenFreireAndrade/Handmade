@@ -1,11 +1,4 @@
 #pragma once
-
-/*===================================================================#
-| 'GameObject' source files last updated on 28 May 2021              |
-#====================================================================#
-| Class has not been fully tested. No known issues found.            |
-#===================================================================*/
-
 #include <string>
 #include "Vector.h"
 

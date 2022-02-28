@@ -1,11 +1,4 @@
 #pragma once
-
-/*===================================================================#
-| 'PlayState' source files last updated on 22 September 2021         |
-#====================================================================#
-| Class has not been fully tested. No known issues found.            |
-#===================================================================*/
-
 #include <vector>
 #include "Background.h"
 #include "GameObject.h"
