@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Music.h"
-#include "Sprite.h"
+#include "Texture.h"
 
 class Background : public GameObject
 {
@@ -26,6 +26,6 @@ protected:
 	bool m_isPlaying{ false };
 
 	Music m_music;
-	Sprite m_image;
+	Texture m_image;
 
 };

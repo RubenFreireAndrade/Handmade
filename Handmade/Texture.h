@@ -6,7 +6,7 @@
 
 typedef std::map<std::string, SDL_Texture*> Textures;
 
-class Sprite
+class Texture
 {
 
 public:
@@ -21,18 +21,18 @@ public:
 	static bool Load(const std::string& filename, const std::string& tag);
 	static void Unload(const std::string& tag = "");
 
-	Sprite() {}
+	Texture() {}
 
 	bool IsAnimationDead();
 	void IsAnimated(bool flag);
 	bool IsAnimationLooping();
 	void IsAnimationLooping(bool flag);
 
-	bool SetImage(const std::string& tag);
-	void SetImageCel(int column, int row);
+	bool SetTexture(const std::string& tag);
+	void SetCel(int column, int row);
 	void SetAnimationVelocity(float velocity);
-	void SetSpriteDimension(int width, int height);
-	void SetImageDimension(int columns, int rows, int width, int height);
+	void SetDimension(int width, int height);
+	void SetSourceDimension(int columns, int rows, int width, int height);
 
 	void ResetAnimation();
 	void Update(int deltaTime);
@@ -44,7 +44,7 @@ public:
 
 private:
 
-	int m_imageCel{ 0 };
+	int m_cel{ 0 };
 	float m_animationVelocity{ 0.0f };
 	float m_animationRunningTime{ 0.0f };
 
@@ -53,10 +53,10 @@ private:
 	bool m_isAnimationLooping{ true };
 	bool m_isAnimationLoopFinal{ false };
 
-	SDL_Texture* m_image{ nullptr };
+	SDL_Texture* m_texture{ nullptr };
 	SDL_Point m_celDimension = { 0, 0 };
-	SDL_Point m_imageDimension = { 1, 1 };
-	SDL_Point m_spriteDimension = { 0, 0 };
+	SDL_Point m_sourceDimension = { 1, 1 };
+	SDL_Point m_textureDimension = { 0, 0 };
 
 	static std::string s_rootFolder;
 	static std::unique_ptr<Textures> s_textures;

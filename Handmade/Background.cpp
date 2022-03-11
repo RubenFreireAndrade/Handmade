@@ -20,9 +20,9 @@ void Background::Load(const std::string& imageFilename, const std::string& audio
 	Vector<int> resolution = Screen::Instance()->GetResolution();
 
 	m_image.Load(imageFilename, imageFilename);
-	m_image.SetImage(imageFilename);
-	m_image.SetSpriteDimension(resolution.x, resolution.y);
-	m_image.SetImageDimension(1, 1, resolution.x, resolution.y);
+	m_image.SetTexture(imageFilename);
+	m_image.SetDimension(resolution.x, resolution.y);
+	m_image.SetSourceDimension(1, 1, resolution.x, resolution.y);
 
 	m_music.Load(audioFilename, audioFilename);
 	m_music.SetMusic(audioFilename);

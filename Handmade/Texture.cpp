@@ -2,14 +2,14 @@
 #include <assert.h>
 #include <SDL_image.h>
 #include "Screen.h"
-#include "Sprite.h"
+#include "Texture.h"
 #include "Utility.h"
 
-std::string Sprite::s_rootFolder = "Assets/Images/";
-std::unique_ptr<Textures> Sprite::s_textures = std::make_unique<Textures>();
+std::string Texture::s_rootFolder = "Assets/Images/";
+std::unique_ptr<Textures> Texture::s_textures = std::make_unique<Textures>();
 
 //======================================================================================================
-bool Sprite::Load(const std::string& filename, const std::string& tag)
+bool Texture::Load(const std::string& filename, const std::string& tag)
 {
 	assert(s_textures->find(tag) == s_textures->end());
 
@@ -31,7 +31,7 @@ bool Sprite::Load(const std::string& filename, const std::string& tag)
 	return true;
 }
 //======================================================================================================
-void Sprite::Unload(const std::string& tag)
+void Texture::Unload(const std::string& tag)
 {
 	if (!tag.empty())
 	{
@@ -52,75 +52,75 @@ void Sprite::Unload(const std::string& tag)
 	}
 }
 //======================================================================================================
-bool Sprite::IsAnimationDead()
+bool Texture::IsAnimationDead()
 {
 	return m_isAnimationDead;
 }
 //======================================================================================================
-void Sprite::IsAnimated(bool flag)
+void Texture::IsAnimated(bool flag)
 {
 	m_isAnimated = flag;
 }
 //======================================================================================================
-bool Sprite::IsAnimationLooping()
+bool Texture::IsAnimationLooping()
 {
 	return m_isAnimationLooping;
 }
 //======================================================================================================
-void Sprite::IsAnimationLooping(bool flag)
+void Texture::IsAnimationLooping(bool flag)
 {
 	m_isAnimationLooping = flag;
 }
 //======================================================================================================
-void Sprite::SetImageCel(int column, int row)
+void Texture::SetCel(int column, int row)
 {
 	//Make sure this function is called AFTER setting the image dimension
-	assert(column > 0 && column <= m_imageDimension.x);
-	assert(row > 0 && row <= m_imageDimension.y);
-	m_imageCel = ((row - 1) * m_imageDimension.x) + (column - 1);
+	assert(column > 0 && column <= m_sourceDimension.x);
+	assert(row > 0 && row <= m_sourceDimension.y);
+	m_cel = ((row - 1) * m_sourceDimension.x) + (column - 1);
 }
 //======================================================================================================
-void Sprite::SetAnimationVelocity(float velocity)
+void Texture::SetAnimationVelocity(float velocity)
 {
 	assert(velocity >= 0.0f);
 	m_animationVelocity = velocity;
 }
 //======================================================================================================
-bool Sprite::SetImage(const std::string& tag)
+bool Texture::SetTexture(const std::string& tag)
 {
 	auto it = s_textures->find(tag);
 	assert(it != s_textures->end());
-	m_image = (*it).second;
+	m_texture = (*it).second;
 	return true;
 }
 //======================================================================================================
-void Sprite::SetSpriteDimension(int width, int height)
+void Texture::SetDimension(int width, int height)
 {
-	m_spriteDimension.x = width;
-	m_spriteDimension.y = height;
+	m_textureDimension.x = width;
+	m_textureDimension.y = height;
 }
 //======================================================================================================
-void Sprite::SetImageDimension(int columns, int rows, int width, int height)
+void Texture::SetSourceDimension(int columns, int rows, int width, int height)
 {
 	rows = std::max(rows, 1);
 	columns = std::max(columns, 1);
 
-	m_imageDimension.x = columns;
-	m_imageDimension.y = rows;
+	m_sourceDimension.x = columns;
+	m_sourceDimension.y = rows;
 
 	m_celDimension.x = width / columns;
 	m_celDimension.y = height / rows;
 }
 //======================================================================================================
-void Sprite::ResetAnimation()
+void Texture::ResetAnimation()
 {
-	m_imageCel = 0;
+	m_cel = 0;
 	m_isAnimationDead = false;
 	m_animationRunningTime = 0.0f;
 	m_isAnimationLoopFinal = false;
 }
 //======================================================================================================
-void Sprite::Update(int deltaTime)
+void Texture::Update(int deltaTime)
 {
 	//If sprite is an animation we have to calculate the 
 	//image cel each frame because it won't be a static value
@@ -131,8 +131,8 @@ void Sprite::Update(int deltaTime)
 		//Aquire index value of specific texture cel to 'cut out' using a formula
 		//The image index is zero-based and is a whole number value counting from
 		//top left and going right and down the sprite sheet, and is capable of 'wrapping'
-		m_imageCel = static_cast<int>(m_animationRunningTime * m_animationVelocity) %
-			static_cast<int>(m_imageDimension.x * m_imageDimension.y);
+		m_cel = static_cast<int>(m_animationRunningTime * m_animationVelocity) %
+			static_cast<int>(m_sourceDimension.x * m_sourceDimension.y);
 
 		if (m_isAnimationLooping)
 		{
@@ -143,7 +143,7 @@ void Sprite::Update(int deltaTime)
 		//If animation is set to cycle once and the last image cel 
 		//has been reached then flag this as the final animation loop
 		else if (!m_isAnimationLooping &&
-			m_imageCel == (m_imageDimension.x * m_imageDimension.y - 1))
+			m_cel == (m_sourceDimension.x * m_sourceDimension.y - 1))
 		{
 			m_isAnimationLoopFinal = true;
 		}
@@ -152,14 +152,14 @@ void Sprite::Update(int deltaTime)
 		//because even though the animation is marked final, a few more 
 		//frames will be called with the last image cel set, so only
 		//mark it dead when the first image cel comes around again
-		if (m_isAnimationLoopFinal && m_imageCel == 0)
+		if (m_isAnimationLoopFinal && m_cel == 0)
 		{
 			m_isAnimationDead = true;
 		}
 	}
 }
 //======================================================================================================
-void Sprite::Render(int x, int y, double angle, Flip flip)
+void Texture::Render(int x, int y, double angle, Flip flip)
 {
 	if (!m_isAnimationDead)
 	{
@@ -169,22 +169,22 @@ void Sprite::Render(int x, int y, double angle, Flip flip)
 		SDL_Rect dst;
 
 		//We need to get exact cel block xy coordinates to 'cut out' 
-		src.x = (m_imageCel % m_imageDimension.x) * m_celDimension.x;
-		src.y = (m_imageCel / m_imageDimension.x) * m_celDimension.y;
+		src.x = (m_cel % m_sourceDimension.x) * m_celDimension.x;
+		src.y = (m_cel / m_sourceDimension.x) * m_celDimension.y;
 		src.w = m_celDimension.x;
 		src.h = m_celDimension.y;
 
 		dst.x = x;
 		dst.y = y;
-		dst.w = m_spriteDimension.x;
-		dst.h = m_spriteDimension.y;
+		dst.w = m_textureDimension.x;
+		dst.h = m_textureDimension.y;
 
 		//Use the centre of the sprite as its centre of rotation
 		SDL_Point centrePoint;
-		centrePoint.x = m_spriteDimension.x / 2;
-		centrePoint.y = m_spriteDimension.y / 2;
+		centrePoint.x = m_textureDimension.x / 2;
+		centrePoint.y = m_textureDimension.y / 2;
 
 		SDL_RenderCopyEx(Screen::Instance()->GetRenderer(),
-			m_image, &src, &dst, angle, &centrePoint, static_cast<SDL_RendererFlip>(flip));
+			m_texture, &src, &dst, angle, &centrePoint, static_cast<SDL_RendererFlip>(flip));
 	}
 }

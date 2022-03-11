@@ -72,7 +72,7 @@
     <ClInclude Include="Text.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
+    <ClInclude Include="Texture.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
@@ -128,7 +128,7 @@
     <ClCompile Include="Text.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
+    <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
