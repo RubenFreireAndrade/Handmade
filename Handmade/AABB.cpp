@@ -10,7 +10,7 @@ AABB AABB::GetCollisionRegion(const AABB& secondBox)
 	collider.m_min.y = std::max(m_min.y, secondBox.m_min.y);
 	collider.m_max.x = std::min(m_max.x, secondBox.m_max.x);
 	collider.m_max.y = std::max(m_max.y, secondBox.m_max.y);
-	
+
 	return collider;
 }
 //======================================================================================================
@@ -40,82 +40,87 @@ bool AABB::IsColliding(const AABB& secondBox) const
 		(m_max.y > secondBox.m_min.y && secondBox.m_max.y > m_min.y));
 }
 //======================================================================================================
-bool AABB::IsColliding(const AABB& secondBox, 
-	const Vector<int>& lhsBoxVelocity, 
-	const Vector<int>& rhsBoxVelocity, 
+bool AABB::IsColliding(const AABB& secondBox,
+	const Vector<int>& lhsBoxVelocity,
+	const Vector<int>& rhsBoxVelocity,
 	float maxTime, float* firstTime)
 {
-    Vector<int> v = lhsBoxVelocity - rhsBoxVelocity; // velocity of rect 1 relative to rect 2
+	//Velocity of box 1 relative to box 2
+	Vector<int> relativeVelocity = lhsBoxVelocity - rhsBoxVelocity;
 
-    //Time of first contact in X
-    auto x0 = 0.0f;
+	//Time of first contact in X
+	auto x0 = 0.0f;
 
-    if (secondBox.m_min.x > m_max.x && v.x > 0)
-    {
-        x0 = (secondBox.m_min.x - m_max.x) / static_cast<float>(v.x);
-    }
+	if (secondBox.m_min.x > m_max.x && relativeVelocity.x > 0)
+	{
+		x0 = (secondBox.m_min.x - m_max.x) / static_cast<float>(relativeVelocity.x);
+	}
 
-    else if (m_min.x > secondBox.m_max.x && v.x < 0)
-    {
-        x0 = (secondBox.m_max.x - m_min.x) / static_cast<float>(v.x); // swap to get +ve time
-    }
+	else if (m_min.x > secondBox.m_max.x && relativeVelocity.x < 0)
+	{
+		//Swap to get +ve time
+		x0 = (secondBox.m_max.x - m_min.x) / static_cast<float>(relativeVelocity.x);
+	}
 
-    //Time of final contact in X
-    auto x1 = maxTime;
+	//Time of final contact in X
+	auto x1 = maxTime;
 
-    if (secondBox.m_max.x > m_min.x && v.x > 0)
-    {
-        x1 = (secondBox.m_max.x - m_min.x) / static_cast<float>(v.x);
-    }
+	if (secondBox.m_max.x > m_min.x && relativeVelocity.x > 0)
+	{
+		x1 = (secondBox.m_max.x - m_min.x) / static_cast<float>(relativeVelocity.x);
+	}
 
-    else if (m_max.x > secondBox.m_min.x && v.x < 0)
-    {
-        x1 = (secondBox.m_min.x - m_max.x) / static_cast<float>(v.x); // swap to get +ve time
-    }
+	else if (m_max.x > secondBox.m_min.x && relativeVelocity.x < 0)
+	{
+		//Swap to get +ve time
+		x1 = (secondBox.m_min.x - m_max.x) / static_cast<float>(relativeVelocity.x);
+	}
 
-    //Time of first contact in Y
-    auto y0 = 0.0f;
+	//Time of first contact in Y
+	auto y0 = 0.0f;
 
-    if (secondBox.m_min.y > m_max.y && v.y > 0)
-    {
-        y0 = (secondBox.m_min.y - m_max.y) / static_cast<float>(v.y);
-    }
+	if (secondBox.m_min.y > m_max.y && relativeVelocity.y > 0)
+	{
+		y0 = (secondBox.m_min.y - m_max.y) / static_cast<float>(relativeVelocity.y);
+	}
 
-    else if (m_min.y > secondBox.m_max.y && v.y < 0)
-    {
-        y0 = (secondBox.m_max.y - m_min.y) / static_cast<float>(v.y); // swap to get +ve time
-    }
+	else if (m_min.y > secondBox.m_max.y && relativeVelocity.y < 0)
+	{
+		//Swap to get +ve time
+		y0 = (secondBox.m_max.y - m_min.y) / static_cast<float>(relativeVelocity.y);
+	}
 
-    //Time of final contact in Y
-    auto y1 = maxTime;
+	//Time of final contact in Y
+	auto y1 = maxTime;
 
-    if (secondBox.m_max.y > m_min.y && v.y > 0)
-    {
-        y1 = (secondBox.m_max.y - m_min.y) / static_cast<float>(v.y);
-    }
+	if (secondBox.m_max.y > m_min.y && relativeVelocity.y > 0)
+	{
+		y1 = (secondBox.m_max.y - m_min.y) / static_cast<float>(relativeVelocity.y);
+	}
 
-    else if (m_max.y > secondBox.m_min.y && v.y < 0)
-    {
-        y1 = (secondBox.m_min.y - m_max.y) / static_cast<float>(v.y); // swap to get +ve time
-    }
+	else if (m_max.y > secondBox.m_min.y && relativeVelocity.y < 0)
+	{
+		//Swap to get +ve time
+		y1 = (secondBox.m_min.y - m_max.y) / static_cast<float>(relativeVelocity.y);
+	}
 
-    //Time of first contact for the 2 rects is the MAX
-    //of the times of first contact in X and Y
-    auto first = std::max(x0, y0);
+	//Time of first contact for the 2 rects is the MAX
+	//of the times of first contact in X and Y
+	auto first = std::max(x0, y0);
 
-    //Time of last contact for the 2 rects is the MIN
-    //of the times of last contact in X and Y
-    auto last = std::min(x1, y1);
+	//Time of last contact for the 2 rects is the MIN
+	//of the times of last contact in X and Y
+	auto last = std::min(x1, y1);
 
-    //If the time of final contact is AFTER the time of
-    //first contact, then the rects do intersect
-    auto intersect = (last > first && first < maxTime);
+	//If the time of final contact is AFTER the time of
+	//first contact, then the rects do intersect
+	auto intersect = (last > first && first < maxTime);
 
-    //Pass back time of first contact
-    if (firstTime)
-    {
-        *firstTime = first;
-    }
+	//Pass back time of first contact
+	if (firstTime)
+	{
+		*firstTime = first;
+	}
 
-    return intersect;
+	return intersect;
 }
