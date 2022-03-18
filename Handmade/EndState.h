@@ -1,7 +1,8 @@
 #pragma once
+#include <memory>
 #include "Background.h"
 #include "GameState.h"
-#include "MainMenu.h"
+#include "MenuKey.h"
 
 class EndState : public GameState
 {
@@ -24,7 +25,7 @@ public:
 
 private:
 
-	MainMenu m_menu;
 	Background m_image;
+	std::unique_ptr<MenuKey> m_menu;
 
 };
