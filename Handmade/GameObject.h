@@ -37,6 +37,7 @@ protected:
 	int m_priority{ 0 };
 	float m_angle{ 0.0f };
 
+	bool m_isDirty{ true };
 	bool m_isAlive{ true };
 	bool m_isActive{ true };
 	bool m_isVisible{ true };
