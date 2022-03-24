@@ -26,6 +26,6 @@ private:
 	Vector<int> m_min;
 	Vector<int> m_max;
 	Vector<int> m_position;
-	Vector<int> m_dimension;
+	Vector<int> m_dimension{ 1, 1 };
 
 };
