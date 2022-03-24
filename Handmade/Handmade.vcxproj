@@ -139,6 +139,7 @@
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="OBBCollider.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Utility.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="OBBCollider.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Utility.cpp" />
