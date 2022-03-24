@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="OBB.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="EndState.h" />
@@ -160,6 +161,7 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="OBB.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="EndState.cpp" />
