@@ -43,6 +43,24 @@
     <Filter Include="Source Files\GameStates">
       <UniqueIdentifier>{b13b4e0d-172a-4c24-9373-75db951e531f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Audio">
+      <UniqueIdentifier>{9c7c95b7-4286-4808-bf82-4648f014109e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Audio">
+      <UniqueIdentifier>{acccb7bd-6a24-485d-9bd3-6a140e0a58d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Physics">
+      <UniqueIdentifier>{d2e97f6e-181a-4b05-bc93-c2532bfd45de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Physics">
+      <UniqueIdentifier>{cb9e5b52-a7d6-4ac9-a96f-09927d280189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Core">
+      <UniqueIdentifier>{b5b8eb0a-58f7-49fb-9d70-e56be295d18d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Core">
+      <UniqueIdentifier>{5dae7650-ecb8-43f1-9a96-6291c6509c2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h">
@@ -69,18 +87,6 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files\Main</Filter>
     </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="AABB.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
@@ -90,23 +96,35 @@
     <ClInclude Include="Utility.h">
       <Filter>Header Files\Main</Filter>
     </ClInclude>
-    <ClInclude Include="Music.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Music.h">
+      <Filter>Header Files\Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files\Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Header Files\Components\Physics</Filter>
+    </ClInclude>
     <ClInclude Include="OBB.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Components\Physics</Filter>
     </ClInclude>
     <ClInclude Include="RigidBody.h">
-      <Filter>Header Files\Components</Filter>
+      <Filter>Header Files\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Header Files\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\Components\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Components\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,18 +152,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="AABB.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -155,23 +161,35 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
-    <ClCompile Include="Music.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Music.cpp">
+      <Filter>Source Files\Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files\Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Source Files\Components\Physics</Filter>
+    </ClCompile>
     <ClCompile Include="OBB.cpp">
-      <Filter>Source Files\Components</Filter>
+      <Filter>Source Files\Components\Physics</Filter>
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
-      <Filter>Source Files\Components</Filter>
+      <Filter>Source Files\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Source Files\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\Components\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Components\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
