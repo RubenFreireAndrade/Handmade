@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AABB.h"
+#include "BoxCollider.h"
 #include "GameObject.h"
 #include "Sound.h"
 #include "Texture.h"
@@ -14,7 +14,7 @@ public:
 	Player();
 	~Player() override;
 
-	const AABB& GetBound();
+	const BoxCollider& GetBound();
 
 	void Update(int deltaTime) override;
 	bool Render() override;
@@ -23,7 +23,7 @@ private:
 
 	int m_velocity = 5;
 
-	AABB m_bound;
+	BoxCollider m_bound;
 	Sound m_footsteps;
 
 	Texture m_idle;

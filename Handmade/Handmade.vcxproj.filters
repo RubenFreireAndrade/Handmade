@@ -105,7 +105,7 @@
     <ClInclude Include="Sound.h">
       <Filter>Header Files\Components\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="AABB.h">
+    <ClInclude Include="BoxCollider.h">
       <Filter>Header Files\Components\Physics</Filter>
     </ClInclude>
     <ClInclude Include="OBB.h">
@@ -173,7 +173,7 @@
     <ClCompile Include="Sound.cpp">
       <Filter>Source Files\Components\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="AABB.cpp">
+    <ClCompile Include="BoxCollider.cpp">
       <Filter>Source Files\Components\Physics</Filter>
     </ClCompile>
     <ClCompile Include="OBB.cpp">

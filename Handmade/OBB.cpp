@@ -34,7 +34,7 @@ bool OBB::IsColliding(const OBB& secondBox) const
 	return IsColliding(tempBox);
 }
 //======================================================================================================
-bool OBB::IsColliding(const AABB& secondBox) const
+bool OBB::IsColliding(const BoxCollider& secondBox) const
 {
 	//TODO - Fix this
 	/*OBB collider;

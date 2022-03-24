@@ -1,21 +1,21 @@
 #pragma once
 #include "Vector.h"
 
-class AABB
+class BoxCollider
 {
 
 public:
 
-	AABB GetCollisionRegion(const AABB& secondBox);
+	BoxCollider GetCollisionRegion(const BoxCollider& secondBox);
 
 	void SetPosition(int x, int y);
 	void SetDimension(int width, int height);
 
 	void Update();
-	bool IsColliding(const AABB& secondBox) const;
+	bool IsColliding(const BoxCollider& secondBox) const;
 
 	bool IsColliding(
-		const AABB& secondBox,
+		const BoxCollider& secondBox,
 		const Vector<int>& lhsBoxVelocity, // velocity of rectangle 1
 		const Vector<int>& rhsBoxVelocity, // velocity of rectangle 2
 		float maxTime, // max time - i.e. your DT for this frame

@@ -1,6 +1,6 @@
 #pragma once
 #include <array>
-#include "AABB.h"
+#include "BoxCollider.h"
 #include "Vector.h"
 
 class OBB
@@ -16,7 +16,7 @@ public:
 	void SetDimension(float width, float height);
 
 	bool IsColliding(const OBB& secondBox) const;
-	bool IsColliding(const AABB& secondBox) const;
+	bool IsColliding(const BoxCollider& secondBox) const;
 
 	void Update();
 

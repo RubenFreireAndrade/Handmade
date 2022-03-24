@@ -27,7 +27,7 @@ Player::Player()
 	m_bound.SetDimension(125, 250);
 }
 //======================================================================================================
-const AABB& Player::GetBound()
+const BoxCollider& Player::GetBound()
 {
 	return m_bound;
 }
