@@ -3,7 +3,7 @@
 #===================================================================*/
 
 #include "Game.h"
-#include "MenuState.h"
+#include "StartState.h"
 
 //TODO - Add 'assert' where required
 //TODO - Consider RAII for class design
@@ -12,7 +12,7 @@
 
 int main(int argc, char* args[])
 {
-	Game game(new MenuState);
+	Game game(new StartState);
 
 	if (game.Initialize("<insert game name here>", 1280, 720))
 	{

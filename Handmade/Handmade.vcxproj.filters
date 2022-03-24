@@ -78,7 +78,7 @@
     <ClInclude Include="GameState.h">
       <Filter>Header Files\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="MenuState.h">
+    <ClInclude Include="StartState.h">
       <Filter>Header Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="PlayState.h">
@@ -140,7 +140,7 @@
     <ClCompile Include="EndState.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="MenuState.cpp">
+    <ClCompile Include="StartState.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="PlayState.cpp">

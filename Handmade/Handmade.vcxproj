@@ -148,7 +148,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="MenuKey.h" />
-    <ClInclude Include="MenuState.h" />
+    <ClInclude Include="StartState.h" />
     <ClInclude Include="Music.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="Screen.h" />
@@ -172,7 +172,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuKey.cpp" />
-    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="StartState.cpp" />
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Screen.cpp" />

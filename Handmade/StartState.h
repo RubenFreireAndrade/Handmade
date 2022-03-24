@@ -4,7 +4,7 @@
 #include "GameState.h"
 #include "MenuKey.h"
 
-class MenuState : public GameState
+class StartState : public GameState
 {
 
 public:
@@ -15,8 +15,8 @@ public:
 		Quit
 	};
 
-	MenuState() {}
-	virtual ~MenuState() {}
+	StartState() {}
+	virtual ~StartState() {}
 
 	virtual bool OnEnter();
 	virtual GameState* Update(int deltaTime);

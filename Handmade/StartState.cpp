@@ -1,8 +1,8 @@
-#include "MenuState.h"
+#include "StartState.h"
 #include "PlayState.h"
 
 //======================================================================================================
-bool MenuState::OnEnter()
+bool StartState::OnEnter()
 {
 	m_image.Load("Menu_1280x720.png", "Journeys.ogg");
 	m_menu = std::make_unique<MenuKey>("Quikhand.ttf", MenuKey::Alignment::Bottom);
@@ -12,7 +12,7 @@ bool MenuState::OnEnter()
 	return true;
 }
 //======================================================================================================
-GameState* MenuState::Update(int deltaTime)
+GameState* StartState::Update(int deltaTime)
 {
 	m_image.PlayMusic();
 	m_menu->Update(deltaTime);
@@ -32,14 +32,14 @@ GameState* MenuState::Update(int deltaTime)
 	return this;
 }
 //======================================================================================================
-bool MenuState::Render()
+bool StartState::Render()
 {
 	m_image.Render();
 	m_menu->Render();
 	return true;
 }
 //======================================================================================================
-void MenuState::OnExit()
+void StartState::OnExit()
 {
 	//Add shutdown tasks here
 }

@@ -1,6 +1,6 @@
 #include "EndState.h"
 #include "Input.h"
-#include "MenuState.h"
+#include "StartState.h"
 #include "PlayState.h"
 
 //======================================================================================================
@@ -17,7 +17,7 @@ GameState* PlayState::Update(int deltaTime)
 	if (Input::Instance()->IsKeyPressed(HM_KEY_M))
 	{
 		m_image.StopMusic();
-		return new MenuState;
+		return new StartState;
 	}
 
 	if (Input::Instance()->IsKeyPressed(HM_KEY_Q))
