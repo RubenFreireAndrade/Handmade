@@ -114,7 +114,7 @@
     <ClInclude Include="RigidBody.h">
       <Filter>Header Files\Components\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Sphere.h">
+    <ClInclude Include="SphereCollider.h">
       <Filter>Header Files\Components\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
@@ -182,7 +182,7 @@
     <ClCompile Include="RigidBody.cpp">
       <Filter>Source Files\Components\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp">
+    <ClCompile Include="SphereCollider.cpp">
       <Filter>Source Files\Components\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">

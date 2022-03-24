@@ -153,7 +153,7 @@
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Sound.h" />
-    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Vector.h" />
@@ -177,7 +177,7 @@
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Text.cpp" />
   </ItemGroup>

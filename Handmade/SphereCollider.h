@@ -1,17 +1,17 @@
 #pragma once
 #include "Vector.h"
 
-class Sphere
+class SphereCollider
 {
 
 public:
 
-	Sphere() {}
+	SphereCollider() {}
 
 	void SetRadius(int radius);
 	void SetPosition(int x, int y);
 
-	bool IsColliding(const Sphere& secondSphere) const;
+	bool IsColliding(const SphereCollider& secondSphere) const;
 
 private:
 
