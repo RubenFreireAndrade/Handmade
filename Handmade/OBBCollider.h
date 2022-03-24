@@ -3,26 +3,26 @@
 #include "BoxCollider.h"
 #include "Vector.h"
 
-class OBB
+class OBBCollider
 {
 
 public:
 
-	OBB() {}
+	OBBCollider() {}
 
 	void SetRotation(float angle);
 	void SetScale(float x, float y);
 	void SetPosition(float x, float y);
 	void SetDimension(float width, float height);
 
-	bool IsColliding(const OBB& secondBox) const;
+	bool IsColliding(const OBBCollider& secondBox) const;
 	bool IsColliding(const BoxCollider& secondBox) const;
 
 	void Update();
 
 private:
 
-	bool IsColliding(const OBB* tempBox) const;
+	bool IsColliding(const OBBCollider* tempBox) const;
 
 	float m_angle{ 0.0f };
 

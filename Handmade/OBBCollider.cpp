@@ -1,43 +1,43 @@
-#include "OBB.h"
+#include "OBBCollider.h"
 #include "Screen.h"
 
 //======================================================================================================
-void OBB::SetRotation(float angle)
+void OBBCollider::SetRotation(float angle)
 {
 	m_angle = angle;
 }
 //======================================================================================================
-void OBB::SetScale(float x, float y)
+void OBBCollider::SetScale(float x, float y)
 {
 	m_scale.x = x;
 	m_scale.y = y;
 }
 //======================================================================================================
-void OBB::SetPosition(float x, float y)
+void OBBCollider::SetPosition(float x, float y)
 {
 	m_position.x = x;
 	m_position.y = y;
 }
 //======================================================================================================
-void OBB::SetDimension(float width, float height)
+void OBBCollider::SetDimension(float width, float height)
 {
 	m_dimension.x = width;
 	m_dimension.y = height;
 }
 //======================================================================================================
-bool OBB::IsColliding(const OBB& secondBox) const
+bool OBBCollider::IsColliding(const OBBCollider& secondBox) const
 {
-	OBB tempBox[2];
+	OBBCollider tempBox[2];
 	tempBox[0] = *this;
 	tempBox[1] = secondBox;
 
 	return IsColliding(tempBox);
 }
 //======================================================================================================
-bool OBB::IsColliding(const BoxCollider& secondBox) const
+bool OBBCollider::IsColliding(const BoxCollider& secondBox) const
 {
 	//TODO - Fix this
-	/*OBB collider;
+	/*OBBCollider collider;
 
 	collider.SetScale(secondBox.GetScale());
 	collider.SetPosition(secondBox.GetPosition());
@@ -48,7 +48,7 @@ bool OBB::IsColliding(const BoxCollider& secondBox) const
 	return true;
 }
 //======================================================================================================
-void OBB::Update()
+void OBBCollider::Update()
 {
 	Vector<float> halfDimension(m_dimension.x * m_scale.x * 0.5f, m_dimension.y * m_scale.y * 0.5f);
 
@@ -61,7 +61,7 @@ void OBB::Update()
 	//TODO - Fix this. We need to rotate the up/right vectors around Z
 	//TODO - Do we use a simple 2x2 matrix here or find some way to rotate vector?
 
-	//Transform the up and right vectors based on how the OBB is rotated 
+	//Transform the up and right vectors based on how the OBBCollider is rotated 
 	/*m_upAxis = m_rotation.GetMatrix() * m_upAxis * halfDimension.y;
 	m_rightAxis = m_rotation.GetMatrix() * m_rightAxis * halfDimension.x;*/
 
@@ -73,7 +73,7 @@ void OBB::Update()
 	m_corners[3] = m_position - m_rightAxis - m_upAxis;
 }
 //======================================================================================================
-bool OBB::IsColliding(const OBB* tempBox) const
+bool OBBCollider::IsColliding(const OBBCollider* tempBox) const
 {
 	//Assign all four temporary axes based on both boxes' up and right axes 
 	//These will be the four axes that all eight corners are projected onto

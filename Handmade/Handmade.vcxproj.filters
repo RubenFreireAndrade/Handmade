@@ -108,7 +108,7 @@
     <ClInclude Include="BoxCollider.h">
       <Filter>Header Files\Components\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="OBB.h">
+    <ClInclude Include="OBBCollider.h">
       <Filter>Header Files\Components\Physics</Filter>
     </ClInclude>
     <ClInclude Include="RigidBody.h">
@@ -176,7 +176,7 @@
     <ClCompile Include="BoxCollider.cpp">
       <Filter>Source Files\Components\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="OBB.cpp">
+    <ClCompile Include="OBBCollider.cpp">
       <Filter>Source Files\Components\Physics</Filter>
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
