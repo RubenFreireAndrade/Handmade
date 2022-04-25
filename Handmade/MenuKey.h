@@ -1,10 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <SDL.h>
 #include "GameObject.h"
 #include "Text.h"
-#include "Vector.h"
 
 class MenuKey : public GameObject
 {
@@ -56,7 +54,7 @@ private:
 	
 	SDL_Color m_activeColor{ 240, 0, 0 };
 	SDL_Color m_inactiveColor{ 255, 255, 255 };
-	Vector<int> m_charDimension;
+	SDL_Point m_charDimension;
 
 	std::vector<Text> m_menuItems;
 	Index m_menuActive{ Index::Index_1 };

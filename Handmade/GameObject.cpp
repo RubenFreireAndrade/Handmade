@@ -46,12 +46,12 @@ const std::string& GameObject::GetTag() const
 	return m_tag;
 }
 //======================================================================================================
-const Vector<int>& GameObject::GetPosition() const
+const SDL_Point& GameObject::GetPosition() const
 {
 	return m_position;
 }
 //======================================================================================================
-const Vector<int>& GameObject::GetDimension() const
+const SDL_Point& GameObject::GetDimension() const
 {
 	return m_dimension;
 }

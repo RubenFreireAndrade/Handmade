@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Vector.h"
+#include <SDL.h>
 
 class GameObject
 {
@@ -22,8 +22,8 @@ public:
 	int GetPriority() const;
 
 	const std::string& GetTag() const;
-	const Vector<int>& GetPosition() const;
-	const Vector<int>& GetDimension() const;
+	const SDL_Point& GetPosition() const;
+	const SDL_Point& GetDimension() const;
 
 	void SetPosition(int x, int y);
 	void SetDimension(int x, int y);
@@ -43,7 +43,7 @@ protected:
 	bool m_isVisible{ true };
 
 	std::string m_tag;
-	Vector<int> m_position;
-	Vector<int> m_dimension;
+	SDL_Point m_position;
+	SDL_Point m_dimension;
 
 };

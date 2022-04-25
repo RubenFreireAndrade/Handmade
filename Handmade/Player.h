@@ -29,6 +29,7 @@ private:
 	Texture m_idle;
 	Texture m_walk;
 
+	Vector<int> m_position;
 	Vector<int> m_directionWalk;
 	Vector<int> m_directionStand;
 
