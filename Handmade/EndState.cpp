@@ -4,7 +4,7 @@
 //======================================================================================================
 bool EndState::OnEnter()
 {
-	m_image.Load("End_1280x720.png", "Glory.ogg");
+	m_image.Load("Backgrounds/End_1280x720.png", "Glory.ogg");
 	m_menu = std::make_unique<MenuKey>("Quikhand.ttf", MenuKey::Alignment::Bottom);
 	m_menu->SetMenuText(MenuKey::Index::Index_1, "Play again");
 	m_menu->SetMenuText(MenuKey::Index::Index_2, "Quit game");

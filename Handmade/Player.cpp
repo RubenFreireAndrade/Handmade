@@ -4,7 +4,7 @@
 //======================================================================================================
 Player::Player()
 {
-	m_idle.Load("Adventure_boy_idle.png", "Idle");
+	m_idle.Load("Characters/Adventure_boy_idle.png", "Idle");
 	m_idle.SetTexture("Idle");
 	m_idle.SetDimension(200, 200);
 	m_idle.SetSourceDimension(10, 1, 5880, 600);
@@ -12,7 +12,7 @@ Player::Player()
 	m_idle.IsAnimationLooping(true);
 	m_idle.SetAnimationVelocity(20.0f);
 
-	m_walk.Load("Adventure_boy_run.png", "Walk");
+	m_walk.Load("Characters/Adventure_boy_run.png", "Walk");
 	m_walk.SetTexture("Walk");
 	m_walk.SetDimension(200, 200);
 	m_walk.SetSourceDimension(10, 1, 5880, 600);

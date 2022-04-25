@@ -4,7 +4,7 @@
 //======================================================================================================
 bool StartState::OnEnter()
 {
-	m_image.Load("Menu_1280x720.png", "Journeys.ogg");
+	m_image.Load("Backgrounds/Menu_1280x720.png", "Journeys.ogg");
 	m_menu = std::make_unique<MenuKey>("Quikhand.ttf", MenuKey::Alignment::Bottom);
 	m_menu->SetMenuText(MenuKey::Index::Index_1, "Play game");
 	m_menu->SetMenuText(MenuKey::Index::Index_2, "Quit game");
