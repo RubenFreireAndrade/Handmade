@@ -5,7 +5,7 @@
 #include "Texture.h"
 #include "Utility.h"
 
-std::string Texture::s_rootFolder = "Assets/Images/";
+std::string Texture::s_rootFolder = "Assets/Textures/";
 std::unique_ptr<Textures> Texture::s_textures = std::make_unique<Textures>();
 
 //======================================================================================================
