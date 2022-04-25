@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <SDL.h>
 #include "BoxCollider.h"
 #include "GameObject.h"
 #include "Texture.h"
@@ -12,12 +13,12 @@ public:
 	enum class State
 	{
 		Default = 0,
-		Hover = 1
+		Hover = 1,
+		Clicked = 2
 	};
 
-	Button(int width = 1, int height = 1,
-		int textureColumns = 1, int textureRows = 1,
-		int textureWidth = 1, int textureHeight = 1,
+	Button(const SDL_Point& dimension,
+		const SDL_Rect& textureDimension,
 		const std::string& filename = "");
 	virtual ~Button() {}
 
@@ -28,6 +29,6 @@ private:
 
 	State m_state;
 	Texture m_texture;
-	BoxCollider m_collider;
+	SDL_Rect m_collider;
 
 };

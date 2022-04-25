@@ -1,13 +1,15 @@
 #include "Button.h"
 
-Button::Button(int width, int height,
-	int textureColumns, int textureRows,
-	int textureWidth, int textureHeight,
+Button::Button(const SDL_Point& dimension,
+	const SDL_Rect& textureDimension,
 	const std::string& filename)
 {
 	m_texture.Load(filename, filename);
-	m_texture.SetDimension(width, height);
-	m_texture.SetSourceDimension(textureColumns, textureRows, textureWidth, textureHeight);
+	m_texture.SetDimension(dimension.x, dimension.y);
+	m_texture.SetSourceDimension(textureDimension.x, 
+		textureDimension.y, 
+		textureDimension.w, 
+		textureDimension.h);
 	m_texture.SetTexture(filename);
 	
 	m_texture.SetCel(1, 1);
