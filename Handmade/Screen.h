@@ -2,7 +2,6 @@
 #include <Windows.h>
 #include <string>
 #include <SDL.h>
-#include "Vector.h"
 
 class Screen
 {
@@ -13,8 +12,8 @@ public:
 
 	HWND GetWindowHandle();
 	SDL_Window* GetWindow();
+	SDL_Point GetResolution();
 	SDL_Renderer* GetRenderer();
-	Vector<int> GetResolution();
 
 	void SetMousePosition(int x, int y);
 	void SetClearColor(Uint8 r, Uint8 g, Uint8 b);

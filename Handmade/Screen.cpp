@@ -24,9 +24,9 @@ SDL_Renderer* Screen::GetRenderer()
 	return m_renderer;
 }
 //======================================================================================================
-Vector<int> Screen::GetResolution()
+SDL_Point Screen::GetResolution()
 {
-	return Vector<int>(m_width, m_height);
+	return SDL_Point{ m_width, m_height };
 }
 //======================================================================================================
 void Screen::SetMousePosition(int x, int y)

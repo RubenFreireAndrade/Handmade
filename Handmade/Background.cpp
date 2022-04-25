@@ -17,7 +17,7 @@ bool Background::Render()
 //======================================================================================================
 void Background::Load(const std::string& imageFilename, const std::string& audioFilename)
 {
-	Vector<int> resolution = Screen::Instance()->GetResolution();
+	auto resolution = Screen::Instance()->GetResolution();
 
 	m_image.Load(imageFilename, imageFilename);
 	m_image.SetTexture(imageFilename);

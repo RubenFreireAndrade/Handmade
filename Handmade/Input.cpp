@@ -18,12 +18,12 @@ int Input::GetMouseWheel() const
 	return m_mouseWheel;
 }
 //======================================================================================================
-const Vector<int>& Input::GetMouseMotion() const
+const SDL_Point& Input::GetMouseMotion() const
 {
 	return m_mouseMotion;
 }
 //======================================================================================================
-const Vector<int>& Input::GetMousePosition() const
+const SDL_Point& Input::GetMousePosition() const
 {
 	return m_mousePosition;
 }

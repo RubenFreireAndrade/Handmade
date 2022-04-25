@@ -273,7 +273,7 @@
 #define HM_MOUSE_MIDDLE 2
 #define HM_MOUSE_RIGHT 4
 
-#include "Vector.h"
+#include <SDL.h>
 
 class Input
 {
@@ -285,8 +285,8 @@ public:
 	char GetKey() const;
 	int GetMouseWheel() const;
 
-	const Vector<int>& GetMouseMotion() const;
-	const Vector<int>& GetMousePosition() const;
+	const SDL_Point& GetMouseMotion() const;
+	const SDL_Point& GetMousePosition() const;
 
 	void SetCursorState(bool isCursorEnabled, bool isCursorVisible);
 
@@ -317,7 +317,7 @@ private:
 	bool m_isMouseClicked{ false };
 	bool m_isWindowClosed{ false };
 
-	Vector<int> m_mouseMotion;
-	Vector<int> m_mousePosition;
+	SDL_Point m_mouseMotion;
+	SDL_Point m_mousePosition;
 
 };
