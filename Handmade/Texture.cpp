@@ -74,7 +74,8 @@ void Texture::IsAnimationLooping(bool flag)
 //======================================================================================================
 void Texture::SetCel(int column, int row)
 {
-	//Make sure this function is called AFTER setting the image dimension
+	//Make sure this function is called AFTER calling 'SetSourceDimension()'
+	//You cannot use zero-based, negative or larger indices than the texture atlas allows
 	assert(column > 0 && column <= m_sourceDimension.x);
 	assert(row > 0 && row <= m_sourceDimension.y);
 	m_cel = ((row - 1) * m_sourceDimension.x) + (column - 1);
@@ -96,14 +97,14 @@ bool Texture::SetTexture(const std::string& tag)
 //======================================================================================================
 void Texture::SetDimension(int width, int height)
 {
+	assert(width > 0 && height > 0);
 	m_textureDimension.x = width;
 	m_textureDimension.y = height;
 }
 //======================================================================================================
 void Texture::SetSourceDimension(int columns, int rows, int width, int height)
 {
-	rows = std::max(rows, 1);
-	columns = std::max(columns, 1);
+	assert(rows > 0 && columns > 0 && width > 0 && height > 0);
 
 	m_sourceDimension.x = columns;
 	m_sourceDimension.y = rows;
@@ -161,6 +162,15 @@ void Texture::Update(int deltaTime)
 //======================================================================================================
 void Texture::Render(int x, int y, double angle, Flip flip)
 {
+	//Make sure you call 'SetTexture()' after loading the texture
+	assert(m_texture != nullptr);
+
+	//Make sure you call 'SetSourceDimension()'
+	assert(m_celDimension.x > 0 && m_celDimension.y > 0);
+
+	//Make sure you call 'SetDimension()'
+	assert(m_textureDimension.x > 0 && m_textureDimension.y > 0);
+
 	if (!m_isAnimationDead)
 	{
 		//Variables to store rectangular dimensions for the source 
