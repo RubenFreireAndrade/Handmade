@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <math.h>
 
 template <class T> class Vector
